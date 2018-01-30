@@ -1,0 +1,338 @@
+* {
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+body {
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+    color: #111;
+}
+
+.fa {
+    font-size: 1rem;
+    padding: 0 5px;
+}
+
+.full-opacity {
+    opacity: 1 !important;
+}
+
+/*Header*/
+
+header {
+    margin-top: -15px;
+    margin-bottom: 80px;
+}
+
+header h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+/*Footer*/
+
+footer {
+    margin-top: 80px;
+    background: #111;
+    color: #fff;
+    padding-top: 80px;
+    overflow-y: hidden;
+}
+
+footer h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 8rem;
+    margin-bottom: -35px;
+}
+
+footer .menu {
+    font-size: 2rem;
+    text-align: right;
+}
+
+footer .menu a {
+    display: inline-block;
+    margin: 0;
+    padding-left: 40px;
+    color: #f2f2f2;
+}
+
+footer .menu a:hover {
+    text-decoration: none;
+}
+
+footer .menu a.cinema:hover {
+    color: #341f97;
+    letter-spacing: 1px;
+}
+
+footer .menu a.dvd:hover {
+    color: #2e86de;
+    letter-spacing: 1px;
+}
+
+footer .menu a.netflix:hover {
+    color: #ee5253;
+    letter-spacing: 1px;
+}
+
+footer .menu a.popcorn:hover {
+    color: #ba324f;
+    letter-spacing: 1px;
+}
+
+/*Sections*/
+
+.datepicker {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.datepicker .button, .datepicker .button i {
+    color: #111;
+}
+
+.datepicker .button:hover, .datepicker .button:hover i {
+    text-decoration: none;
+    color: #341f97;
+    letter-spacing: 1px;
+ }
+
+.posters-list {
+    margin: 0 60px;
+}
+
+.poster-item {
+    padding: 0 50px 80px;
+    text-align: center;
+}
+
+.poster {
+    margin-bottom: 20px;
+    -webkit-box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
+    box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
+    position: relative;
+    margin-top: -70px;
+}
+
+.poster .poster-footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #341f97;
+    width: 100%;
+    opacity: 0;
+}
+
+.poster .movie-age {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    padding: 5px;
+    opacity: 0;
+}
+
+.poster-footer .score-set {
+    float: left;
+    padding: 0 5px;
+}
+
+.score-set .score {
+    color: #fff;
+    padding-right: 10px;
+    font-size: 0.9rem;
+}
+
+.poster-footer .screen-format {
+    float: right;
+    padding: 0 5px;
+}
+
+.poster-item h2 {
+    text-align: center;
+    font-size: 1.2rem;
+
+    visibility: hidden;
+}
+
+.poster-item .subtitle {
+    text-align: center;
+    font-size: small;
+
+    visibility: hidden;
+}
+
+.poster-item .button-group {
+    position: absolute;
+    bottom: 100px;
+    right: 0;
+}
+
+.poster-item .button {
+    cursor: pointer;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #341f97;
+    border-radius: 0;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    display: inline-block;
+
+    visibility: hidden;
+    opacity: 0;
+}
+
+/*Hover animations*/
+.poster-item .button:hover {
+    background-color: #170e43;
+}
+
+.poster-item:hover .poster {
+    transform: translate(0, 70px);
+}
+
+.poster-item:hover .img-poster {
+    max-width: 130%;
+    margin-left: -15%;
+}
+
+.poster-item:hover .movie-age, .poster-item:hover .poster-footer {
+    opacity: 1;
+    width: 130%;
+    right: -15%;
+}
+
+.poster-item:hover h2, .poster-item:hover .subtitle {
+    visibility: visible;
+    margin-top: 0;
+}
+
+.poster-item:hover .button {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/*Modal*/
+
+@media (min-width: 992px) {
+    .modal-xl {
+        max-width: 90%;
+    }
+}
+
+.modal .modal-content {
+    background-color: #f2f2f2;
+    border-radius: 0;
+    border: 0;
+    opacity: 0.95;
+    padding: 1rem 2rem;
+    -webkit-box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
+    box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
+}
+
+.modal .modal-header {
+    background-color: #341f97;
+    color: #fff;
+    margin: -1rem -2rem 0;
+    padding: 1.5rem 2rem;
+    border: 0;
+    border-radius: 0;
+}
+
+.modal .modal-footer {
+    background-color: #341f97;
+    color: #fff;
+    margin: 30px -2rem -1rem;
+    padding: 20px 3rem;
+    display: block;
+    border: 0;
+    border-radius: 0;
+}
+
+.modal h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 20px 0;
+}
+
+.modal .subtitle {
+    font-size: 1rem;
+    font-weight: normal;
+    padding-left: 10px;
+}
+
+.modal .img-poster {
+    padding-bottom: 10px;
+}
+
+.modal .button {
+    color: #341f97;
+}
+
+.modal .item {
+    padding-bottom: 10px;
+}
+
+.modal .item .header {
+    font-weight: bold;
+    font-size: 0.75rem;
+}
+
+.modal .movie-age {
+    float: right;
+    margin-top: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.modal .movie-age img {
+    width: 16px;
+    margin-left: 5px;
+}
+
+.modal .trailer {
+    margin: 20px 0;
+    opacity: 1;
+}
+
+.modal-header h3 {
+    padding: 0;
+    margin: 0;
+}
+
+.modal-header .close {
+    color: #fff;
+}
+
+.modal-footer .score-set {
+    float: left;
+    font-size: 0.75rem;
+}
+
+.modal-footer .score-set .score {
+    display: inline-block;
+    padding: 0 20px;
+    font-size: 1rem;
+}
+
+.modal-footer .screen-format {
+    float: right;
+    font-size: 0.75em;
+}
+
+.modal-footer .screen-format img {
+     padding-left: 10px;
+ }

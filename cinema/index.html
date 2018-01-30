@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <!--Open Graph-->
+
+    <!-- Title and Icon -->
+    <title>Estreias do Cinema</title>
+    <!--<link rel="icon" href="../../../../favicon.ico">-->
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <h1>Estreias do Cinema</h1>
+    </header>
+
+    <section id="datepicker" class="datepicker">
+        <a class="button pull-left" href="#">
+            <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Anterior
+        </a>
+        <span>16 de Novembro de 2017 - 22 de Novembro de 2017</span>
+        <a class="button pull-right" href="#">
+            Próximo <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+        </a>
+    </section>
+
+    <section id="posters" class="posters-list">
+        <div class="row">
+            <div class="col-md-4 poster-item">
+                <h2>Liga da Justiça</h2>
+                <p class="subtitle">(Justice League)</p>
+                <div class="poster">
+                    <img class="img-fluid img-poster"
+                         src="https://fanart.tv/fanart/movies/141052/movieposter/justice-league-584f6a56c8c64.jpg">
+
+                    <span class="movie-age">
+                        <img src="../img/12anos.png">
+                    </span>
+                    <div class="poster-footer">
+                        <div class="score-set">
+                            <span class="score"><img src="../img/imdb.png"> 7.3</span>
+                            <span class="score"><img src="../img/rt-2.png"> 41%</span>
+                        </div>
+                        <div class="screen-format">
+                            <img src="../img/3d.png">
+                            <img src="../img/imax.png">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <a class="button" href="#movie1" data-toggle="modal">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            Saiba mais
+                        </a>
+                        <a class="button" href="#trailer1" data-toggle="modal">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 poster-item">
+                <h2>On yoga - Arquitetura da paz</h2>
+                <p class="subtitle">(On yoga: The architecture of peace)</p>
+                <div class="poster">
+                    <img class="img-fluid img-poster"
+                         src="http://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/filmebyoga.jpg">
+                    <span class="movie-age">
+                    </span>
+                    <div class="poster-footer">
+                        <div class="score-set">
+                            <span class="score"><img src="../img/imdb.png"> 8.5</span>
+                        </div>
+                        <div class="screen-format">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <a class="button" href="#movie2" data-toggle="modal">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            Saiba mais
+                        </a>
+                        <a class="button" href="#">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 poster-item">
+                <h2>Colo</h2>
+                <p class="subtitle">(Colo)</p>
+                <div class="poster">
+                    <img class="img-fluid img-poster"
+                         src="http://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/filmebcolo2.jpg">
+                    <span class="movie-age">
+                        <img src="../img/14anos.png">
+                    </span>
+                    <div class="poster-footer">
+                        <div class="score-set">
+                            <span class="score"><img src="../img/imdb.png"> 5.6</span>
+                        </div>
+                        <div class="screen-format">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <a class="button" href="#movie3" data-toggle="modal">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            Saiba mais
+                        </a>
+                        <a class="button" href="#">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 poster-item">
+                <h2>On yoga - Arquitetura da paz</h2>
+                <p class="subtitle">(On yoga: The architecture of peace)</p>
+                <div class="poster">
+                    <img class="img-fluid img-poster"
+                         src="http://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/filmebyoga.jpg">
+                    <span class="movie-age">
+                    </span>
+                    <div class="poster-footer">
+                        <div class="score-set">
+                            <span class="score"><img src="../img/imdb.png"> 8.5</span>
+                        </div>
+                        <div class="screen-format">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <a class="button" href="#">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            Saiba mais
+                        </a>
+                        <a class="button" href="#">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 poster-item">
+                <h2>Colo</h2>
+                <p class="subtitle">(Colo)</p>
+                <div class="poster">
+                    <img class="img-fluid img-poster"
+                         src="http://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/filmebcolo2.jpg">
+                    <span class="movie-age">
+                        <img src="../img/14anos.png">
+                    </span>
+                    <div class="poster-footer">
+                        <div class="score-set">
+                            <span class="score"><img src="../img/imdb.png"> 5.6</span>
+                        </div>
+                        <div class="screen-format">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <a class="button" href="#">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            Saiba mais
+                        </a>
+                        <a class="button" href="#">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 poster-item">
+                <h2>On yoga - Arquitetura da paz</h2>
+                <p class="subtitle">(On yoga: The architecture of peace)</p>
+                <div class="poster">
+                    <img class="img-fluid img-poster"
+                         src="http://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/filmebyoga.jpg">
+                    <span class="movie-age">
+                    </span>
+                    <div class="poster-footer">
+                        <div class="score-set">
+                            <span class="score"><img src="../img/imdb.png"> 8.5</span>
+                        </div>
+                        <div class="screen-format">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <a class="button" href="#">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            Saiba mais
+                        </a>
+                        <a class="button" href="#">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 poster-item">
+                <h2>Colo</h2>
+                <p class="subtitle">(Colo)</p>
+                <div class="poster">
+                    <img class="img-fluid img-poster"
+                         src="http://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/filmebcolo2.jpg">
+                    <span class="movie-age">
+                        <img src="../img/14anos.png">
+                    </span>
+                    <div class="poster-footer">
+                        <div class="score-set">
+                            <span class="score"><img src="../img/imdb.png"> 5.6</span>
+                        </div>
+                        <div class="screen-format">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <a class="button" href="#">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            Saiba mais
+                        </a>
+                        <a class="button" href="#">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> <!-- /container -->
+
+<footer>
+    <div class="container">
+        <div class="pull-left">
+            <h3>Estreias</h3>
+        </div>
+        <div class="menu pull-right">
+            <a class="cinema" href="#">Cinema</a>
+            <a class="dvd" href="#">DVD</a>
+            <br>
+            <a class="netflix" href="#">Netflix</a>
+            <a class="popcorn" href="#">Popcorn Time</a>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Modal -->
+<div class="modal" id="movie1" tabindex="-1" role="dialog" aria-labelledby="movie1" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h3>Liga da Justiça <span class="subtitle">(Justice League)</span></h3>
+
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img class="img-fluid img-poster"
+                             src="https://fanart.tv/fanart/movies/141052/movieposter/justice-league-584f6a56c8c64.jpg">
+
+                        <a class="button" href="#trailer1" data-toggle="modal" data-dismiss="modal">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="item">
+                            <div class="header">Duração</div>
+                            2h 0min
+                        </div>
+                        <div class="item">
+                            <div class="header">Distribuição</div>
+                            Warner
+                        </div>
+                        <div class="item">
+                            <div class="header">Data de estreia</div>
+                            16/11/17
+                        </div>
+                        <div class="item">
+                            <div class="header">País</div>
+                            Estados Unidos
+                        </div>
+                        <div class="item">
+                            <div class="header">Gênero</div>
+                            <i class="fa fa-bomb" aria-hidden="true"></i> Ação
+                        </div>
+                        <div class="item">
+                            <div class="header">Ano de produção</div>
+                            2016
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="item">
+                            <div class="header">Direção</div>
+                            Zack Snyder
+                        </div>
+                        <div class="item">
+                            <div class="header">Elenco</div>
+                            Jason Momoa - Aquaman<br>
+                            Amber Heard - Mera<br>
+                            Henry Cavill - Superman
+                        </div>
+                        <div class="item">
+                            <div class="header">Sinopse</div>
+                            Os maiores super-herois da DC Comics precisam se unir, formando a Liga da
+                            Justiça, para enfrentar uma ameaça além das capacidades individuais de cada um
+                            deles.
+                        </div>
+                        <span class="movie-age">
+                            Classificação Indicativa
+                            <img src="../img/12anos.png">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="score-set">
+                    Pontuação:
+                    <div class="score">
+                        <span class="label">IMDB</span>
+                        <span class="value">7.3</span>
+                        <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                    </div>
+                    <div class="score">
+                        <span class="label">Rotten Tomatoes</span>
+                        <span class="value">41%</span>
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="screen-format">
+                    Disponivel nos formatos: 2D <img src="../img/3d.png"> <img src="../img/imax.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="movie2" tabindex="-1" role="dialog" aria-labelledby="movie2" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h3>On yoga - Arquitetura da paz <span class="subtitle">(On yoga: The architecture of peace)</span></h3>
+
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img class="img-fluid img-poster"
+                             src="http://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/filmebyoga.jpg">
+
+                        <a class="button" href="#">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="item">
+                            <div class="header">Duração</div>
+                            1h 27min
+                        </div>
+                        <div class="item">
+                            <div class="header">Distribuição</div>
+                            Pagu Pictures / Bretz Filmes
+                        </div>
+                        <div class="item">
+                            <div class="header">Data de estreia</div>
+                            16/11/17
+                        </div>
+                        <div class="item">
+                            <div class="header">País</div>
+                            Brasil<br>
+                            Índia<br>
+                            China
+                        </div>
+                        <div class="item">
+                            <div class="header">Gênero</div>
+                            <i class="fa fa-video-camera" aria-hidden="true"></i> Documentário
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="item">
+                            <div class="header">Direção</div>
+                            Heitor Dhalia
+                        </div>
+                        <div class="item">
+                            <div class="header">Sinopse</div>
+                            O documentário mostra uma busca do cineasta Heiot Dhalia e o fotógrafo Michael
+                            O'Neill por conhecer melhor os gurus e mestres de yoga na Índia, incluindo o
+                            Festival Internacional de Yoga em Rishikesh e o Mela Festival Kumbha, em
+                            Haridwar.
+                            Conhecem também, em Nova Yorque, grandes pensadores, médicos indianos e
+                            americanos e
+                            professores.
+                        </div>
+                        <span class="movie-age">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="score-set">
+                    Pontuação:
+                    <div class="score">
+                        <span class="label">IMDB</span>
+                        <span class="value">8.5</span>
+                        <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="screen-format">
+                    Disponivel nos formatos: 2D
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="movie3" tabindex="-1" role="dialog" aria-labelledby="movie3" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h3>Colo <span class="subtitle">(Colo)</span></h3>
+
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img class="img-fluid img-poster"
+                             src="http://www.filmeb.com.br/sites/default/files/styles/large/public/cartazes/filmebcolo2.jpg">
+
+                        <a class="button" href="#">
+                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="item">
+                            <div class="header">Duração</div>
+                            2h 16min
+                        </div>
+                        <div class="item">
+                            <div class="header">Distribuição</div>
+                            Zeta Filmes
+                        </div>
+                        <div class="item">
+                            <div class="header">Data de estreia</div>
+                            16/11/17
+                        </div>
+                        <div class="item">
+                            <div class="header">País</div>
+                            Portugal
+                        </div>
+                        <div class="item">
+                            <div class="header">Gênero</div>
+                            <i class="fa fa-user" aria-hidden="true"></i> Drama
+                        </div>
+                        <div class="item">
+                            <div class="header">Ano de produção</div>
+                            2017
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="item">
+                            <div class="header">Direção</div>
+                            Teresa Villaverde
+                        </div>
+                        <div class="item">
+                            <div class="header">Elenco</div>
+                            João Pedro Vaz<br>
+                            Alice Albergaria Borges<br>
+                            Beatriz Batarda
+                        </div>
+                        <div class="item">
+                            <div class="header">Sinopse</div>
+                            A rotina diária de pai, mãe e filha é absorvida pelos efeitos da crise
+                            econômica. A mãe
+                            se desdobra em dois empregos para pagar as contas, pois seu marido está
+                            desempregado. A
+                            filha adolescente guarda segredos e tenta manter sua vida, apesar da falta de
+                            dinheiro.
+                            Para escapar dessa realidade comum, eles se tornam, estranhos uns aos outros,
+                            enquanto a
+                            tensão se transforma em silêncio e culpa.
+                        </div>
+                        <span class="movie-age">
+                            Classificação Indicativa
+                            <img src="../img/14anos.png">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="score-set">
+                    Pontuação:
+                    <div class="score">
+                        <span class="label">IMDB</span>
+                        <span class="value">5.6</span>
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="screen-format">
+                    Disponivel nos formatos: 2D
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="trailer1" tabindex="-1" role="dialog" aria-labelledby="trailer1" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content full-opacity">
+            <div class="modal-header">
+                <h3>Liga da Justiça <span class="subtitle">(Justice League)</span></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="trailer embed-responsive embed-responsive-16by9">
+                    <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/r9-DM9uBtVI?rel=0&amp;showinfo=0" frameborder="0"
+                            allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="col-md-12 text-center">
+                    <a class="button" href="#movie1" data-toggle="modal" data-dismiss="modal">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Saiba mais
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Scripts-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!--Custom scripts-->
+<script src="../js/main.js"></script>
+
+</body>
+</html>
