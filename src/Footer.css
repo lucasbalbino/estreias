@@ -1,0 +1,51 @@
+footer {
+    margin-top: 80px;
+    background: #111;
+    color: #fff;
+    padding-top: 80px;
+    overflow-y: hidden;
+    border-top: 5px #341f97 solid;
+}
+
+footer h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 8rem;
+    margin-bottom: -35px;
+}
+
+footer .menu {
+    font-size: 2rem;
+    text-align: right;
+}
+
+footer .menu button {
+    display: inline-block;
+    margin: 0;
+    padding-left: 40px;
+    color: #f2f2f2;
+}
+
+footer .menu button:hover {
+    text-decoration: none;
+}
+
+footer .menu button.cinema:hover {
+    color: #341f97;
+    letter-spacing: 1px;
+}
+
+footer .menu button.dvd:hover {
+    color: #2e86de;
+    letter-spacing: 1px;
+}
+
+footer .menu button.netflix:hover {
+    color: #ee5253;
+    letter-spacing: 1px;
+}
+
+footer .menu button.popcorn:hover {
+    color: #ba324f;
+    letter-spacing: 1px;
+}

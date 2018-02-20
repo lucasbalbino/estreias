@@ -7,4 +7,5 @@ tmp
 .DS_Store
 .idea
 workspace/
-semantic/
+coverage
+build

@@ -1,0 +1,10 @@
+header {
+    margin-top: -15px;
+    margin-bottom: 80px;
+}
+
+header h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 4rem;
+}

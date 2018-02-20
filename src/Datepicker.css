@@ -1,0 +1,14 @@
+.datepicker {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.datepicker .button, .datepicker .button i {
+    color: #111;
+}
+
+.datepicker .button:hover, .datepicker .button:hover i {
+    text-decoration: none;
+    color: #341f97;
+    letter-spacing: 1px;
+}

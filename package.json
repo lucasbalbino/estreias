@@ -1,0 +1,33 @@
+{
+  "name": "estreias",
+  "version": "1.0.0",
+  "description": "Todas as estreias de Cinema, DVD, Netflix e Popcorn Time",
+  "main": "index.js",
+  "devDependencies": {
+    "react-scripts": "^1.0.17"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasbalbino/estreias.git"
+  },
+  "author": "Lucas Balbino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasbalbino/estreias/issues"
+  },
+  "homepage": "https://github.com/lucasbalbino/estreias#readme"
+}

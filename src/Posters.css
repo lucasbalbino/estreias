@@ -1,0 +1,119 @@
+.posters-list {
+    margin: 0 60px;
+}
+
+.poster-item {
+    padding: 0 50px 80px;
+    text-align: center;
+}
+
+.poster {
+    margin-bottom: 20px;
+    -webkit-box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
+    box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
+    position: relative;
+    margin-top: -70px;
+}
+
+.poster .poster-footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #341f97;
+    width: 100%;
+    opacity: 0;
+}
+
+.poster .movie-age {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    padding: 5px;
+    opacity: 0;
+}
+
+.poster-footer .score-set {
+    float: left;
+    padding: 0 5px;
+}
+
+.score-set .score {
+    color: #fff;
+    padding-right: 10px;
+    font-size: 0.9rem;
+}
+
+.poster-footer .screen-format {
+    float: right;
+    padding: 0 5px;
+}
+
+.poster-item h2 {
+    text-align: center;
+    font-size: 1.2rem;
+
+    visibility: hidden;
+}
+
+.poster-item .subtitle {
+    text-align: center;
+    font-size: small;
+
+    visibility: hidden;
+}
+
+.poster-item .button-group {
+    position: absolute;
+    bottom: 100px;
+    right: 0;
+}
+
+.poster-item .button {
+    cursor: pointer;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #341f97;
+    border-radius: 0;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    display: inline-block;
+
+    visibility: hidden;
+    opacity: 0;
+}
+
+/*Hover animations*/
+.poster-item .button:hover {
+    background-color: #170e43;
+}
+
+.poster-item:hover .poster {
+    transform: translate(0, 70px);
+}
+
+.poster-item:hover .img-poster {
+    max-width: 130%;
+    margin-left: -15%;
+}
+
+.poster-item:hover .movie-age, .poster-item:hover .poster-footer {
+    opacity: 1;
+    width: 130%;
+    right: -15%;
+}
+
+.poster-item:hover h2, .poster-item:hover .subtitle {
+    visibility: visible;
+    margin-top: 0;
+}
+
+.poster-item:hover .button {
+    visibility: visible;
+    opacity: 1;
+}
