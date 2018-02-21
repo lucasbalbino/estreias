@@ -1,7 +1,19 @@
-@media (min-width: 992px) {
-    .modal-xl {
-        max-width: 90%;
-    }
+/*Workaround problem Bootstrap 3 to 4*/
+.fade.in {
+    opacity: 1;
+}
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+.modal-backdrop.in {
+    opacity: 0.5;
+}
+/**/
+
+.modal {
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 .modal .modal-content {
@@ -14,11 +26,16 @@
     box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
 }
 
+/*.modal .modal-header {*/
+    /*background-color: #341f97;*/
+    /*color: #fff;*/
+    /*margin: -1rem -2rem 0;*/
+    /*padding: 1.5rem 2rem;*/
+    /*border: 0;*/
+    /*border-radius: 0;*/
+/*}*/
+
 .modal .modal-header {
-    background-color: #341f97;
-    color: #fff;
-    margin: -1rem -2rem 0;
-    padding: 1.5rem 2rem;
     border: 0;
     border-radius: 0;
 }
@@ -86,7 +103,9 @@
 }
 
 .modal-header .close {
-    color: #fff;
+    color: #111;
+    position: absolute;
+    right: 3rem;
 }
 
 .modal-footer .score-set {

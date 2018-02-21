@@ -20,6 +20,10 @@
     opacity: 1 !important;
 }
 
+a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+    color: #fff;
+}
+
 button {
     background: none;
     border: 0;

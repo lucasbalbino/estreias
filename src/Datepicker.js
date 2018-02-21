@@ -1,4 +1,6 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
+
 import './Datepicker.css';
 
 class Datepicker extends PureComponent {
@@ -9,7 +11,7 @@ class Datepicker extends PureComponent {
                 <button className="button pull-left">
                     <i className="fa fa-chevron-circle-left" aria-hidden="true"/> Anterior
                 </button>
-                <span>16 de Novembro de 2017 - 22 de Novembro de 2017</span>
+                <span>{this.props.periodo}</span>
                 <button className="button pull-right" href="#">
                     Próximo <i className="fa fa-chevron-circle-right" aria-hidden="true"/>
                 </button>
@@ -17,4 +19,9 @@ class Datepicker extends PureComponent {
         );
     }
 }
+
+Datepicker.propTypes = {
+    titulo: PropTypes.string
+};
+
 export default Datepicker;

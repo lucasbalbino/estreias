@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+
 import './Footer.css';
 
 class Header extends PureComponent {

@@ -1,14 +1,21 @@
 import React, {PureComponent} from 'react';
-import './Header.css'
+import PropTypes from 'prop-types';
+
+import './Header.css';
 
 class Header extends PureComponent {
 
     render() {
         return (
             <header>
-                <h1>Estreias do Cinema</h1>
+                <h1>{this.props.titulo}</h1>
             </header>
         );
     }
 }
+
+Header.propTypes = {
+    titulo: PropTypes.string
+};
+
 export default Header;
