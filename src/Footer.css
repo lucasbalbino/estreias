@@ -4,7 +4,22 @@ footer {
     color: #fff;
     padding-top: 80px;
     overflow-y: hidden;
+}
+
+footer.cinema {
     border-top: 5px #341f97 solid;
+}
+
+footer.dvd {
+    border-top: 5px #2e86de solid;
+}
+
+footer.netflix {
+    border-top: 5px #ee5253 solid;
+}
+
+footer.popcorntime {
+    border-top: 5px #ba324f solid;
 }
 
 footer h3 {
@@ -19,33 +34,33 @@ footer .menu {
     text-align: right;
 }
 
-footer .menu button {
+footer .menu a {
     display: inline-block;
     margin: 0;
     padding-left: 40px;
     color: #f2f2f2;
 }
 
-footer .menu button:hover {
+footer .menu a:hover {
     text-decoration: none;
 }
 
-footer .menu button.cinema:hover {
+footer .menu a.cinema:hover {
     color: #341f97;
     letter-spacing: 1px;
 }
 
-footer .menu button.dvd:hover {
+footer .menu a.dvd:hover {
     color: #2e86de;
     letter-spacing: 1px;
 }
 
-footer .menu button.netflix:hover {
+footer .menu a.netflix:hover {
     color: #ee5253;
     letter-spacing: 1px;
 }
 
-footer .menu button.popcorn:hover {
+footer .menu a.popcorntime:hover {
     color: #ba324f;
     letter-spacing: 1px;
 }

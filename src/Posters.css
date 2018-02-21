@@ -19,9 +19,24 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    background-color: #341f97;
     width: 100%;
     opacity: 0;
+}
+
+.poster.cinema .poster-footer {
+    background-color: #341f97;
+}
+
+.poster.dvd .poster-footer {
+    background-color: #2e86de;
+}
+
+.poster.netflix .poster-footer {
+    background-color: #ee5253;
+}
+
+.poster.popcorntime .poster-footer {
+    background-color: #ba324f;
 }
 
 .poster .movie-age {
@@ -73,7 +88,6 @@
     cursor: pointer;
     vertical-align: middle;
     white-space: nowrap;
-    background-color: #341f97;
     border-radius: 0;
     color: #fff;
     text-decoration: none;
@@ -88,9 +102,37 @@
     opacity: 0;
 }
 
+.poster.cinema .button {
+    background-color: #341f97;
+}
+
+.poster.dvd .button {
+    background-color: #2e86de;
+}
+
+.poster.netflix .button {
+    background-color: #ee5253;
+}
+
+.poster.popcorntime .button {
+    background-color: #ba324f;
+}
+
 /*Hover animations*/
-.poster-item .button:hover {
-    background-color: #170e43;
+.poster.cinema .button:hover {
+    background-color: #1e1258;
+}
+
+.poster.dvd .button:hover {
+    background-color: #1a60a5;
+}
+
+.poster.netflix .button:hover {
+    background-color: #de1617;
+}
+
+.poster.popcorntime .button:hover {
+    background-color: #7e2235;
 }
 
 .poster-item .button.disabled:hover {

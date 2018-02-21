@@ -46,7 +46,10 @@ class Posters extends PureComponent {
     };
 
     render() {
+        const type = this.props.type;
         const posters = this.props.posters;
+
+        let typeClass = "poster " + type;
         return (
             <section classID="posters" className="posters-list">
                 <div className="row">
@@ -54,7 +57,7 @@ class Posters extends PureComponent {
                         <div className="col-md-4 poster-item" key={poster.id}>
                             <h2>{poster.title}</h2>
                             <p className="subtitle">({poster.subtitle ? poster.subtitle : poster.title})</p>
-                            <div className="poster">
+                            <div className={typeClass}>
                                 <img alt={poster.title} className="img-fluid img-poster" src={poster.posterImage}/>
                                 <span className="movie-age">
                                     {this.getMovieAge(poster.movieAge)}
@@ -88,13 +91,15 @@ class Posters extends PureComponent {
                                 </div>
                             </div>
                             <GenericModal
-                                type="modalMovie"
+                                estreiaType={type}
+                                modalType="modalMovie"
                                 content={poster}
                                 show={this.state["modalMovie" + poster.id]}
                                 onHide={() => this.handleHideModal("modalMovie" + poster.id)}
                             />
                             {poster.trailerURL && <GenericModal
-                                type="modalTrailer"
+                                estreiaType={type}
+                                modalType="modalTrailer"
                                 content={poster}
                                 show={this.state["modalTrailer" + poster.id]}
                                 onHide={() => this.handleHideModal("modalTrailer" + poster.id)}

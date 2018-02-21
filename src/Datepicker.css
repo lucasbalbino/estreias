@@ -9,6 +9,21 @@
 
 .datepicker .button:hover, .datepicker .button:hover i {
     text-decoration: none;
-    color: #341f97;
     letter-spacing: 1px;
+}
+
+.datepicker.cinema .button:hover, .datepicker.cinema .button:hover i {
+    color: #341f97;
+}
+
+.datepicker.dvd .button:hover, .datepicker.dvd .button:hover i {
+    color: #2e86de;
+}
+
+.datepicker.netflix .button:hover, .datepicker.netflix .button:hover i {
+    color: #ee5253;
+}
+
+.datepicker.popcorntime .button:hover, .datepicker.popcorntime .button:hover i {
+    color: #ba324f;
 }

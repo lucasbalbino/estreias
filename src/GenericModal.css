@@ -31,12 +31,27 @@
 }
 
 .modal .modal-header.invert {
-    background-color: #341f97;
     color: #fff;
     margin: -1rem -2rem 0;
     padding: 1.5rem 2rem;
     border: 0;
     border-radius: 0;
+}
+
+.modal.cinema .modal-header.invert {
+    background-color: #341f97;
+}
+
+.modal.dvd .modal-header.invert {
+    background-color: #2e86de;
+}
+
+.modal.netflix .modal-header.invert {
+    background-color: #ee5253;
+}
+
+.modal.popcorntime .modal-header.invert {
+    background-color: #ba324f;
 }
 
 .modal .modal-header {
@@ -45,7 +60,6 @@
 }
 
 .modal .modal-footer {
-    background-color: #341f97;
     color: #fff;
     margin: 30px -2rem -1rem;
     padding: 20px 3rem;
@@ -54,25 +68,63 @@
     border-radius: 0;
 }
 
+.modal.cinema .modal-footer {
+    background-color: #341f97;
+}
+
+.modal.dvd .modal-footer {
+    background-color: #2e86de;
+}
+
+.modal.netflix .modal-footer {
+    background-color: #ee5253;
+}
+
+.modal.popcorntime .modal-footer {
+    background-color: #ba324f;
+}
+
 .modal h3 {
     font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
     padding: 20px 0;
+
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -o-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
 }
 
 .modal .subtitle {
     font-size: 1rem;
     font-weight: normal;
     padding-left: 10px;
+
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -o-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
 }
 
 .modal .img-poster {
     padding-bottom: 10px;
 }
 
-.modal .button {
+.modal.cinema .button {
     color: #341f97;
+}
+
+.modal.dvd .button {
+    color: #2e86de;
+}
+
+.modal.netflix .button {
+    color: #ee5253;
+}
+
+.modal.popcorntime .button {
+    color: #ba324f;
 }
 
 .modal .item {
@@ -110,10 +162,20 @@
     color: #111;
     position: absolute;
     right: 3rem;
+
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -o-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
 }
 
 .modal-header.invert .close {
     color: #fff;
+
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -o-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
 }
 
 .modal-footer .score-set {
