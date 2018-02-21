@@ -44,92 +44,124 @@ class GenericModal extends PureComponent {
         }
     };
 
-    render() {
-        const movie = this.props.content;
-        return (
-            <Modal {...this.props} bsSize="large">
-                <Modal.Header closeButton>
-                    <h3>{movie.title} <span
-                        className="subtitle">({movie.subtitle ? movie.subtitle : movie.title})</span></h3>
-                </Modal.Header>
-                <Modal.Body>
-                    <div className="row">
-                        <div className="col-md-4 text-center">
-                            <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>
+    movieModal = (movie) => {
+        return <Modal {...this.props} bsSize="large">
+            <Modal.Header closeButton>
+                <h3>{movie.title} <span
+                    className="subtitle">({movie.subtitle ? movie.subtitle : movie.title})</span></h3>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="row">
+                    <div className="col-md-4 text-center">
+                        <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>
 
-                            <a className="button" href="#trailer1" data-toggle="modal" data-dismiss="modal">
-                                <i className="fa fa-play-circle" aria-hidden="true"/>
-                                Assistir Trailer
-                            </a>
-                        </div>
-                        <div className="col-md-3">
-                            {movie.duration && <div className="item">
-                                <div className="header">Duração</div>
-                                {movie.duration}
-                            </div>}
-                            {movie.distribution && <div className="item">
-                                <div className="header">Distribuição</div>
-                                {movie.distribution.join(" / ")}
-                            </div>}
-                            {movie.releaseDate && <div className="item">
-                                <div className="header">Data de estreia</div>
-                                {movie.releaseDate}
-                            </div>}
-                            {movie.country && <div className="item">
-                                <div className="header">País</div>
-                                {movie.country.join('<br>')}
-                            </div>}
-                            {movie.genre && <div className="item">
-                                <div className="header">Gênero</div>
-                                <span className={this.iconGenre(movie.genre)} aria-hidden="true"/> {movie.genre}
-                            </div>}
-                            {movie.productionYear && <div className="item">
-                                <div className="header">Ano de produção</div>
-                                {movie.productionYear}
-                            </div>}
-                        </div>
-                        <div className="col-md-5">
-                            {movie.director && <div className="item">
-                                <div className="header">Direção</div>
-                                {movie.director}
-                            </div>}
-                            {movie.cast && <div className="item">
-                                <div className="header">Elenco</div>
-                                {movie.cast.join('<br>')}
-                            </div>}
-                            {movie.synopsis && <div className="item">
-                                <div className="header">Sinopse</div>
-                                {movie.synopsis}
-                            </div>}
-                            {movie.movieAge && <span className="movie-age">
+                        <a className="button" href="#trailer1" data-toggle="modal" data-dismiss="modal">
+                            <i className="fa fa-play-circle" aria-hidden="true"/>
+                            Assistir Trailer
+                        </a>
+                    </div>
+                    <div className="col-md-3">
+                        {movie.duration && <div className="item">
+                            <div className="header">Duração</div>
+                            {movie.duration}
+                        </div>}
+                        {movie.distribution && <div className="item">
+                            <div className="header">Distribuição</div>
+                            {movie.distribution.join(" / ")}
+                        </div>}
+                        {movie.releaseDate && <div className="item">
+                            <div className="header">Data de estreia</div>
+                            {movie.releaseDate}
+                        </div>}
+                        {movie.country && <div className="item">
+                            <div className="header">País</div>
+                            {movie.country.join('<br>')}
+                        </div>}
+                        {movie.genre && <div className="item">
+                            <div className="header">Gênero</div>
+                            <span className={this.iconGenre(movie.genre)} aria-hidden="true"/> {movie.genre}
+                        </div>}
+                        {movie.productionYear && <div className="item">
+                            <div className="header">Ano de produção</div>
+                            {movie.productionYear}
+                        </div>}
+                    </div>
+                    <div className="col-md-5">
+                        {movie.director && <div className="item">
+                            <div className="header">Direção</div>
+                            {movie.director}
+                        </div>}
+                        {movie.cast && <div className="item">
+                            <div className="header">Elenco</div>
+                            {movie.cast.join('<br>')}
+                        </div>}
+                        {movie.synopsis && <div className="item">
+                            <div className="header">Sinopse</div>
+                            {movie.synopsis}
+                        </div>}
+                        {movie.movieAge && <span className="movie-age">
                                 Classificação Indicativa {this.getMovieAge(movie.movieAge)}
                             </span>}
+                    </div>
+                </div>
+            </Modal.Body>
+            <Modal.Footer>
+                <div className="score-set">
+                    Pontuação:
+                    {movie.score && movie.score.map((score) =>
+                        <div className="score" key={score.type}>
+                            {this.getScore(score.type, score.pontuation)}
                         </div>
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <div className="score-set">
-                        Pontuação:
-                        {movie.score && movie.score.map((score) =>
-                            <div className="score" key={score.type}>
-                                {this.getScore(score.type, score.pontuation)}
-                            </div>
-                        )}
-                    </div>
-                    <div className="screen-format">
-                        Disponivel nos formatos: 2D
-                        {movie.screenFormat && movie.screenFormat.map((format) =>
-                            <img alt={format} key={format}
-                                 src={require("./img/" + format + ".png")}/>
-                        )}
-                    </div>
-                </Modal.Footer>
-            </Modal>
-        )
+                    )}
+                </div>
+                <div className="screen-format">
+                    Disponivel nos formatos: 2D
+                    {movie.screenFormat && movie.screenFormat.map((format) =>
+                        <img alt={format} key={format}
+                             src={require("./img/" + format + ".png")}/>
+                    )}
+                </div>
+            </Modal.Footer>
+        </Modal>
+    };
+
+    trailerModal = (movie) => {
+        let video = movie.trailerURL + "?rel=0&amp;showinfo=0";
+
+        return <Modal {...this.props} bsSize="large" className="full-opacity">
+            <Modal.Header className="invert" closeButton>
+                <h3>{movie.title} <span
+                    className="subtitle">({movie.subtitle ? movie.subtitle : movie.title})</span></h3>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="trailer embed-responsive embed-responsive-16by9">
+                    <iframe title={movie.title} width="560" height="315"
+                            src={video} frameBorder="0" allowFullScreen/>
+                </div>
+                <div className="col-md-12 text-center">
+                    <a className="button" href="#movie1" data-toggle="modal" data-dismiss="modal">
+                        <span className="fa fa-plus-circle" aria-hidden="true"/>
+                        Saiba mais
+                    </a>
+                </div>
+            </Modal.Body>
+        </Modal>
+    };
+
+    render() {
+        const movie = this.props.content;
+        const type = this.props.type;
+
+        if(type === "modalMovie") {
+            return (this.movieModal(movie));
+        } else if(type === "modalTrailer") {
+            return (this.trailerModal(movie));
+        }
     }
 }
 
 GenericModal.propTypes = {
+    type: PropTypes.string,
     content: PropTypes.object
 };
 

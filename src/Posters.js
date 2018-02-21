@@ -13,21 +13,17 @@ class Posters extends PureComponent {
 
         this.state = {};
         let posters = this.props.posters;
-        for(let i=0; i<posters.length; i++){
+        for (let i = 0; i < posters.length; i++) {
             this.state["modalMovie" + posters[i].id] = false;
+            this.state["modalTrailer" + posters[i].id] = false;
         }
     }
 
-    handleHideModal = (index) => {
-        let modal = "modalMovie" + index;
+    handleHideModal = (modal) => {
         this.setState({[modal]: false});
-        // this.setState(prevState => ({
-        //     [modal]: !prevState[modal]
-        // }));
     };
 
-    handleShowModal = (index) => {
-        let modal = "modalMovie" + index;
+    handleShowModal = (modal) => {
         this.setState({[modal]: true});
     };
 
@@ -79,21 +75,30 @@ class Posters extends PureComponent {
                                     </div>
                                 </div>
                                 <div className="button-group">
-                                    <a className="button" onClick={() => this.handleShowModal(poster.id)}>
+                                    <a className="button"
+                                       onClick={() => this.handleShowModal("modalMovie" + poster.id)}>
                                         <span className="fa fa-plus-circle" aria-hidden="true"/>
                                         Saiba mais
                                     </a>
-                                    <a className="button" href="#trailer1" data-toggle="modal">
+                                    <a className={!poster.trailerURL ? "button disabled" : "button"}
+                                       onClick={() => this.handleShowModal("modalTrailer" + poster.id)}>
                                         <span className="fa fa-play-circle" aria-hidden="true"/>
                                         Assistir Trailer
                                     </a>
                                 </div>
                             </div>
                             <GenericModal
+                                type="modalMovie"
                                 content={poster}
                                 show={this.state["modalMovie" + poster.id]}
-                                onHide={() => this.handleHideModal(poster.id)}
+                                onHide={() => this.handleHideModal("modalMovie" + poster.id)}
                             />
+                            {poster.trailerURL && <GenericModal
+                                type="modalTrailer"
+                                content={poster}
+                                show={this.state["modalTrailer" + poster.id]}
+                                onHide={() => this.handleHideModal("modalTrailer" + poster.id)}
+                            />}
                         </div>
                     )}
                 </div>

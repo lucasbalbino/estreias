@@ -93,6 +93,11 @@
     background-color: #170e43;
 }
 
+.poster-item .button.disabled:hover {
+    cursor: not-allowed;
+    background-color: #666;
+}
+
 .poster-item:hover .poster {
     transform: translate(0, 70px);
 }
