@@ -5,6 +5,19 @@
 .poster-item {
     padding: 0 50px 80px;
     text-align: center;
+
+    animation: slideDown 0.5s ease-out 0s 1;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translate(0, -20px);
+        opacity: 0.75;
+    }
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
 }
 
 .poster {
@@ -163,4 +176,23 @@
 .poster-item:hover .button {
     visibility: visible;
     opacity: 1;
+}
+
+.no-results {
+    padding: 100px;
+}
+
+.no-results .icon {
+    display: block;
+    padding: 10px;
+    animation: scaleDown 0.5s ease-out 0s 1;
+}
+
+@keyframes scaleDown {
+    0% {
+        transform: scale(1.6);
+    }
+    100% {
+        transform: scale(1);
+    }
 }

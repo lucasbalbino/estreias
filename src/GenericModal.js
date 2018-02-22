@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Modal} from 'react-bootstrap';
+import Trailer from './Trailer';
 import PropTypes from 'prop-types';
 
 import './GenericModal.css';
@@ -10,12 +11,14 @@ class GenericModal extends PureComponent {
 
         this.changeType = this.changeType.bind(this);
 
-        this.state = {modalType: this.props.modalType};
+        this.state = {
+            modaltype: this.props.modaltype
+        };
     }
 
     changeType = () => {
         this.setState((prevState) => {
-            return {modalType: (prevState.modalType === "modalMovie") ? "modalTrailer" : "modalMovie"};
+            return {modaltype: (prevState.modaltype === "modalMovie") ? "modalTrailer" : "modalMovie"};
         });
     };
 
@@ -48,7 +51,7 @@ class GenericModal extends PureComponent {
                 <span className={icon} aria-hidden="true"/>
             </span>;
         } else if (type === "imdb") {
-            icon = (pont > 5) ? "fa fa-chevron-circle-up" : "fa fa-chevron-circle-down";
+            icon = (pont > 6) ? "fa fa-chevron-circle-up" : "fa fa-chevron-circle-down";
             return <span>
                 <span className="label">IMDB </span>
                 <span className="value">{pont}</span>
@@ -72,6 +75,13 @@ class GenericModal extends PureComponent {
                             <i className="fa fa-play-circle" aria-hidden="true"/>
                             Assistir Trailer
                         </button>
+                        <br/>
+                        {type === "netflix" &&
+                        <a className={!movie.netflixURL ? "button disabled" : "button"}
+                           href={movie.netflixURL} target="_blank">
+                            <span className="fa fa-film" aria-hidden="true"/>
+                            Assistir na Netflix
+                        </a>}
                     </div>
                     <div className="col-md-3">
                         {movie.duration && <div className="item">
@@ -92,7 +102,11 @@ class GenericModal extends PureComponent {
                         </div>}
                         {movie.genre && <div className="item">
                             <div className="header">Gênero</div>
-                            <span className={this.iconGenre(movie.genre)} aria-hidden="true"/> {movie.genre}
+                            {movie.genre.map((g) =>
+                                <div key={g}>
+                                    <span className={this.iconGenre(g)} aria-hidden="true"/> {g}
+                                </div>
+                            )}
                         </div>}
                         {movie.productionYear && <div className="item">
                             <div className="header">Ano de produção</div>
@@ -102,7 +116,7 @@ class GenericModal extends PureComponent {
                     <div className="col-md-5">
                         {movie.director && <div className="item">
                             <div className="header">Direção</div>
-                            {movie.director}
+                            {movie.director.map((dir) => <div key={dir}>{dir}</div>)}
                         </div>}
                         {movie.cast && <div className="item">
                             <div className="header">Elenco</div>
@@ -148,15 +162,18 @@ class GenericModal extends PureComponent {
                     className="subtitle">({movie.subtitle ? movie.subtitle : movie.title})</span></h3>
             </Modal.Header>
             <Modal.Body>
-                <div className="trailer embed-responsive embed-responsive-16by9">
-                    <iframe title={movie.title} width="560" height="315"
-                            src={video} frameBorder="0" allowFullScreen/>
-                </div>
+                <Trailer className="trailer" title={movie.title} src={video} type={type}/>
                 <div className="col-md-12 text-center">
                     <button className="button" onClick={this.changeType}>
                         <span className="fa fa-plus-circle" aria-hidden="true"/>
                         Saiba mais
                     </button>
+                    {type === "netflix" &&
+                    <a className={!movie.netflixURL ? "button disabled" : "button"}
+                       href={movie.netflixURL} target="_blank">
+                        <span className="fa fa-film" aria-hidden="true"/>
+                        Assistir na Netflix
+                    </a>}
                 </div>
             </Modal.Body>
         </Modal>
@@ -164,20 +181,20 @@ class GenericModal extends PureComponent {
 
     render() {
         const movie = this.props.content;
-        const modalType = this.state.modalType;
-        const estreiaType = this.props.estreiaType;
+        const modaltype = this.state.modaltype;
+        const estreiatype = this.props.estreiatype;
 
-        if (modalType === "modalMovie") {
-            return (this.movieModal(estreiaType, movie));
-        } else if (modalType === "modalTrailer") {
-            return (this.trailerModal(estreiaType, movie));
+        if (modaltype === "modalMovie") {
+            return (this.movieModal(estreiatype, movie));
+        } else if (modaltype === "modalTrailer") {
+            return (this.trailerModal(estreiatype, movie));
         }
     }
 }
 
 GenericModal.propTypes = {
-    estreiaType: PropTypes.string,
-    modalType: PropTypes.string,
+    estreiatype: PropTypes.string,
+    modaltype: PropTypes.string,
     content: PropTypes.object
 };
 

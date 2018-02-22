@@ -1,8 +1,11 @@
 import React, {PureComponent} from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Estreias from './Estreias';
 
-import jsonData from './example.json';
+import cinema from './cinema.json';
+import dvd from './dvd.json';
+import netflix from './netflix.json';
+import popcorntime from './popcorntime.json';
 
 class App extends PureComponent {
 
@@ -10,20 +13,24 @@ class App extends PureComponent {
         return (
             <div>
                 <Router>
-                    <div>
-                        <Route path="/cinema" render={()=>
-                            <Estreias type="cinema" title="Estreias do Cinema" json={jsonData}/>
+                    <Switch>
+                        {/*<Route exact path="/" render={() =>*/}
+                            {/*<Estreias type="cinema" title="Estreias do Cinema" json={jsonData}/>*/}
+                        {/*}/>*/}
+                        <Route exact path="/cinema" render={() =>
+                            <Estreias type="cinema" title="Estreias do Cinema" json={cinema}/>
                         }/>
-                        <Route path="/dvd" render={()=>
-                            <Estreias type="dvd" title="Estreias do DVD" json={jsonData}/>
+                        <Route exact path="/dvd" render={() =>
+                            <Estreias type="dvd" title="Estreias do DVD" json={dvd}/>
                         }/>
-                        <Route path="/netflix" render={()=>
-                            <Estreias type="netflix" title="Estreias da Netflix" json={jsonData}/>
+                        <Route exact path="/netflix" render={() =>
+                            <Estreias type="netflix" title="Estreias da Netflix" json={netflix}/>
                         }/>
-                        <Route path="/popcorntime" render={()=>
-                            <Estreias type="popcorntime" title="Estreias do Popcorn Time" json={jsonData}/>
+                        <Route exact path="/popcorntime" render={() =>
+                            <Estreias type="popcorntime" title="Estreias do Popcorn Time" json={popcorntime}/>
                         }/>
-                    </div>
+                        {/*<Route component={NoMatch}/>*/}
+                    </Switch>
                 </Router>
             </div>
         );
