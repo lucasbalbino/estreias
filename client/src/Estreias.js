@@ -11,22 +11,37 @@ class Estreias extends PureComponent {
         super(props);
 
         this.state = {
+            json: "",
             loading: true
         };
     }
 
+    callApi = async (type) => {
+        const response = await fetch('/type/' + type);
+        const body = await response.json();
+
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
+    };
+
     componentDidMount() {
-        setTimeout(() => this.setState({loading: false}), 1600);
+        this.callApi(this.props.type)
+            .then(res => this.setState({json: res, loading: false}))
+            .catch(err => console.log(err));
     }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(nextProps) {
         this.setState({loading: true});
-        setTimeout(() => this.setState({loading: false}), 1600);
+
+        this.callApi(nextProps.type)
+            .then(res => this.setState({json: res, loading: false}))
+            .catch(err => console.log(err));
     }
 
     render() {
+
         const type = this.props.type;
-        const jsonData = this.props.json;
         const title = this.props.title;
 
         if (this.state.loading) {
@@ -43,7 +58,7 @@ class Estreias extends PureComponent {
                 <div className="container">
                     <Header type={type} title={title}/>
                     <Datepicker type={type} releaseDate={new Date(2017, 10, 16)}/>
-                    <Posters type={type} qtd={jsonData.count} posters={jsonData.content}/>
+                    <Posters type={type} qtd={this.state.json.count} posters={this.state.json.content}/>
                 </div>
                 <Footer type={type}/>
             </div>
@@ -53,8 +68,7 @@ class Estreias extends PureComponent {
 
 Estreias.propTypes = {
     type: PropTypes.string,
-    title: PropTypes.string,
-    jsonData: PropTypes.object
+    title: PropTypes.string
 };
 
 export default Estreias;

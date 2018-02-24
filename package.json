@@ -3,26 +3,16 @@
   "version": "1.0.0",
   "description": "Todas as estreias de Cinema, DVD, Netflix e Popcorn Time",
   "main": "index.js",
-  "devDependencies": {
-    "react-scripts": "^1.0.17"
+  "scripts": {
+    "client": "cd client && npm run start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
-    "moment": "^2.20.1",
-    "react": "^16.2.0",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.2.0",
-    "react-moment": "^0.7.0",
-    "react-router-dom": "^4.2.2"
+    "express": "^4.16.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "concurrently": "^3.5.0"
   },
   "repository": {
     "type": "git",
