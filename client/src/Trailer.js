@@ -6,6 +6,8 @@ class Trailer extends PureComponent {
     constructor(props) {
         super(props);
 
+        this.trailerLoaded = this.trailerLoaded.bind(this);
+
         this.state = {
             trailerIsLoading: true
         }

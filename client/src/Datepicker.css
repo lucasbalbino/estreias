@@ -7,6 +7,11 @@
     color: #111;
 }
 
+.datepicker .button.disabled, .datepicker .button.disabled i {
+    color: #cccccc;
+    cursor: not-allowed;
+}
+
 .datepicker .button:hover, .datepicker .button:hover i {
     text-decoration: none;
     letter-spacing: 1px;
@@ -26,4 +31,9 @@
 
 .datepicker.popcorntime .button:hover, .datepicker.popcorntime .button:hover i {
     color: #ba324f;
+}
+
+.datepicker .button.disabled:hover, .datepicker .button.disabled:hover i {
+    letter-spacing: 0;
+    color: #cccccc;
 }

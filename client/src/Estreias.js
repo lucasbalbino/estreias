@@ -1,14 +1,21 @@
 import React, {PureComponent} from 'react';
+import moment from 'moment';
+
 import Header from './Header';
 import Datepicker from './Datepicker';
 import Posters from './Posters';
 import Footer from './Footer';
 import Loading from './Loading';
+
 import PropTypes from 'prop-types';
 
 class Estreias extends PureComponent {
     constructor(props) {
         super(props);
+
+        this.changeDate = this.changeDate.bind(this);
+
+        this.date = moment().format("DD-MM-YYYY");
 
         this.state = {
             json: "",
@@ -17,12 +24,22 @@ class Estreias extends PureComponent {
     }
 
     callApi = async (type) => {
-        const response = await fetch('/type/' + type);
+        const response = await fetch('api/estreias/' + type + "/" + this.date);
         const body = await response.json();
 
         if (response.status !== 200) throw Error(body.message);
 
         return body;
+    };
+
+    changeDate = (newDate) => {
+        this.date = newDate.format("DD-MM-YYYY");
+
+        this.setState({json: "", loading: true});
+
+        this.callApi(this.props.type)
+            .then(res => this.setState({json: res, loading: false}))
+            .catch(err => console.log(err));
     };
 
     componentDidMount() {
@@ -40,14 +57,16 @@ class Estreias extends PureComponent {
     }
 
     render() {
-
         const type = this.props.type;
         const title = this.props.title;
 
         if (this.state.loading) {
             return (
                 <div>
-                    <Loading type={type}/>
+                    <div className="container">
+                        <Header type={type} title={title}/>
+                        <Loading type={type}/>
+                    </div>
                     <Footer type={type}/>
                 </div>
             );
@@ -57,7 +76,8 @@ class Estreias extends PureComponent {
             <div>
                 <div className="container">
                     <Header type={type} title={title}/>
-                    <Datepicker type={type} releaseDate={new Date(2017, 10, 16)}/>
+                    <Datepicker type={type} releaseDate={this.state.json.date || moment()}
+                                change={this.changeDate} nextDate={this.state.json.nextDate} previousDate={this.state.json.previousDate}/>
                     <Posters type={type} qtd={this.state.json.count} posters={this.state.json.content}/>
                 </div>
                 <Footer type={type}/>

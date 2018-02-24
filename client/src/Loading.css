@@ -7,6 +7,14 @@
     margin-top: -56.25%;
 }
 
+#loading.poster{
+    padding: 70px;
+    height: 100px;
+    position: absolute;
+    top: 25%;
+    box-shadow: none;
+}
+
 .sk-folding-cube {
     margin: 20px auto;
     width: 100px;

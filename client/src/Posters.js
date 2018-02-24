@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 import GenericModal from './GenericModal';
+import Loading from './Loading';
+import PropTypes from 'prop-types';
 
 import './Posters.css'
 
@@ -10,12 +11,15 @@ class Posters extends PureComponent {
 
         this.handleHideModal = this.handleHideModal.bind(this);
         this.handleShowModal = this.handleShowModal.bind(this);
+        this.imageLoaded = this.imageLoaded.bind(this);
+        this.imageError = this.imageError.bind(this);
 
         this.state = {};
 
         let posters = this.props.posters;
         if (posters) {
             for (let i = 0; i < posters.length; i++) {
+                this.state["imageIsLoading" + posters[i].id] = true;
                 this.state["modalMovie" + posters[i].id] = false;
                 this.state["modalTrailer" + posters[i].id] = false;
             }
@@ -28,6 +32,18 @@ class Posters extends PureComponent {
 
     handleShowModal = (modal) => {
         this.setState({[modal]: true});
+    };
+
+    imageLoaded = (id) => {
+        let image = "imageIsLoading" + id;
+        this.setState({[image]: false});
+    };
+
+    imageError = (e, id) => {
+        let image = "imageIsLoading" + id;
+        this.setState({[image]: false});
+
+        e.target.src = require("./img/poster.png");
     };
 
     getMovieAge = (classif) => {
@@ -65,7 +81,7 @@ class Posters extends PureComponent {
             );
         }
 
-        let typeClass = "poster " + type;
+        let classType = "poster " + type;
         return (
             <section classID="posters" className="posters-list">
                 <div className="row">
@@ -73,8 +89,11 @@ class Posters extends PureComponent {
                         <div className="col-md-4 poster-item" key={poster.id}>
                             <h2>{poster.title}</h2>
                             <p className="subtitle">({poster.subtitle ? poster.subtitle : poster.title})</p>
-                            <div className={typeClass}>
-                                <img alt={poster.title} className="img-fluid img-poster" src={poster.posterImage}/>
+                            <div className={classType}>
+                                {this.state["imageIsLoading" + poster.id] ? <Loading type={classType}/> : null}
+                                <img alt={poster.title} className="img-fluid img-poster" src={poster.posterImage}
+                                     onLoad={() => this.imageLoaded(poster.id)}
+                                     onError={(e) => {this.imageError(e, poster.id)}}/>
                                 <span className="movie-age">
                                     {this.getMovieAge(poster.movieAge)}
                                 </span>

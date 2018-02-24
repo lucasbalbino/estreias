@@ -4,13 +4,12 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.get('/api/hello', (req, res) => {
-    res.send({express: 'Hello From Express'});
-});
 
-app.get('/type/:type', (req, res) => {
+app.get('/api/estreias/:type/:date', (req, res) => {
     let type = req.params.type;
-    console.log(type);
+    let date = req.params.date;
+    console.log(type, date);
+
     fs.readFile(type + '.json', 'utf8', (err, data) => {
         if (err) throw err;
         obj = JSON.parse(data);

@@ -71,7 +71,7 @@ class GenericModal extends PureComponent {
                     <div className="col-md-4 text-center">
                         <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>
 
-                        <button className="button" onClick={this.changeType}>
+                        <button className={!movie.trailerURL ? "button disabled" : "button"} onClick={this.changeType} disabled={!movie.trailerURL}>
                             <i className="fa fa-play-circle" aria-hidden="true"/>
                             Assistir Trailer
                         </button>
