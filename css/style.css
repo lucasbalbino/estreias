@@ -41,6 +41,7 @@ footer {
     color: #fff;
     padding-top: 80px;
     overflow-y: hidden;
+    border-top: 5px #341f97 solid;
 }
 
 footer h3 {
