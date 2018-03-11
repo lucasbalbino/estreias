@@ -1,7 +1,7 @@
 {
   "name": "estreias",
   "version": "1.0.0",
-  "description": "Todas as estreias de Cinema, DVD, Netflix e Popcorn Time",
+  "description": "Todas as estreias de Cinema, Netflix e HBO Go",
   "devDependencies": {
     "react-scripts": "^1.0.17"
   },

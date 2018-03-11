@@ -1,5 +1,5 @@
 .posters-list {
-    margin: 0 60px;
+    margin: 0 60px 80px;
 }
 
 .poster-item {
@@ -41,16 +41,12 @@
     background-color: #341f97;
 }
 
-.poster.dvd .poster-footer {
+.poster.hbo-go .poster-footer {
     background-color: #2e86de;
 }
 
 .poster.netflix .poster-footer {
     background-color: #ee5253;
-}
-
-.poster.popcorntime .poster-footer {
-    background-color: #ba324f;
 }
 
 .poster .movie-age {
@@ -81,6 +77,7 @@
 .poster-item h2 {
     text-align: center;
     font-size: 1.2rem;
+    text-transform: capitalize;
 
     visibility: hidden;
 }
@@ -88,6 +85,7 @@
 .poster-item .subtitle {
     text-align: center;
     font-size: small;
+    text-transform: capitalize;
 
     visibility: hidden;
 }
@@ -120,7 +118,7 @@
     background-color: #341f97;
 }
 
-.poster.dvd .button {
+.poster.hbo-go .button {
     background-color: #2e86de;
 }
 
@@ -128,25 +126,17 @@
     background-color: #ee5253;
 }
 
-.poster.popcorntime .button {
-    background-color: #ba324f;
-}
-
 /*Hover animations*/
 .poster.cinema .button:hover {
     background-color: #1e1258;
 }
 
-.poster.dvd .button:hover {
+.poster.hbo-go .button:hover {
     background-color: #1a60a5;
 }
 
 .poster.netflix .button:hover {
     background-color: #de1617;
-}
-
-.poster.popcorntime .button:hover {
-    background-color: #7e2235;
 }
 
 .poster-item .button.disabled:hover {
@@ -182,6 +172,7 @@
 
 .no-results {
     padding: 100px;
+    margin-bottom: 80px;
 }
 
 .no-results .icon {

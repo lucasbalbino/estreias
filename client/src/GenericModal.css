@@ -42,16 +42,12 @@
     background-color: #341f97;
 }
 
-.modal.dvd .modal-header.invert {
+.modal.hbo-go .modal-header.invert {
     background-color: #2e86de;
 }
 
 .modal.netflix .modal-header.invert {
     background-color: #ee5253;
-}
-
-.modal.popcorntime .modal-header.invert {
-    background-color: #ba324f;
 }
 
 .modal .modal-header {
@@ -72,16 +68,12 @@
     background-color: #341f97;
 }
 
-.modal.dvd .modal-footer {
+.modal.hbo-go .modal-footer {
     background-color: #2e86de;
 }
 
 .modal.netflix .modal-footer {
     background-color: #ee5253;
-}
-
-.modal.popcorntime .modal-footer {
-    background-color: #ba324f;
 }
 
 .modal h3 {
@@ -124,16 +116,12 @@
     color: #341f97;
 }
 
-.modal.dvd .button {
+.modal.hbo-go .button {
     color: #2e86de;
 }
 
 .modal.netflix .button {
     color: #ee5253;
-}
-
-.modal.popcorntime .button {
-    color: #ba324f;
 }
 
 .modal .item {
@@ -193,7 +181,7 @@
 
 .modal-footer .score-set .score {
     display: inline-block;
-    padding: 0 20px;
+    padding-right: 20px;
     font-size: 1rem;
 }
 

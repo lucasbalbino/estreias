@@ -48,19 +48,21 @@ class Posters extends PureComponent {
 
     getMovieAge = (classif) => {
         if (classif) {
-            return <img alt={classif} src={require("./img/" + classif + "anos.png")}/>;
+            return (classif === "livre") ?
+                <img alt={classif} src={require("./img/livre.png")}/> :
+                <img alt={classif} src={require("./img/" + classif + "anos.png")}/>;
         }
     };
 
     getScore = (type, pont) => {
         if (type === "rt") {
-            if (pont > 50) {
-                return <span><img alt={type} src={require("./img/rt-1.png")}/> {pont}%</span>;
+            if (parseInt(pont.split("%")[0], 10) > 50) {
+                return <span><img alt={type} src={require("./img/rt-1.png")}/> {pont}</span>;
             } else {
-                return <span><img alt={type} src={require("./img/rt-2.png")}/> {pont}%</span>;
+                return <span><img alt={type} src={require("./img/rt-2.png")}/> {pont}</span>;
             }
         } else {
-            return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont}</span>;
+            return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont.split("/")[0]}</span>;
         }
     };
 
@@ -93,7 +95,9 @@ class Posters extends PureComponent {
                                 {this.state["imageIsLoading" + poster.id] ? <Loading type={classType}/> : null}
                                 <img alt={poster.title} className="img-fluid img-poster" src={poster.posterImage}
                                      onLoad={() => this.imageLoaded(poster.id)}
-                                     onError={(e) => {this.imageError(e, poster.id)}}/>
+                                     onError={(e) => {
+                                         this.imageError(e, poster.id)
+                                     }}/>
                                 <span className="movie-age">
                                     {this.getMovieAge(poster.movieAge)}
                                 </span>
@@ -101,7 +105,7 @@ class Posters extends PureComponent {
                                     <div className="score-set">
                                         {poster.score && poster.score.map((score) =>
                                             <span className="score" key={score.type}>
-                                                {this.getScore(score.type, score.pontuation)}
+                                                {this.getScore(score.type, score.rating)}
                                             </span>
                                         )}
                                     </div>
@@ -128,6 +132,12 @@ class Posters extends PureComponent {
                                        href={poster.netflixURL} target="_blank">
                                         <span className="fa fa-film" aria-hidden="true"/>
                                         Assistir na Netflix
+                                    </a>}
+                                    {type === "hbo-go" &&
+                                    <a className={!poster.hbogoURL ? "button disabled" : "button"}
+                                       href={poster.hbogoURL} target="_blank">
+                                        <span className="fa fa-film" aria-hidden="true"/>
+                                        Assistir na HBO Go
                                     </a>}
                                 </div>
                             </div>

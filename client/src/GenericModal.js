@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import './GenericModal.css';
 
+import genres from './genres.json'
+
 class GenericModal extends PureComponent {
     constructor(props) {
         super(props);
@@ -22,22 +24,21 @@ class GenericModal extends PureComponent {
         });
     };
 
-    iconGenre = (genre) => {
-        switch (genre) {
-            case "Ação":
-                return "fa fa-bomb";
-            case "Documentário":
-                return "fa fa-video-camera";
-            case "Drama":
-                return "fa fa-user";
-            default:
-                return "fa fa-cogs";
+    applyGenre = (genreId) => {
+        let index = genres.map(function(e) { return e.id; }).indexOf(genreId);
+        if(index >= 0) {
+            let icon = "fa " + genres[index].icon;
+            return <span><span className={icon} aria-hidden="true"/> {genres[index].name}</span>
+        } else {
+            return <span><span className="fa fa-cogs" aria-hidden="true"/> {genreId}</span>
         }
     };
 
     getMovieAge = (classif) => {
         if (classif) {
-            return <img alt={classif} src={require("./img/" + classif + "anos.png")}/>;
+            return (classif === "livre") ?
+                <img alt={classif} src={require("./img/livre.png")}/> :
+                <img alt={classif} src={require("./img/" + classif + "anos.png")}/>;
         }
     };
 
@@ -47,7 +48,7 @@ class GenericModal extends PureComponent {
             icon = (pont > 50) ? "fa fa-chevron-circle-up" : "fa fa-chevron-circle-down";
             return <span>
                 <span className="label">Rotten Tomatoes </span>
-                <span className="value">{pont}%</span>
+                <span className="value">{pont}</span>
                 <span className={icon} aria-hidden="true"/>
             </span>;
         } else if (type === "imdb") {
@@ -57,10 +58,19 @@ class GenericModal extends PureComponent {
                 <span className="value">{pont}</span>
                 <span className={icon} aria-hidden="true"/>
             </span>;
+        } else if (type === "mc") {
+            icon = (pont > 60) ? "fa fa-chevron-circle-up" : "fa fa-chevron-circle-down";
+            return <span>
+                <span className="label">Metacritic </span>
+                <span className="value">{pont}</span>
+                <span className={icon} aria-hidden="true"/>
+            </span>;
         }
     };
 
     movieModal = (type, movie) => {
+        let imdb = "http://www.imdb.com/title/" + movie.idIMDB;
+
         return <Modal {...this.props} bsSize="large" className={type}>
             <Modal.Header closeButton>
                 <h3>{movie.title} <span
@@ -76,17 +86,28 @@ class GenericModal extends PureComponent {
                             Assistir Trailer
                         </button>
                         <br/>
+                        {movie.idIMDB &&
+                        <div><a className="button" href={imdb} target="_blank">
+                            <span className="fa fa-imdb" aria-hidden="true"/>
+                            Acessar IMDB
+                        </a></div>}
                         {type === "netflix" &&
-                        <a className={!movie.netflixURL ? "button disabled" : "button"}
-                           href={movie.netflixURL} target="_blank">
+                        <div><a className={!movie.netflixURL ? "button disabled" : "button"}
+                                href={movie.netflixURL} target="_blank">
                             <span className="fa fa-film" aria-hidden="true"/>
                             Assistir na Netflix
-                        </a>}
+                        </a></div>}
+                        {type === "hbo-go" &&
+                        <div><a className={!movie.hbogoURL ? "button disabled" : "button"}
+                                href={movie.hbogoURL} target="_blank">
+                            <span className="fa fa-film" aria-hidden="true"/>
+                            Assistir na HBO Go
+                        </a></div>}
                     </div>
                     <div className="col-md-3">
-                        {movie.duration && <div className="item">
+                        {movie.runtime && <div className="item">
                             <div className="header">Duração</div>
-                            {movie.duration} min
+                            {movie.runtime} min
                         </div>}
                         {movie.distribution && <div className="item">
                             <div className="header">Distribuição</div>
@@ -96,6 +117,14 @@ class GenericModal extends PureComponent {
                             <div className="header">Data de estreia</div>
                             {movie.releaseDate}
                         </div>}
+                        {movie.netflixDate && <div className="item">
+                            <div className="header">Início na Netflix</div>
+                            {movie.netflixDate}
+                        </div>}
+                        {movie.hbogoDate && <div className="item">
+                            <div className="header">Início na HBO Go</div>
+                            {movie.hbogoDate}
+                        </div>}
                         {movie.country && <div className="item">
                             <div className="header">País</div>
                             {movie.country.map((c) => <div key={c}>{c}</div>)}
@@ -104,7 +133,7 @@ class GenericModal extends PureComponent {
                             <div className="header">Gênero</div>
                             {movie.genre.map((g) =>
                                 <div key={g}>
-                                    <span className={this.iconGenre(g)} aria-hidden="true"/> {g}
+                                    {this.applyGenre(g)}
                                 </div>
                             )}
                         </div>}
@@ -134,20 +163,19 @@ class GenericModal extends PureComponent {
             </Modal.Body>
             <Modal.Footer>
                 <div className="score-set">
-                    Pontuação:
                     {movie.score && movie.score.map((score) =>
                         <div className="score" key={score.type}>
-                            {this.getScore(score.type, score.pontuation)}
+                            {this.getScore(score.type, score.rating)}
                         </div>
                     )}
                 </div>
-                <div className="screen-format">
-                    Disponivel nos formatos: 2D
+                {type === "cinema" && <div className="screen-format">
+                    Formatos: 2D
                     {movie.screenFormat && movie.screenFormat.map((format) =>
                         <img alt={format} key={format}
                              src={require("./img/" + format + ".png")}/>
                     )}
-                </div>
+                </div>}
             </Modal.Footer>
         </Modal>
     };
@@ -173,6 +201,12 @@ class GenericModal extends PureComponent {
                        href={movie.netflixURL} target="_blank">
                         <span className="fa fa-film" aria-hidden="true"/>
                         Assistir na Netflix
+                    </a>}
+                    {type === "hbo-go" &&
+                    <a className={!movie.hbogoURL ? "button disabled" : "button"}
+                       href={movie.hbogoURL} target="_blank">
+                        <span className="fa fa-film" aria-hidden="true"/>
+                        Assistir na HBO Go
                     </a>}
                 </div>
             </Modal.Body>

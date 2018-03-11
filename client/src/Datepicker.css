@@ -21,16 +21,12 @@
     color: #341f97;
 }
 
-.datepicker.dvd .button:hover, .datepicker.dvd .button:hover i {
+.datepicker.hbo-go .button:hover, .datepicker.hbo-go .button:hover i {
     color: #2e86de;
 }
 
 .datepicker.netflix .button:hover, .datepicker.netflix .button:hover i {
     color: #ee5253;
-}
-
-.datepicker.popcorntime .button:hover, .datepicker.popcorntime .button:hover i {
-    color: #ba324f;
 }
 
 .datepicker .button.disabled:hover, .datepicker .button.disabled:hover i {

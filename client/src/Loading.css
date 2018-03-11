@@ -52,16 +52,12 @@
     background-color: #341f97;
 }
 
-.dvd .sk-folding-cube .sk-cube:before {
+.hbo-go .sk-folding-cube .sk-cube:before {
     background-color: #2e86de;
 }
 
 .netflix .sk-folding-cube .sk-cube:before {
     background-color: #ee5253;
-}
-
-.popcorntime .sk-folding-cube .sk-cube:before {
-    background-color: #ba324f;
 }
 
 .sk-folding-cube .sk-cube2 {

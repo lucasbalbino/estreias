@@ -13,14 +13,10 @@ header h1.cinema:hover {
     text-shadow: 4px 0 0 #341f97;
 }
 
-header h1.dvd:hover {
+header h1.hbo-go:hover {
     text-shadow: 4px 0 0 #2e86de;
 }
 
 header h1.netflix:hover {
     text-shadow: 4px 0 0 #ee5253;
-}
-
-header h1.popcorntime:hover {
-    text-shadow: 4px 0 0 #ba324f;
 }
