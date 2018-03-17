@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const db = require('../db');
 const router = express.Router();
 
 router.get('/api/dashboard', (req, res) => {
@@ -21,6 +22,15 @@ router.get('/api/estreias/:type/:date', (req, res) => {
         obj = JSON.parse(data);
         // setTimeout((function() {res.send(JSON.stringify(obj))}), 5000);
         res.send(JSON.stringify(obj));
+    });
+});
+
+
+router.get('/api/genre', (req, res) => {
+    db.query('SELECT * FROM genre', (err, result) => {
+        if (err) throw err;
+
+        res.send(result);
     });
 });
 

@@ -1,21 +1,7 @@
 const express = require('express');
-const mysql = require('mysql');
 
 const app = express();
 const port = process.env.PORT || 5000;
-
-const connection = mysql.createConnection({
-    host: 'mysql472.umbler.com',
-    user: 'user-api',
-    password: 'g2eB#H2TOQ-',
-    port: 41890,
-    database: 'estreias_db'
-});
-
-connection.connect((err) => {
-    if (err) throw err;
-    console.log('Connected!');
-});
 
 app.all('/*', function (req, res, next) {
     // CORS headers
