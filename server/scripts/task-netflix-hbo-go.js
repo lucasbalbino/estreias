@@ -41,9 +41,10 @@ mv.getMovie("hbo", (result) => {
                     if (err) throw err;
                     idMovie = result[0].id;
 
-                    otherInfoMovie(idMovie, data);
+                    scoreMovie(idMovie, data);
                 });
             } else {
+                scoreMovie(idMovie, data);
                 otherInfoMovie(idMovie, data);
             }
 
@@ -51,6 +52,31 @@ mv.getMovie("hbo", (result) => {
         });
     });
 });
+
+function scoreMovie(idMovie, data) {
+    let scoreIMDB = 0, scoreRT = 0, scoreMC = 0;
+    data.score.forEach((sc) => {
+        if (sc.type === "imdb") {
+            scoreIMDB = sc.rating;
+        }
+        if (sc.type === "rt") {
+            scoreRT = sc.rating;
+        }
+        if (sc.type === "mc") {
+            scoreMC = sc.rating;
+        }
+    });
+
+    let sql = "INSERT INTO score(movie_id, imdb, rt, mc) VALUES ('" + idMovie + "', '" + scoreIMDB + "', '" + scoreRT +
+        "', '" + scoreMC + "') ON DUPLICATE KEY UPDATE id=id";
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("Pontuação IMDb - '" + scoreIMDB + "' vinculada ao filme '" + data.title + "' no banco");
+        console.log("Pontuação Rotten Tomatoes - '" + scoreRT + "' vinculada ao filme '" + data.title + "' no banco");
+        console.log("Pontuação Metacritic - '" + scoreMC + "' vinculada ao filme '" + data.title + "' no banco");
+    });
+}
 
 function otherInfoMovie(idMovie, data) {
 
@@ -108,28 +134,5 @@ function otherInfoMovie(idMovie, data) {
             if (err) throw err;
             console.log("Gênero '" + idGenre + "' vinculado ao filme '" + data.title + "' no banco");
         });
-    });
-
-    let scoreIMDB = 0, scoreRT = 0, scoreMC = 0;
-    data.score.forEach((sc) => {
-        if (sc.type === "imdb") {
-            scoreIMDB = sc.rating;
-        }
-        if (sc.type === "rt") {
-            scoreRT = sc.rating;
-        }
-        if (sc.type === "mc") {
-            scoreMC = sc.rating;
-        }
-    });
-
-    let sql = "INSERT INTO score(movie_id, imdb, rt, mc) VALUES ('" + idMovie + "', '" + scoreIMDB + "', '" + scoreRT +
-        "', '" + scoreMC + "') ON DUPLICATE KEY UPDATE id=id";
-
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log("Pontuação IMDb - '" + scoreIMDB + "' vinculada ao filme '" + data.title + "' no banco");
-        console.log("Pontuação Rotten Tomatoes - '" + scoreRT + "' vinculada ao filme '" + data.title + "' no banco");
-        console.log("Pontuação Metacritic - '" + scoreMC + "' vinculada ao filme '" + data.title + "' no banco");
     });
 }

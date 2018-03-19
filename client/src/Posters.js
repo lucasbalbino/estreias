@@ -56,13 +56,15 @@ class Posters extends PureComponent {
 
     getScore = (type, pont) => {
         if (type === "rt") {
-            if (parseInt(pont.split("%")[0], 10) > 50) {
-                return <span><img alt={type} src={require("./img/rt-1.png")}/> {pont}</span>;
+            if (pont > 50) {
+                return <span><img alt={type} src={require("./img/rt-1.png")}/> {pont}%</span>;
             } else {
-                return <span><img alt={type} src={require("./img/rt-2.png")}/> {pont}</span>;
+                return <span><img alt={type} src={require("./img/rt-2.png")}/> {pont}%</span>;
             }
-        } else {
-            return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont.split("/")[0]}</span>;
+        } else if(type === "imdb") {
+            return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont}/10</span>;
+        } else if(type === "mc") {
+            return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont}/100</span>;
         }
     };
 

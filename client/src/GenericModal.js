@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 
 import './GenericModal.css';
 
-import genres from './genres.json'
-
 class GenericModal extends PureComponent {
     constructor(props) {
         super(props);
@@ -14,9 +12,52 @@ class GenericModal extends PureComponent {
         this.changeType = this.changeType.bind(this);
 
         this.state = {
-            modaltype: this.props.modaltype
+            modaltype: this.props.modaltype,
+            dataFeltched: false,
+            genres: [],
+            country: [],
+            distribution: []
         };
     }
+
+    componentDidMount() {
+        this.getGenres()
+            .then(res => this.setState({genres: res}))
+            .catch(err => console.log(err));
+        this.getCountry()
+            .then(res => this.setState({country: res}))
+            .catch(err => console.log(err));
+        this.getDistribution()
+            .then(res => this.setState({distribution: res}))
+            .catch(err => console.log(err));
+    }
+
+    getGenres = async () => {
+        const response = await fetch("api/genres");
+        const body = await response.json();
+
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
+    };
+
+    getCountry = async () => {
+        const response = await fetch("api/country");
+        const body = await response.json();
+
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
+    };
+
+    getDistribution = async () => {
+        const response = await fetch("api/distribution");
+        const body = await response.json();
+
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
+    };
 
     changeType = () => {
         this.setState((prevState) => {
@@ -25,8 +66,11 @@ class GenericModal extends PureComponent {
     };
 
     applyGenre = (genreId) => {
-        let index = genres.map(function(e) { return e.id; }).indexOf(genreId);
-        if(index >= 0) {
+        let genres = this.state.genres;
+        let index = genres.map(function (e) {
+            return e["just_watch_id"];
+        }).indexOf(genreId);
+        if (index >= 0) {
             let icon = "fa " + genres[index].icon;
             return <span><span className={icon} aria-hidden="true"/> {genres[index].name}</span>
         } else {
@@ -48,21 +92,21 @@ class GenericModal extends PureComponent {
             icon = (pont > 50) ? "fa fa-chevron-circle-up" : "fa fa-chevron-circle-down";
             return <span>
                 <span className="label">Rotten Tomatoes </span>
-                <span className="value">{pont}</span>
+                <span className="value">{pont}%</span>
                 <span className={icon} aria-hidden="true"/>
             </span>;
         } else if (type === "imdb") {
             icon = (pont > 6) ? "fa fa-chevron-circle-up" : "fa fa-chevron-circle-down";
             return <span>
                 <span className="label">IMDB </span>
-                <span className="value">{pont}</span>
+                <span className="value">{pont}/10</span>
                 <span className={icon} aria-hidden="true"/>
             </span>;
         } else if (type === "mc") {
             icon = (pont > 60) ? "fa fa-chevron-circle-up" : "fa fa-chevron-circle-down";
             return <span>
                 <span className="label">Metacritic </span>
-                <span className="value">{pont}</span>
+                <span className="value">{pont}/100</span>
                 <span className={icon} aria-hidden="true"/>
             </span>;
         }
@@ -81,7 +125,8 @@ class GenericModal extends PureComponent {
                     <div className="col-md-4 text-center">
                         <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>
 
-                        <button className={!movie.trailerURL ? "button disabled" : "button"} onClick={this.changeType} disabled={!movie.trailerURL}>
+                        <button className={!movie.trailerURL ? "button disabled" : "button"} onClick={this.changeType}
+                                disabled={!movie.trailerURL}>
                             <i className="fa fa-play-circle" aria-hidden="true"/>
                             Assistir Trailer
                         </button>
@@ -91,6 +136,7 @@ class GenericModal extends PureComponent {
                             <span className="fa fa-imdb" aria-hidden="true"/>
                             Acessar IMDB
                         </a></div>}
+                        {movie.idIMDB && <br/>}
                         {type === "netflix" &&
                         <div><a className={!movie.netflixURL ? "button disabled" : "button"}
                                 href={movie.netflixURL} target="_blank">
@@ -109,9 +155,16 @@ class GenericModal extends PureComponent {
                             <div className="header">Duração</div>
                             {movie.runtime} min
                         </div>}
-                        {movie.distribution && <div className="item">
+                        {movie.distribution && this.state.distribution.length > 0 && <div className="item">
                             <div className="header">Distribuição</div>
-                            {movie.distribution.join(" / ")}
+                            {movie.distribution.map((d) => {
+                                let distribution = this.state.distribution;
+                                let i = distribution.map(function (e) {
+                                    return e.id;
+                                }).indexOf(d);
+
+                                return (i) ? <div key={d}>{distribution[i].name}</div> : null;
+                            })}
                         </div>}
                         {movie.releaseDate && <div className="item">
                             <div className="header">Data de estreia</div>
@@ -125,9 +178,15 @@ class GenericModal extends PureComponent {
                             <div className="header">Início na HBO Go</div>
                             {movie.hbogoDate}
                         </div>}
-                        {movie.country && <div className="item">
+                        {movie.country && this.state.country.length > 0 && <div className="item">
                             <div className="header">País</div>
-                            {movie.country.map((c) => <div key={c}>{c}</div>)}
+                            {movie.country.map((c) => {
+                                let country = this.state.country;
+                                let i = country.map(function (e) {
+                                    return e.id;
+                                }).indexOf(c);
+                                return (i) ? <div key={c}>{country[i].name}</div> : null;
+                            })}
                         </div>}
                         {movie.genre && <div className="item">
                             <div className="header">Gênero</div>
