@@ -15,7 +15,7 @@ class Estreias extends PureComponent {
 
         this.changeDate = this.changeDate.bind(this);
 
-        this.date = moment().format("DD-MM-YYYY");
+        this.date = moment().format("YYYY-MM-DD");
 
         this.state = {
             json: "",
@@ -33,7 +33,7 @@ class Estreias extends PureComponent {
     };
 
     changeDate = (newDate) => {
-        this.date = newDate.format("DD-MM-YYYY");
+        this.date = newDate.format("YYYY-MM-DD");
 
         this.setState({json: "", loading: true});
 

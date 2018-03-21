@@ -19,4 +19,7 @@ app.all('/*', function (req, res, next) {
 
 app.use('/', require('./server/routes'));
 
+// let task = require('./server/scripts/task-netflix-hbo-go');
+// task.getMovie();
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

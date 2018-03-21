@@ -10,9 +10,9 @@ class Datepicker extends PureComponent {
 
     render() {
         const type = this.props.type;
-        const releaseDate = moment(this.props.releaseDate, "DD-MM-YYYY");
-        const nextDate = moment(this.props.nextDate, "DD-MM-YYYY");
-        const previousDate = moment(this.props.previousDate, "DD-MM-YYYY");
+        const releaseDate = moment(this.props.releaseDate, "YYYY-MM-DD");
+        const nextDate = moment(this.props.nextDate, "YYYY-MM-DD");
+        const previousDate = moment(this.props.previousDate, "YYYY-MM-DD");
 
         let date =
             (<span>
