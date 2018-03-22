@@ -10,16 +10,16 @@ class Datepicker extends PureComponent {
 
     render() {
         const type = this.props.type;
-        const releaseDate = moment(this.props.releaseDate, "YYYY-MM-DD");
+        const date = moment(this.props.releaseDate, "YYYY-MM-DD");
         const nextDate = moment(this.props.nextDate, "YYYY-MM-DD");
         const previousDate = moment(this.props.previousDate, "YYYY-MM-DD");
 
-        let date =
+        let dateString =
             (<span>
-                <Moment format="LL" locale="pt-br">
-                    {releaseDate}
-                </Moment> - <Moment format="LL" locale="pt-br" add={{days: 6}}>
-                    {releaseDate}
+                <Moment format="LL" locale="pt-br" add={{days: 1}}>
+                    {previousDate}
+                </Moment> - <Moment format="LL" locale="pt-br">
+                    {date}
                 </Moment>
             </span>);
 
@@ -33,7 +33,7 @@ class Datepicker extends PureComponent {
                         disabled={!previousDate.isValid()}>
                     <i className="fa fa-chevron-circle-left" aria-hidden="true"/> Anterior
                 </button>
-                {date}
+                {dateString}
                 <button className={nextDate.isValid() ? "button pull-right" : "button pull-right disabled"}
                         onClick={() => {
                             if (nextDate.isValid()) this.props.change(nextDate)

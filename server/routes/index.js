@@ -5,7 +5,7 @@ const db = require('../db');
 const router = express.Router();
 
 router.get('/api/dashboard', (req, res) => {
-    fs.readFile('dashboard.json', 'utf8', (err, data) => {
+    fs.readFile('workspace/dashboard.json', 'utf8', (err, data) => {
         if (err) throw err;
         obj = JSON.parse(data);
         // setTimeout((function() {res.send(JSON.stringify(obj))}), 1000);
@@ -15,21 +15,31 @@ router.get('/api/dashboard', (req, res) => {
 
 router.get('/api/estreias/:type/:date', (req, res) => {
     let type = req.params.type;
-    let date = req.params.date;
-    console.log(type, date);
+    let date = moment(req.params.date, "YYYY-MM-DD");
+    console.log("BUSCANDO Estreias '" + type + "' com a seguinte data: " + date.format("YYYY-MM-DD"));
 
-    if (type !== "netflix") {
-        fs.readFile(type + '.json', 'utf8', (err, data) => {
+    if (type === "cinema") {
+        fs.readFile('workspace/cinema.json', 'utf8', (err, data) => {
             if (err) throw err;
             obj = JSON.parse(data);
             // setTimeout((function() {res.send(JSON.stringify(obj))}), 5000);
             res.send(JSON.stringify(obj));
         });
     } else {
+        let nextDate = moment(date).add(7, "days");
+        let previousDate = moment(date).subtract(7, "days");
+
+        let dateType = "";
+        if (type === "netflix") {
+            dateType = "netflix_date";
+        } else if (type === "hbo-go") {
+            dateType = "hbo_go_date";
+        }
+
         let movies = {
-            "date": date,
-            "nextDate": "2018-02-26",
-            "previousDate": "2018-02-12",
+            "date": date.format("YYYY-MM-DD"),
+            "nextDate": (moment().isSameOrAfter(nextDate)) ? nextDate.format("YYYY-MM-DD") : "",
+            "previousDate": (moment("2018-01-01").isSameOrBefore(previousDate)) ? previousDate.format("YYYY-MM-DD") : "",
             "count": 0,
             "content": []
         };
@@ -40,13 +50,14 @@ router.get('/api/estreias/:type/:date', (req, res) => {
         runtime, movie_age AS "movieAge", poster_image AS "posterImage", synopsis, trailer_url AS "trailerURL", netflix_url AS "netflixURL",
         hbo_go_url AS "hbogoURL"
         FROM movies
-        WHERE netflix_date BETWEEN '2018-03-17' AND '2018-03-17'
-        ORDER BY popularity DESC`;
+        WHERE ` + dateType + " BETWEEN '" + previousDate.add(1, "days").format("YYYY-MM-DD") + "' AND '" + date.format("YYYY-MM-DD") + "'" +
+            "ORDER BY popularity DESC";
 
         db.query(sql, (err, result) => {
             if (err) throw err;
 
             movies.count = result.length;
+            console.log("FILMES ENCONTRADOS: " + movies.count);
 
             result.forEach((data, index) => {
                 let idMovie = data.id;
