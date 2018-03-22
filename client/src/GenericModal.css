@@ -105,6 +105,8 @@
 
 .modal .button {
     padding: 5px 20px;
+    display: inline-block;
+    text-decoration: none;
 }
 
 .modal .button.disabled:hover, .modal .button.disabled:hover span {
@@ -112,16 +114,49 @@
     color: #666;
 }
 
-.modal.cinema .button {
+.modal.cinema .button, .modal.cinema .button span {
     color: #341f97;
 }
 
-.modal.hbo-go .button {
+.modal.netflix .button, .modal.netflix .button span {
+    color: #ee5253;
+}
+
+.modal.hbo-go .button, .modal.hbo-go .button span {
     color: #2e86de;
 }
 
-.modal.netflix .button {
-    color: #ee5253;
+.modal .button.main {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.modal.cinema .button.main {
+    border: 2px solid #341f97;
+}
+
+.modal.netflix .button.main {
+    border: 2px solid #ee5253;
+}
+
+.modal.hbo-go .button.main {
+    border: 2px solid #2e86de;
+}
+
+.modal .button.main:hover, .modal .button.main:hover span {
+    color: #fff;
+}
+
+.modal.cinema .button.main:hover {
+    background-color: #341f97;
+}
+
+.modal.netflix .button.main:hover {
+    background-color: #ee5253;
+}
+
+.modal.hbo-go .button.main:hover {
+    background-color: #2e86de;
 }
 
 .modal .item {

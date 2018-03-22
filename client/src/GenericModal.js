@@ -12,52 +12,9 @@ class GenericModal extends PureComponent {
         this.changeType = this.changeType.bind(this);
 
         this.state = {
-            modaltype: this.props.modaltype,
-            dataFeltched: false,
-            genres: [],
-            country: [],
-            distribution: []
+            modaltype: this.props.modaltype
         };
     }
-
-    componentDidMount() {
-        this.getGenres()
-            .then(res => this.setState({genres: res}))
-            .catch(err => console.log(err));
-        this.getCountry()
-            .then(res => this.setState({country: res}))
-            .catch(err => console.log(err));
-        this.getDistribution()
-            .then(res => this.setState({distribution: res}))
-            .catch(err => console.log(err));
-    }
-
-    getGenres = async () => {
-        const response = await fetch("api/genres");
-        const body = await response.json();
-
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
-
-    getCountry = async () => {
-        const response = await fetch("api/country");
-        const body = await response.json();
-
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
-
-    getDistribution = async () => {
-        const response = await fetch("api/distribution");
-        const body = await response.json();
-
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
 
     changeType = () => {
         this.setState((prevState) => {
@@ -66,7 +23,7 @@ class GenericModal extends PureComponent {
     };
 
     applyGenre = (genreId) => {
-        let genres = this.state.genres;
+        let genres = this.props.list.genres;
         let index = genres.map(function (e) {
             return e["just_watch_id"];
         }).indexOf(genreId);
@@ -80,7 +37,7 @@ class GenericModal extends PureComponent {
 
     getMovieAge = (classif) => {
         if (classif) {
-            return (classif === "livre") ?
+            return (classif === "livre" || classif === "L") ?
                 <img alt={classif} src={require("./img/livre.png")}/> :
                 <img alt={classif} src={require("./img/" + classif + "anos.png")}/>;
         }
@@ -130,35 +87,34 @@ class GenericModal extends PureComponent {
                             <i className="fa fa-play-circle" aria-hidden="true"/>
                             Assistir Trailer
                         </button>
-                        <br/>
                         {movie.idIMDB &&
-                        <div><a className="button" href={imdb} target="_blank">
+                        <a className="button" href={imdb} target="_blank">
                             <span className="fa fa-imdb" aria-hidden="true"/>
                             Acessar IMDB
-                        </a></div>}
-                        {movie.idIMDB && <br/>}
+                        </a>}
                         {type === "netflix" &&
-                        <div><a className={!movie.netflixURL ? "button disabled" : "button"}
-                                href={movie.netflixURL} target="_blank">
+                        <a className={!movie.netflixURL ? "button disabled" : "button main"}
+                           href={movie.netflixURL} target="_blank">
                             <span className="fa fa-film" aria-hidden="true"/>
                             Assistir na Netflix
-                        </a></div>}
+                        </a>}
                         {type === "hbo-go" &&
-                        <div><a className={!movie.hbogoURL ? "button disabled" : "button"}
-                                href={movie.hbogoURL} target="_blank">
+                        <a className={!movie.hbogoURL ? "button disabled" : "button main"}
+                           href={movie.hbogoURL} target="_blank">
                             <span className="fa fa-film" aria-hidden="true"/>
                             Assistir na HBO Go
-                        </a></div>}
+                        </a>}
                     </div>
                     <div className="col-md-3">
                         {movie.runtime && <div className="item">
                             <div className="header">Duração</div>
                             {movie.runtime} min
                         </div>}
-                        {movie.distribution && this.state.distribution.length > 0 && <div className="item">
+                        {movie.distribution && this.props.list && this.props.list.distribution.length > 0 &&
+                        <div className="item">
                             <div className="header">Distribuição</div>
                             {movie.distribution.map((d) => {
-                                let distribution = this.state.distribution;
+                                let distribution = this.props.list.distribution;
                                 let i = distribution.map(function (e) {
                                     return e.id;
                                 }).indexOf(d);
@@ -178,10 +134,11 @@ class GenericModal extends PureComponent {
                             <div className="header">Início na HBO Go</div>
                             {movie.hbogoDate}
                         </div>}
-                        {movie.country && this.state.country.length > 0 && <div className="item">
+                        {movie.country && this.props.list && this.props.list.country.length > 0 &&
+                        <div className="item">
                             <div className="header">País</div>
                             {movie.country.map((c) => {
-                                let country = this.state.country;
+                                let country = this.props.list.country;
                                 let i = country.map(function (e) {
                                     return e.id;
                                 }).indexOf(c);
@@ -223,9 +180,9 @@ class GenericModal extends PureComponent {
             <Modal.Footer>
                 <div className="score-set">
                     {movie.score && movie.score.map((score) =>
-                        <div className="score" key={score.type}>
+                        (score.rating > 0) ? <div className="score" key={score.type}>
                             {this.getScore(score.type, score.rating)}
-                        </div>
+                        </div> : null
                     )}
                 </div>
                 {type === "cinema" && <div className="screen-format">
@@ -288,7 +245,8 @@ class GenericModal extends PureComponent {
 GenericModal.propTypes = {
     estreiatype: PropTypes.string,
     modaltype: PropTypes.string,
-    content: PropTypes.object
+    content: PropTypes.object,
+    list: PropTypes.object
 };
 
 export default GenericModal;

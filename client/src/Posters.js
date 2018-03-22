@@ -48,7 +48,7 @@ class Posters extends PureComponent {
 
     getMovieAge = (classif) => {
         if (classif) {
-            return (classif === "livre") ?
+            return (classif === "livre" || classif === "L") ?
                 <img alt={classif} src={require("./img/livre.png")}/> :
                 <img alt={classif} src={require("./img/" + classif + "anos.png")}/>;
         }
@@ -61,9 +61,9 @@ class Posters extends PureComponent {
             } else {
                 return <span><img alt={type} src={require("./img/rt-2.png")}/> {pont}%</span>;
             }
-        } else if(type === "imdb") {
+        } else if (type === "imdb") {
             return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont}/10</span>;
-        } else if(type === "mc") {
+        } else if (type === "mc") {
             return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont}/100</span>;
         }
     };
@@ -106,9 +106,9 @@ class Posters extends PureComponent {
                                 <div className="poster-footer">
                                     <div className="score-set">
                                         {poster.score && poster.score.map((score) =>
-                                            <span className="score" key={score.type}>
-                                                {this.getScore(score.type, score.rating)}
-                                            </span>
+                                            (score.rating > 0) ? <span className="score" key={score.type}>
+                                                    {this.getScore(score.type, score.rating)}
+                                                </span> : null
                                         )}
                                     </div>
                                     <div className="screen-format">
@@ -147,6 +147,7 @@ class Posters extends PureComponent {
                                 estreiatype={type}
                                 modaltype="modalMovie"
                                 content={poster}
+                                list={this.props.list}
                                 show={this.state["modalMovie" + poster.id]}
                                 onHide={() => this.handleHideModal("modalMovie" + poster.id)}
                             />
@@ -167,7 +168,8 @@ class Posters extends PureComponent {
 
 Posters.propTypes = {
     qtd: PropTypes.number,
-    posters: PropTypes.array
+    posters: PropTypes.array,
+    list: PropTypes.object
 };
 
 export default Posters;

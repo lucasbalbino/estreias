@@ -9,6 +9,8 @@ import Posters from './Posters';
 import Footer from './Footer';
 import Loading from './Loading';
 
+import './Estreias.css';
+
 class Estreias extends PureComponent {
     constructor(props) {
         super(props);
@@ -65,7 +67,7 @@ class Estreias extends PureComponent {
         if (this.state.loading) {
             return (
                 <div>
-                    <div className="container">
+                    <div className="container estreias">
                         <Header type={type} title={title}/>
                         <Loading type={type}/>
                     </div>
@@ -82,12 +84,12 @@ class Estreias extends PureComponent {
                     <title>{title}</title>
                     <link rel="icon" type="image/png" href={favicon}/>
                 </Helmet>
-                <div className="container">
+                <div className="container estreias">
                     <Header type={type} title={title}/>
                     <Datepicker type={type} releaseDate={this.state.json.date || moment()}
                                 change={this.changeDate} nextDate={this.state.json.nextDate}
                                 previousDate={this.state.json.previousDate}/>
-                    <Posters type={type} qtd={this.state.json.count} posters={this.state.json.content}/>
+                    <Posters type={type} qtd={this.state.json.count} posters={this.state.json.content} list={this.props.list}/>
                 </div>
                 <Footer type={type}/>
             </div>
@@ -97,7 +99,8 @@ class Estreias extends PureComponent {
 
 Estreias.propTypes = {
     type: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+    list: PropTypes.object
 };
 
 export default Estreias;
