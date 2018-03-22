@@ -29,22 +29,29 @@ function urlJustWatchMovie(id) {
 }
 
 function urlTMDBMovie(title, year) {
+    let append = (year) ? ('&year=' + year) : '';
     return 'https://api.themoviedb.org/3/search/movie?' +
-        'api_key='+ TMDB_API_KEY +'&' +
+        'api_key=' + TMDB_API_KEY + '&' +
         'language=pt-BR&' +
         'include_adult=false&' +
         'region=BRA&' +
-        'query=' + title + '&' +
-        'year=' + year;
+        'query=' + title + append;
 }
 
 function urlTMDBVideos(id) {
     return 'https://api.themoviedb.org/3/movie/' + id + '/videos?' +
-        'api_key='+ TMDB_API_KEY;
+        'api_key=' + TMDB_API_KEY;
 }
 
 function urlOMDB(title, year) {
-    return 'https://www.omdbapi.com/?t=' + title + '&apikey='+ OMDB_API_KEY +'&y=' + year;
+    let append = (year) ? ('&y=' + year) : '';
+    return 'https://www.omdbapi.com/?t=' + title + '&apikey=' + OMDB_API_KEY + append;
+}
+
+function urlFilmeB(type, dataInicial, dataFinal) {
+    return 'http://www.filmeb.com.br/calendario-de-estreias?tp=' + type +
+        '&field_estreia_data_estreia_value[min][date]=' + dataInicial +
+        '&field_estreia_data_estreia_value[max][date]=' + dataFinal;
 }
 
 
@@ -53,5 +60,6 @@ module.exports = {
     urlJustWatchMovie: urlJustWatchMovie,
     urlTMDBMovie: urlTMDBMovie,
     urlTMDBVideos: urlTMDBVideos,
-    urlOMDB: urlOMDB
+    urlOMDB: urlOMDB,
+    urlFilmeB: urlFilmeB
 };

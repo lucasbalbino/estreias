@@ -1,13 +1,13 @@
-const mv = require('./just-watch');
+const fb = require('./filmeb');
 
-const db = require('../db');
+// const db = require('../db');
 
-function getMovie(type) {
-    mv.getMovie(type, 1, insertOnDataBase);
+function getMovie() {
+    fb.getMovie("w", "2018-03-22", "2018-03-28", saveOnFile);
 }
 
 const fs = require('fs');
-function saveOnFile(type, result) {
+function saveOnFile(result) {
 
     if (!result) {
         return;
@@ -16,8 +16,7 @@ function saveOnFile(type, result) {
     result.forEach((data) => {
         fs.appendFile('workspace/result.json', JSON.stringify(data) + ",\n", function (err) {
             if (err) throw err;
-            console.log(data.netflixDate + ": Filme '" + data.title + "' salvo");
-            index++;
+            console.log(data.releaseDate + ": Filme '" + data.title + "' salvo");
         });
     });
 }

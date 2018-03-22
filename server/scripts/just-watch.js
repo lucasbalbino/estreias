@@ -50,7 +50,7 @@ function getCredits(arr, role) {
             if (role === "ACTOR" && items.length === QTD_CAST) {
                 return false;
             } else if (el.role.toUpperCase() === role) {
-                items.push(el.name.replace(/'/g, ""));
+                items.push(el.name.replace(/'/g, "\\'"));
                 return true;
             } else {
                 return true;
@@ -152,19 +152,19 @@ function getJustWatchMovie(type, index, callback) {
                                 }
 
                                 axios.get(url.urlOMDB(subtitle, year)).then((response) => {
-                                    itemsProcessed++;
                                     let json = response.data;
                                     if (json.Response !== "False") {
                                         let result = json;
                                         idIMDB = result["imdbID"];
                                         cast = result["Actors"].split(",").map(function (item) {
-                                            return item.replace(/'/g, "").trim();
+                                            return item.replace(/'/g, "\\'").trim();
                                         });
                                         director = result["Director"].split(",").map(function (item) {
-                                            return item.replace(/'/g, "").trim();
+                                            return item.replace(/'/g, "\\'").trim();
                                         });
                                     }
 
+                                    itemsProcessed++;
                                     dados.push({
                                         "idTMDB": idTMDB,
                                         "idIMDB": idIMDB,
@@ -172,8 +172,8 @@ function getJustWatchMovie(type, index, callback) {
                                         "releaseDate": releaseDate,
                                         "netflixDate": netflixDate,
                                         "hbogoDate": hbogoDate,
-                                        "title": (title) ? title.replace(/'/g, "") : title,
-                                        "subtitle": (subtitle) ? subtitle.replace(/'/g, "") : subtitle,
+                                        "title": (title) ? title.replace(/'/g, "\\'") : title,
+                                        "subtitle": (subtitle) ? subtitle.replace(/'/g, "\\'") : subtitle,
                                         "year": year,
                                         "runtime": runtime,
                                         "director": director,
@@ -182,7 +182,7 @@ function getJustWatchMovie(type, index, callback) {
                                         "movieAge": movieAge,
                                         "posterImage": posterImage,
                                         "popularity": popularity,
-                                        "synopsis": (synopsis) ? synopsis.replace(/'/g, "") : synopsis,
+                                        "synopsis": (synopsis) ? synopsis.replace(/'/g, "\\'") : synopsis,
                                         "score": score,
                                         "trailerURL": trailerURL,
                                         "netflixURL": netflixURL,
@@ -203,8 +203,8 @@ function getJustWatchMovie(type, index, callback) {
                                         "releaseDate": releaseDate,
                                         "netflixDate": netflixDate,
                                         "hbogoDate": hbogoDate,
-                                        "title": (title) ? title.replace(/'/g, "") : title,
-                                        "subtitle": (subtitle) ? subtitle.replace(/'/g, "") : subtitle,
+                                        "title": (title) ? title.replace(/'/g, "\\'") : title,
+                                        "subtitle": (subtitle) ? subtitle.replace(/'/g, "\\'") : subtitle,
                                         "year": year,
                                         "runtime": runtime,
                                         "director": director,
@@ -213,7 +213,7 @@ function getJustWatchMovie(type, index, callback) {
                                         "movieAge": movieAge,
                                         "posterImage": posterImage,
                                         "popularity": popularity,
-                                        "synopsis": (synopsis) ? synopsis.replace(/'/g, "") : synopsis,
+                                        "synopsis": (synopsis) ? synopsis.replace(/'/g, "\\'") : synopsis,
                                         "score": score,
                                         "trailerURL": trailerURL,
                                         "netflixURL": netflixURL,
@@ -239,8 +239,8 @@ function getJustWatchMovie(type, index, callback) {
                                 "releaseDate": releaseDate,
                                 "netflixDate": netflixDate,
                                 "hbogoDate": hbogoDate,
-                                "title": (title) ? title.replace(/'/g, "") : title,
-                                "subtitle": (subtitle) ? subtitle.replace(/'/g, "") : subtitle,
+                                "title": (title) ? title.replace(/'/g, "\\'") : title,
+                                "subtitle": (subtitle) ? subtitle.replace(/'/g, "\\'") : subtitle,
                                 "year": year,
                                 "runtime": runtime,
                                 "director": director,
@@ -249,7 +249,7 @@ function getJustWatchMovie(type, index, callback) {
                                 "movieAge": movieAge,
                                 "posterImage": posterImage,
                                 "popularity": popularity,
-                                "synopsis": (synopsis) ? synopsis.replace(/'/g, "") : synopsis,
+                                "synopsis": (synopsis) ? synopsis.replace(/'/g, "\\'") : synopsis,
                                 "score": score,
                                 "trailerURL": trailerURL,
                                 "netflixURL": netflixURL,
@@ -272,8 +272,8 @@ function getJustWatchMovie(type, index, callback) {
                             "releaseDate": releaseDate,
                             "netflixDate": netflixDate,
                             "hbogoDate": hbogoDate,
-                            "title": (title) ? title.replace(/'/g, "") : title,
-                            "subtitle": (subtitle) ? subtitle.replace(/'/g, "") : subtitle,
+                            "title": (title) ? title.replace(/'/g, "\\'") : title,
+                            "subtitle": (subtitle) ? subtitle.replace(/'/g, "\\'") : subtitle,
                             "year": year,
                             "runtime": runtime,
                             "director": director,
@@ -282,7 +282,7 @@ function getJustWatchMovie(type, index, callback) {
                             "movieAge": movieAge,
                             "posterImage": posterImage,
                             "popularity": popularity,
-                            "synopsis": (synopsis) ? synopsis.replace(/'/g, "") : synopsis,
+                            "synopsis": (synopsis) ? synopsis.replace(/'/g, "\\'") : synopsis,
                             "score": score,
                             "trailerURL": trailerURL,
                             "netflixURL": netflixURL,
