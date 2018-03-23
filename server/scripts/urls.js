@@ -49,6 +49,9 @@ function urlOMDB(title, year) {
 }
 
 function urlFilmeB(type, dataInicial, dataFinal) {
+    if(!type && !dataInicial && !dataFinal) {
+        return 'http://www.filmeb.com.br/calendario-de-estreias';
+    }
     return 'http://www.filmeb.com.br/calendario-de-estreias?tp=' + type +
         '&field_estreia_data_estreia_value[min][date]=' + dataInicial +
         '&field_estreia_data_estreia_value[max][date]=' + dataFinal;

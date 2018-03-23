@@ -19,12 +19,7 @@ app.all('/*', function (req, res, next) {
 
 app.use('/', require('./server/routes'));
 
-// let task = require('./server/scripts/task-netflix-hbo-go');
-// type = "nfx"; "hbg";
-// task.getMovie("hbg");
-
-let task = require('./server/scripts/task-cinema');
-task.getMovie();
-
+// let task = require('./server/scripts/task-movies');
+// task.getMovie("cinema");
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

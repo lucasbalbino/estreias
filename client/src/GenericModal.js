@@ -106,7 +106,7 @@ class GenericModal extends PureComponent {
                         </a>}
                     </div>
                     <div className="col-md-3">
-                        {movie.runtime && <div className="item">
+                        {movie.runtime > 0 && <div className="item">
                             <div className="header">Duração</div>
                             {movie.runtime} min
                         </div>}
@@ -187,10 +187,8 @@ class GenericModal extends PureComponent {
                 </div>
                 {type === "cinema" && <div className="screen-format">
                     Formatos: 2D
-                    {movie.screenFormat && movie.screenFormat.map((format) =>
-                        <img alt={format} key={format}
-                             src={require("./img/" + format + ".png")}/>
-                    )}
+                    {movie.is3D && <img alt="3D" src={require("./img/3d.png")}/>}
+                    {movie.isIMAX && <img alt="IMAX" src={require("./img/imax.png")}/>}
                 </div>}
             </Modal.Footer>
         </Modal>

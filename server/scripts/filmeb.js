@@ -5,6 +5,9 @@ const url = require('./urls');
 
 const RELEASE_YEARS = ["2016", "2017", "2018"];
 
+// Preencha se algum nome estiver incorreto
+let fixSubtitle = {};//{ old: "Ferdinand the bull", new: "Ferdinand" };
+
 function getScoreOMDB(ratings) {
     let score = [];
     for (let j = 0; j < ratings.length; j++) {
@@ -48,7 +51,11 @@ function getCorrectIndex(arr) {
 function getFilmeBMovie(type, initialDate, finalDate, callback) {
     let dados = [];
 
-    console.log("COLETANDO URL '" + type + "' entre o período " + initialDate + " e " + finalDate);
+    if(!type && !initialDate && !finalDate) {
+        console.log("COLETANDO URL mais recente");
+    } else {
+        console.log("COLETANDO URL '" + type + "' entre o período " + initialDate + " e " + finalDate);
+    }
     request(url.urlFilmeB(type, initialDate, finalDate), (error, response, html) => {
         if (!error && response.statusCode === 200) {
 
@@ -96,6 +103,11 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                     title = titleA.text().trim();
 
                     subtitle = conteudo.find("i").text().trim();
+                    if(fixSubtitle) {
+                        if(fixSubtitle.old === subtitle) {
+                            subtitle = fixSubtitle.new;
+                        }
+                    }
 
                     let texto = conteudo.text();
                     let temp = texto.split("[")[1].split("]")[0].split(", ");
@@ -136,10 +148,16 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                     movieAge = "L";
                                 }
                             }
-                        } else if (temp[i].toLowerCase().indexOf("3d") >= 0) {
+                        } else if (temp[i].trim().toLowerCase().indexOf("3d") >= 0) {
                             is3D = true;
-                        } else if (temp[i].toLowerCase().indexOf("imax") >= 0) {
+                            if(temp[i].split("/").length > 1 && temp[i].toLowerCase().split("/")[1].indexOf("imax") >= 0) {
+                                isIMAX = true;
+                            }
+                        } else if (temp[i].trim().toLowerCase().indexOf("imax") >= 0) {
                             isIMAX = true;
+                            if(temp[i].split("/").length > 1 && temp[i].toLowerCase().split("/")[1].indexOf("3d") >= 0) {
+                                is3D = true;
+                            }
                         }
                     }
 
@@ -149,6 +167,11 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                             let k = getCorrectIndex(json.results);
                             if (k === -1) {
                                 console.log("> Erro ao inserir Filme '" + title + "' (" + subtitle + "). É provável que o nome esteja errado");
+                                itemsProcessed++;
+
+                                if (itemsProcessed === qtd) {
+                                    callback("cinema", dados);
+                                }
                                 return true;
                             }
                             let result = json.results[k];
@@ -208,13 +231,15 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                         "distribution": distribution,
                                         "genre": genre,
                                         "cast": cast,
-                                        "score": score
+                                        "score": score,
+                                        "netflixURL": "",
+                                        "hbogoURL": ""
                                     });
 
                                     console.log("> Filme '" + title + "' adicionado");
 
                                     if (itemsProcessed === qtd) {
-                                        callback(dados);
+                                        callback("cinema", dados);
                                     }
 
                                 }).catch(function (error) {
@@ -240,13 +265,15 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                         "distribution": distribution,
                                         "genre": genre,
                                         "cast": cast,
-                                        "score": score
+                                        "score": score,
+                                        "netflixURL": "",
+                                        "hbogoURL": ""
                                     });
 
-                                    console.log("> Filme '" + title + "' adicionado (sem OMDB):" + error.message);
+                                    console.log("> Filme '" + title + "' adicionado (sem OMDB): " + error.message);
 
                                     if (itemsProcessed === qtd) {
-                                        callback(dados);
+                                        callback("cinema", dados);
                                     }
                                 });
                             }).catch(function (error) {
@@ -276,13 +303,15 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                 "distribution": distribution,
                                 "genre": genre,
                                 "cast": cast,
-                                "score": score
+                                "score": score,
+                                "netflixURL": "",
+                                "hbogoURL": ""
                             });
 
                             console.log("> Filme '" + title + "' adicionado (sem TMDB)");
 
                             if (itemsProcessed === qtd) {
-                                callback(type, dados);
+                                callback("cinema", dados);
                             }
                         }
                     }).catch(function (error) {
@@ -308,13 +337,15 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                             "distribution": distribution,
                             "genre": genre,
                             "cast": cast,
-                            "score": score
+                            "score": score,
+                            "netflixURL": "",
+                            "hbogoURL": ""
                         });
 
                         console.log("> Filme '" + title + "' adicionado (sem TMDB): " + error.message);
 
                         if (itemsProcessed === qtd) {
-                            callback(type, dados);
+                            callback("cinema", dados);
                         }
                     });
                 }, index * 600);

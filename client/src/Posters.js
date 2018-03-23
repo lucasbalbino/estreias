@@ -72,7 +72,7 @@ class Posters extends PureComponent {
         const type = this.props.type;
         const posters = this.props.posters;
 
-        if (!posters) {
+        if (!posters || posters.length === 0) {
             return (
                 <section className="no-results">
                     <div className="row">
@@ -112,10 +112,8 @@ class Posters extends PureComponent {
                                         )}
                                     </div>
                                     <div className="screen-format">
-                                        {poster.screenFormat && poster.screenFormat.map((format) =>
-                                            <img alt={format} key={format}
-                                                 src={require("./img/" + format + ".png")}/>
-                                        )}
+                                        {poster.is3D && <img alt="3D" src={require("./img/3d.png")}/>}
+                                        {poster.isIMAX && <img alt="IMAX" src={require("./img/imax.png")}/>}
                                     </div>
                                 </div>
                                 <div className="button-group">
