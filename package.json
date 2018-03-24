@@ -4,9 +4,11 @@
   "description": "Todas as estreias de Cinema, Netflix e HBO Go",
   "main": "index.js",
   "scripts": {
+    "client-dev": "cd client && npm run start",
+    "server-dev": "nodemon server.js",
     "client": "cd client && npm run start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client-dev\"",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
