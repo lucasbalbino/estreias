@@ -36,7 +36,7 @@ function reconnect(connection){
     console.log("New connection tentative...");
 
     //- Create a new one
-    connection = mysql_npm.createPool(db_config);
+    connection = mysql.createPool(db_config);
 
     //- Try to reconnect
     connection.getConnection(function(err){
