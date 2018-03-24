@@ -8,5 +8,4 @@ tmp
 .idea
 workspace/
 coverage
-build
 npm-debug.log

@@ -31,6 +31,6 @@
   "bugs": {
     "url": "https://github.com/lucasbalbino/estreias/issues"
   },
-  "homepage": "https://github.com/lucasbalbino/estreias#readme",
+  "homepage": ".",
   "proxy": "http://localhost:3000/"
 }

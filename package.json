@@ -6,10 +6,8 @@
   "scripts": {
     "client-dev": "cd client && npm run start",
     "server-dev": "nodemon server.js",
-    "client": "cd client && npm run start",
-    "server": "node server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client-dev\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "start": "node server.js"
   },
   "dependencies": {
     "react": "^16.2.0",
