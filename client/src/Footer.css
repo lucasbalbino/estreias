@@ -1,0 +1,65 @@
+footer {
+    background: #111;
+    color: #fff;
+    padding-top: 80px;
+    overflow-y: hidden;
+}
+
+footer.cinema {
+    border-top: 5px #341f97 solid;
+}
+
+footer.hbo-go {
+    border-top: 5px #2e86de solid;
+}
+
+footer.netflix {
+    border-top: 5px #ee5253 solid;
+}
+
+footer h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 8rem;
+    margin-bottom: -35px;
+}
+
+footer h3 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer h3 a:hover {
+    color: #fff;
+}
+
+footer .menu {
+    font-size: 2rem;
+    text-align: right;
+}
+
+footer .menu a {
+    display: inline-block;
+    margin: 0;
+    padding-left: 40px;
+    color: #f2f2f2;
+}
+
+footer .menu a:hover {
+    text-decoration: none;
+}
+
+footer .menu a.cinema:hover {
+    color: #341f97;
+    letter-spacing: 1px;
+}
+
+footer .menu a.hbo-go:hover {
+    color: #2e86de;
+    letter-spacing: 1px;
+}
+
+footer .menu a.netflix:hover {
+    color: #ee5253;
+    letter-spacing: 1px;
+}

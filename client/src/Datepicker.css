@@ -1,0 +1,35 @@
+.datepicker {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.datepicker .button, .datepicker .button i {
+    color: #111;
+}
+
+.datepicker .button.disabled, .datepicker .button.disabled i {
+    color: #cccccc;
+    cursor: not-allowed;
+}
+
+.datepicker .button:hover, .datepicker .button:hover i {
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.datepicker.cinema .button:hover, .datepicker.cinema .button:hover i {
+    color: #341f97;
+}
+
+.datepicker.hbo-go .button:hover, .datepicker.hbo-go .button:hover i {
+    color: #2e86de;
+}
+
+.datepicker.netflix .button:hover, .datepicker.netflix .button:hover i {
+    color: #ee5253;
+}
+
+.datepicker .button.disabled:hover, .datepicker .button.disabled:hover i {
+    letter-spacing: 0;
+    color: #cccccc;
+}

@@ -1,0 +1,22 @@
+header {
+    margin-top: -15px;
+    margin-bottom: 80px;
+}
+
+header h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+header h1.cinema:hover {
+    text-shadow: 4px 0 0 #341f97;
+}
+
+header h1.hbo-go:hover {
+    text-shadow: 4px 0 0 #2e86de;
+}
+
+header h1.netflix:hover {
+    text-shadow: 4px 0 0 #ee5253;
+}
