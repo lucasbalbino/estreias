@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
     host: 'mysql472.umbler.com',
     user: 'user-api',
     password: 'g2eB#H2TOQ-',
-    port: 41890,
+    port: 3306,
     database: 'estreias_db'
 });
 

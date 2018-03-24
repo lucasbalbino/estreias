@@ -28,11 +28,11 @@ class Dashboards extends PureComponent {
         this.setState({[image]: false});
     };
 
-    imageError = (e, id) => {
+    imageError = (e, id, type) => {
         let image = "imageIsLoading" + id;
         this.setState({[image]: false});
 
-        e.target.src = require("./img/poster.png");
+        e.target.src = "./img/poster-" + type + ".png";
     };
 
     getDate = (date) => {
@@ -82,7 +82,7 @@ class Dashboards extends PureComponent {
                                                  src={poster.posterImage}
                                                  onLoad={() => this.imageLoaded(poster.id)}
                                                  onError={(e) => {
-                                                     this.imageError(e, poster.id)
+                                                     this.imageError(e, poster.id, type)
                                                  }}/>
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@ class Dashboards extends PureComponent {
             <div>
                 <Helmet>
                     <title>{this.props.title}</title>
-                    <link rel="icon" type="image/png" href="favicon.png"/>
+                    <link rel="icon" type="image/png" href="img/favicon.png"/>
                 </Helmet>
                 <div>
                     {this.dash("cinema", result["cinema"], "Estreias do Cinema", "Ver mais informações e trailers")}

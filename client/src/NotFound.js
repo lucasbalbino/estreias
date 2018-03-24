@@ -11,7 +11,7 @@ class NotFound extends PureComponent {
             <div>
                 <Helmet>
                     <title>{this.props.title}</title>
-                    <link rel="icon" type="image/png" href="favicon-todos.png"/>
+                    <link rel="icon" type="image/png" href="img/favicon.png"/>
                 </Helmet>
                 Não encontrei nada
                 <Footer/>

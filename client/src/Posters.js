@@ -41,7 +41,7 @@ class Posters extends PureComponent {
         this.setState({[image]: false});
     };
 
-    imageError = (e, poster) => {
+    imageError = (e, poster, type) => {
         let image = "imageIsLoading" + poster.id;
         let titleWhenImageError = "titleWhenImageError" + poster.id;
         this.setState({
@@ -52,28 +52,28 @@ class Posters extends PureComponent {
             </div>
         });
 
-        e.target.src = require("./img/poster.png");
+        e.target.src = "./img/poster-" + type + ".png";
     };
 
     getMovieAge = (classif) => {
         if (classif) {
             return (classif === "livre" || classif === "L") ?
-                <img alt={classif} src={require("./img/livre.png")}/> :
-                <img alt={classif} src={require("./img/" + classif + "anos.png")}/>;
+                <img alt={classif} src="./img/livre.png"/> :
+                <img alt={classif} src={"./img/" + classif + "anos.png"}/>;
         }
     };
 
     getScore = (type, pont) => {
         if (type === "rt") {
             if (pont > 50) {
-                return <span><img alt={type} src={require("./img/rt-1.png")}/> {pont}%</span>;
+                return <span><img alt={type} src="./img/rt-1.png"/> {pont}%</span>;
             } else {
-                return <span><img alt={type} src={require("./img/rt-2.png")}/> {pont}%</span>;
+                return <span><img alt={type} src="./img/rt-2.png"/> {pont}%</span>;
             }
         } else if (type === "imdb") {
-            return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont}/10</span>;
+            return <span><img alt={type} src={"./img/" + type + ".png"}/> {pont}/10</span>;
         } else if (type === "mc") {
-            return <span><img alt={type} src={require("./img/" + type + ".png")}/> {pont}/100</span>;
+            return <span><img alt={type} src={"./img/" + type + ".png"}/> {pont}/100</span>;
         }
     };
 
@@ -107,7 +107,7 @@ class Posters extends PureComponent {
                                 <img alt={poster.title} className="img-fluid img-poster" src={poster.posterImage}
                                      onLoad={() => this.imageLoaded(poster.id)}
                                      onError={(e) => {
-                                         this.imageError(e, poster)
+                                         this.imageError(e, poster, type)
                                      }}/>
                                 {this.state["titleWhenImageError" + poster.id]}
                                 <span className="movie-age">
@@ -122,8 +122,8 @@ class Posters extends PureComponent {
                                         )}
                                     </div>
                                     <div className="screen-format">
-                                        {poster.is3D && <img alt="3D" src={require("./img/3d.png")}/>}
-                                        {poster.isIMAX && <img alt="IMAX" src={require("./img/imax.png")}/>}
+                                        {poster.is3D && <img alt="3D" src="./img/3d.png"/>}
+                                        {poster.isIMAX && <img alt="IMAX" src="./img/imax.png"/>}
                                     </div>
                                 </div>
                                 <div className="button-group">

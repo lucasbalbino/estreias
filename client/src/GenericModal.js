@@ -38,8 +38,8 @@ class GenericModal extends PureComponent {
     getMovieAge = (classif) => {
         if (classif) {
             return (classif === "livre" || classif === "L") ?
-                <img alt={classif} src={require("./img/livre.png")}/> :
-                <img alt={classif} src={require("./img/" + classif + "anos.png")}/>;
+                <img alt={classif} src="./img/livre.png"/> :
+                <img alt={classif} src={"./img/" + classif + "anos.png"}/>;
         }
     };
 
@@ -80,7 +80,8 @@ class GenericModal extends PureComponent {
             <Modal.Body>
                 <div className="row">
                     <div className="col-md-4 text-center">
-                        {movie.posterImage && <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>}
+                        {movie.posterImage &&
+                        <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>}
 
                         <button className={!movie.trailerURL ? "button disabled" : "button"} onClick={this.changeType}
                                 disabled={!movie.trailerURL}>
@@ -110,7 +111,8 @@ class GenericModal extends PureComponent {
                             <div className="header">Duração</div>
                             {movie.runtime} min
                         </div>}
-                        {movie.distribution && this.props.list && this.props.list.distribution.length > 0 &&
+                        {movie.distribution && movie.distribution.length > 0 &&
+                        this.props.list && this.props.list.distribution.length > 0 &&
                         <div className="item">
                             <div className="header">Distribuição</div>
                             {movie.distribution.map((d) => {
@@ -134,7 +136,8 @@ class GenericModal extends PureComponent {
                             <div className="header">Início na HBO Go</div>
                             {movie.hbogoDate}
                         </div>}
-                        {movie.country && this.props.list && this.props.list.country.length > 0 &&
+                        {movie.country && movie.country.length > 0 &&
+                        this.props.list && this.props.list.country.length > 0 &&
                         <div className="item">
                             <div className="header">País</div>
                             {movie.country.map((c) => {
@@ -145,7 +148,7 @@ class GenericModal extends PureComponent {
                                 return (i) ? <div key={c}>{country[i].name}</div> : null;
                             })}
                         </div>}
-                        {movie.genre && <div className="item">
+                        {movie.genre && movie.genre.length > 0 && <div className="item">
                             <div className="header">Gênero</div>
                             {movie.genre.map((g) =>
                                 <div key={g}>
@@ -153,17 +156,17 @@ class GenericModal extends PureComponent {
                                 </div>
                             )}
                         </div>}
-                        {movie.productionYear && <div className="item">
-                            <div className="header">Ano de produção</div>
-                            {movie.productionYear}
+                        {movie.year && <div className="item">
+                            <div className="header">Ano</div>
+                            {movie.year}
                         </div>}
                     </div>
                     <div className="col-md-5">
-                        {movie.director && <div className="item">
+                        {movie.director && movie.director.length > 0 && <div className="item">
                             <div className="header">Direção</div>
                             {movie.director.map((dir) => <div key={dir}>{dir}</div>)}
                         </div>}
-                        {movie.cast && <div className="item">
+                        {movie.cast && movie.cast.length > 0 && <div className="item">
                             <div className="header">Elenco</div>
                             {movie.cast.map((actor) => <div key={actor}>{actor}</div>)}
                         </div>}
@@ -187,8 +190,8 @@ class GenericModal extends PureComponent {
                 </div>
                 {type === "cinema" && <div className="screen-format">
                     Formatos: 2D
-                    {movie.is3D && <img alt="3D" src={require("./img/3d.png")}/>}
-                    {movie.isIMAX && <img alt="IMAX" src={require("./img/imax.png")}/>}
+                    {movie.is3D && <img alt="3D" src="./img/3d.png"/>}
+                    {movie.isIMAX && <img alt="IMAX" src="./img/imax.png"/>}
                 </div>}
             </Modal.Footer>
         </Modal>

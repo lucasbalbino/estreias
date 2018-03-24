@@ -76,7 +76,7 @@ class Estreias extends PureComponent {
             );
         }
 
-        const favicon = "favicon-" + type + ".png";
+        const favicon = "img/favicon-" + type + ".png";
 
         return (
             <div>
