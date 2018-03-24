@@ -37,16 +37,16 @@ class Dashboards extends PureComponent {
 
     getDate = (date) => {
         return (<span>
-                <Moment format="DD/MM/YYYY">
-                    {moment(date, "DD-MM-YYYY")}
-                </Moment> - <Moment format="DD/MM/YYYY" add={{days: 6}}>
-                    {moment(date, "DD-MM-YYYY")}
+                <Moment format="DD/MM/YYYY" subtract={{days: 6}}>
+                    {moment(date, "YYYY-MM-DD")}
+                </Moment> - <Moment format="DD/MM/YYYY">
+                    {moment(date, "YYYY-MM-DD")}
                 </Moment>
             </span>);
     };
 
     dash = (type, json, title, info) => {
-        if(json) {
+        if (json) {
             let dashClass = "dash " + type;
             let coverClass = "cover " + type;
             let posterClass = "poster " + type;
@@ -60,12 +60,19 @@ class Dashboards extends PureComponent {
                         <div className="col-md-4">
                             <h2>{title}</h2>
                             <p className="qtd">{json.count} filmes</p>
+                            {(type === "cinema") ?
+                                <p className="label">semana</p> :
+                                <p className="label">últimos 7 dias</p>}
                             <p className="date">{this.getDate(json.date)}</p>
                         </div>
                         <div className="col-md-8 posters-list">
                             <div className="row">
                                 {posters.map((poster, index) =>
-                                    <div className={index < 3 ? "col-md-4 poster" : "col-md-4 poster last"} key={poster.id}>
+                                    <div className={ (
+                                        index === 4 ?
+                                            "col-md-4 poster last" :
+                                            (index === 3 ? "col-md-4 poster before-last" : "col-md-4 poster")
+                                    ) } key={poster.id}>
                                         <h3>{poster.title}</h3>
                                         <p className="subtitle">({poster.subtitle ? poster.subtitle : poster.title})</p>
                                         <div>

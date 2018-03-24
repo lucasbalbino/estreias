@@ -80,7 +80,7 @@ class GenericModal extends PureComponent {
             <Modal.Body>
                 <div className="row">
                     <div className="col-md-4 text-center">
-                        <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>
+                        {movie.posterImage && <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>}
 
                         <button className={!movie.trailerURL ? "button disabled" : "button"} onClick={this.changeType}
                                 disabled={!movie.trailerURL}>

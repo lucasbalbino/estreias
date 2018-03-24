@@ -5,8 +5,8 @@ function getMovie(type, initialDate, finalDate, isYear) {
     if (isTV(type)) {
         jw.getMovie(type, 1, insertOnDataBase);
     } else {
-        let time = (isYear) ? "y" : "w";
-        // fb.getMovie("w", "2018-01-25", "2018-01-31", insertOnDataBase);
+        // let time = (isYear) ? "y" : "w";
+        // fb.getMovie("w", "2018-12-27", "2019-01-02", insertOnDataBase);
         fb.getMovie("", "", "", insertOnDataBase);
     }
 }

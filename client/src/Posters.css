@@ -29,6 +29,7 @@
     min-height: 300px;
 }
 
+
 .poster .poster-footer {
     position: absolute;
     bottom: 0;
@@ -188,4 +189,25 @@
     100% {
         transform: scale(1);
     }
+}
+
+.poster-item .imageError {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    right: 25%;
+    transform: translate(0, -50%);
+}
+
+.poster-item .imageError h2{
+    visibility: visible;
+}
+
+.poster-item .imageError .subtitle {
+    visibility: visible;
+}
+
+.poster-item:hover .imageError h2, .poster-item:hover .imageError .subtitle {
+    visibility: hidden;
+    display: none;
 }

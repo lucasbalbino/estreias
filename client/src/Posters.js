@@ -22,8 +22,10 @@ class Posters extends PureComponent {
                 this.state["imageIsLoading" + posters[i].id] = true;
                 this.state["modalMovie" + posters[i].id] = false;
                 this.state["modalTrailer" + posters[i].id] = false;
+                this.state["titleWhenImageError" + posters[i].id] = null;
             }
         }
+
     }
 
     handleHideModal = (modal) => {
@@ -39,9 +41,16 @@ class Posters extends PureComponent {
         this.setState({[image]: false});
     };
 
-    imageError = (e, id) => {
-        let image = "imageIsLoading" + id;
-        this.setState({[image]: false});
+    imageError = (e, poster) => {
+        let image = "imageIsLoading" + poster.id;
+        let titleWhenImageError = "titleWhenImageError" + poster.id;
+        this.setState({
+            [image]: false,
+            [titleWhenImageError]: <div className="imageError">
+                <h2>{poster.title}</h2>
+                <p className="subtitle">({poster.subtitle ? poster.subtitle : poster.title})</p>
+            </div>
+        });
 
         e.target.src = require("./img/poster.png");
     };
@@ -98,8 +107,9 @@ class Posters extends PureComponent {
                                 <img alt={poster.title} className="img-fluid img-poster" src={poster.posterImage}
                                      onLoad={() => this.imageLoaded(poster.id)}
                                      onError={(e) => {
-                                         this.imageError(e, poster.id)
+                                         this.imageError(e, poster)
                                      }}/>
+                                {this.state["titleWhenImageError" + poster.id]}
                                 <span className="movie-age">
                                     {this.getMovieAge(poster.movieAge)}
                                 </span>

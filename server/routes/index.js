@@ -5,7 +5,7 @@ const estreias = require('./estreias');
 const list = require('./list');
 const dashboard = require('./dashboard');
 
-router.get('/api/dashboard', dashboard.getDashboard);
+router.get('/api/dashboard', dashboard.getResumo);
 
 router.get('/api/estreias/:type/:date', estreias.getEstreias);
 

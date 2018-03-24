@@ -98,7 +98,7 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                         releaseDate = transformDate($(el).find("div.weeksep").text().split(",")[1].trim());
                     }
 
-                    let conteudo = $(el).find("span.views-field.views-field-php")
+                    let conteudo = $(el).find("span.views-field.views-field-php");
                     let titleA = conteudo.find("a").first();
                     title = titleA.text().trim();
 
@@ -110,6 +110,15 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                     }
 
                     let texto = conteudo.text();
+                    if(!texto) {
+                        console.log("> Erro ao inserir Filme '" + title + "' (" + subtitle + "). Não foi possível parsear as informações");
+                        itemsProcessed++;
+
+                        if (itemsProcessed === qtd) {
+                            callback("cinema", dados);
+                        }
+                        return true;
+                    }
                     let temp = texto.split("[")[1].split("]")[0].split(", ");
                     year = temp[temp.length - 1].trim();
                     country = temp.slice(1, temp.length - 1).map(function (item) {
