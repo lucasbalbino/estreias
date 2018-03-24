@@ -12,6 +12,11 @@
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.2.0",
+    "react-moment": "^0.7.0",
+    "react-router-dom": "^4.2.2",
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
@@ -20,7 +25,8 @@
     "request": "^2.85.0"
   },
   "devDependencies": {
-    "concurrently": "^3.5.0"
+    "concurrently": "^3.5.0",
+    "react-scripts": "^1.0.17"
   },
   "repository": {
     "type": "git",
