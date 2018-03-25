@@ -19,8 +19,7 @@ app.all('/*', function (req, res, next) {
 
 app.use('/', require('./server/routes'));
 
-// let task = require('./server/scripts/task-movies');
-// task.getMovie("cinema");
-
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+let task = require('./server/scripts/scheduled-task');
+task.startScheduledTask();

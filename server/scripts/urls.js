@@ -38,6 +38,11 @@ function urlTMDBMovie(title, year) {
         'query=' + title + append;
 }
 
+function urlTMDBMovieID(id) {
+    return 'https://api.themoviedb.org/3/movie/' + id +
+        '?language=pt-BR&api_key=' + TMDB_API_KEY;
+}
+
 function urlTMDBVideos(id) {
     return 'https://api.themoviedb.org/3/movie/' + id + '/videos?' +
         'api_key=' + TMDB_API_KEY;
@@ -62,6 +67,7 @@ module.exports = {
     urlJustWatchGeneral: urlJustWatchGeneral,
     urlJustWatchMovie: urlJustWatchMovie,
     urlTMDBMovie: urlTMDBMovie,
+    urlTMDBMovieID: urlTMDBMovieID,
     urlTMDBVideos: urlTMDBVideos,
     urlOMDB: urlOMDB,
     urlFilmeB: urlFilmeB

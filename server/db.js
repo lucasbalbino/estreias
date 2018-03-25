@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-const db_config = {
+const dbconfig = {
     host: 'mysql472.umbler.com',
     user: 'user-api',
     password: 'g2eB#H2TOQ-',
@@ -8,85 +8,26 @@ const db_config = {
     database: 'estreias_db'
 };
 
-//-
-//- Create the connection variable
-//-
-let connection = mysql.createPool(db_config);
+let connection = mysql.createConnection(dbconfig);
 
-
-//-
-//- Establish a new connection
-//-
-connection.getConnection(function(err){
-    if(err) {
-        // mysqlErrorHandling(connection, err);
-        console.log("*** Cannot establish a connection with the database. ***");
-
-        connection = reconnect(connection);
-    }else {
-        console.log("*** New connection established with the database. ***")
+connection.connect((err) => {
+    if (err) {
+        console.log("DB Disconnected!", err.code);
     }
+    console.log('DB Connected!');
 });
 
+connection.on('error', (err) => {
+    console.log("DB Disconnected!", err.code);
+});
 
-//-
-//- Reconnection function
-//-
-function reconnect(connection){
-    console.log("New connection tentative...");
-
-    //- Create a new one
-    connection = mysql.createPool(db_config);
-
-    //- Try to reconnect
-    connection.getConnection(function(err){
-        if(err) {
-            //- Try to connect every 2 seconds.
-            setTimeout(reconnect(connection), 2000);
-        }else {
-            console.log("*** New connection established with the database. ***")
-            return connection;
+let interval = setInterval(function () {
+    connection.query('SELECT 1', (err, results) => {
+        if (err) {
+            console.log("DB Disconnected!", err.code);
+            clearInterval(interval);
         }
     });
-}
+}, 3000);
 
-
-//-
-//- Error listener
-//-
-connection.on('error', function(err) {
-
-    //-
-    //- The server close the connection.
-    //-
-    if(err.code === "PROTOCOL_CONNECTION_LOST"){
-        console.log("/!\\ Cannot establish a connection with the database. /!\\ ("+err.code+")");
-        return reconnect(connection);
-    }
-
-    else if(err.code === "PROTOCOL_ENQUEUE_AFTER_QUIT"){
-        console.log("/!\\ Cannot establish a connection with the database. /!\\ ("+err.code+")");
-        return reconnect(connection);
-    }
-
-    else if(err.code === "PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR"){
-        console.log("/!\\ Cannot establish a connection with the database. /!\\ ("+err.code+")");
-        return reconnect(connection);
-    }
-
-    else if(err.code === "PROTOCOL_ENQUEUE_HANDSHAKE_TWICE"){
-        console.log("/!\\ Cannot establish a connection with the database. /!\\ ("+err.code+")");
-    }
-
-    else{
-        console.log("/!\\ Cannot establish a connection with the database. /!\\ ("+err.code+")");
-        return reconnect(connection);
-    }
-
-});
-
-
-//-
-//- Export
-//-
 module.exports = connection;

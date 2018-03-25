@@ -121,10 +121,13 @@ class Dashboards extends PureComponent {
         let result = this.state.json;
 
         if (this.state.loading) {
+            let type = ["cinema", "netflix", "hbo-go"];
+            let typeRandom = parseInt(Math.random()*10, 10)%3;
+
             return (
                 <div>
                     <div className="container">
-                        <Loading type="cinema"/>
+                        <Loading type={type[typeRandom]}/>
                     </div>
                     <Footer/>
                 </div>

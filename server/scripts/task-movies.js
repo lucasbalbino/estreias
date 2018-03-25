@@ -22,13 +22,12 @@ function saveOnFile(type, result) {
         fs.appendFile('workspace/result.json', JSON.stringify(data) + ",\n", function (err) {
             if (err) throw err;
             console.log(printDate(type, data) + ": Filme '" + data.title + "' salvo");
-            index++;
         });
     });
 }
 
 function isTV(type) {
-    return (type === "nfx" || type === "hbg");
+    return (type === "netflix" || type === "hbo-go");
 }
 
 function printDate(type, data) {

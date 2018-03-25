@@ -18,6 +18,7 @@ let dashboard = {
 
         getResumo: (req, res) => {
             let sqlProcessed = 0;
+            console.log("BUSCANDO Dashboards");
 
             let dash = {
                 "cinema": {

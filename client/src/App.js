@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import Estreias from './Estreias';
 import Dashboards from './Dashboards';
+import Loading from './Loading';
 import NotFound from './NotFound';
 
 class App extends PureComponent {
@@ -61,6 +62,22 @@ class App extends PureComponent {
             country: this.state.country,
             distribution: this.state.distribution
         };
+
+        if (!(list.genres && list.genres.length > 0 &&
+            list.country && list.country.length > 0 &&
+            list.distribution && list.distribution.length > 0)) {
+
+            let type = ["cinema", "netflix", "hbo-go"];
+            let typeRandom = parseInt(Math.random()*10, 10)%3;
+
+            return (
+                <div>
+                    <div className="container">
+                        <Loading type={type[typeRandom]}/>
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <div>
