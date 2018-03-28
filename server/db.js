@@ -1,33 +1,44 @@
 const mysql = require('mysql');
 
 const dbconfig = {
-    host: 'mysql472.umbler.com',
-    user: 'user-api',
-    password: 'g2eB#H2TOQ-',
-    port: 3306,
-    database: 'estreias_db'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+    connectionLimit: 10,
+    waitForConnections: true,
+    wait_timeout: 28800,
+    connect_timeout: 10
 };
 
-let connection = mysql.createConnection(dbconfig);
+let connection = mysql.createPool(dbconfig);
 
-connection.connect((err) => {
+connection.getConnection((err) => {
     if (err) {
-        console.log("DB Disconnected!", err.code);
+        console.log("DB Not Connected!", err.code);
+    } else {
+        console.log('DB Connected!');
     }
-    console.log('DB Connected!');
 });
 
 connection.on('error', (err) => {
     console.log("DB Disconnected!", err.code);
+    reconnect();
 });
 
-let interval = setInterval(function () {
-    connection.query('SELECT 1', (err, results) => {
+let interval;
+function reconnect() {
+    console.log('Retrying connection...');
+    connection.getConnection((err) => {
         if (err) {
-            console.log("DB Disconnected!", err.code);
+            console.log("DB Not Connected!", err.code);
+            interval = setInterval(reconnect, 300);
+        } else {
+            console.log('DB Connected!');
             clearInterval(interval);
         }
     });
-}, 3000);
+}
 
 module.exports = connection;

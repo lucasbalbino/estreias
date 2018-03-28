@@ -1,3 +1,11 @@
+.app-loading {
+    min-height: 100vh;
+}
+
+.dashboard {
+    min-height: calc(100vh - 198px);
+}
+
 .dash {
     padding: 4rem 0;
     overflow-x: hidden;

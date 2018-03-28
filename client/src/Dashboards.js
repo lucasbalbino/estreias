@@ -126,7 +126,7 @@ class Dashboards extends PureComponent {
 
             return (
                 <div>
-                    <div className="container">
+                    <div className="container dashboard">
                         <Loading type={type[typeRandom]}/>
                     </div>
                     <Footer/>

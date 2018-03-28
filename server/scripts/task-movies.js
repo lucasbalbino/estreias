@@ -85,15 +85,14 @@ function insertOnDataBase(type, result) {
 
                     if (data.score && data.score.length > 0)
                         scoreMovie(idMovie, type, data, i);
-
-                    // if (data.genre && data.genre.length > 0)
-                    //     genreMovie(idMovie, type, data, i);
-                    // if (data.country && data.country.length > 0)
-                    //     countryMovie(idMovie, type, data, i);
-                    // if (data.distribution && data.distribution.length > 0)
-                    //     distributionMovie(idMovie, type, data, i);
-                    // if ((data.director && data.director.length > 0) || (data.actor && data.actor.length > 0))
-                    //     creditsMovie(idMovie, type, data, i);
+                    if (data.genre && data.genre.length > 0)
+                        genreMovie(idMovie, type, data, i);
+                    if (data.country && data.country.length > 0)
+                        countryMovie(idMovie, type, data, i);
+                    if (data.distribution && data.distribution.length > 0)
+                        distributionMovie(idMovie, type, data, i);
+                    if ((data.director && data.director.length > 0) || (data.actor && data.actor.length > 0))
+                        creditsMovie(idMovie, type, data, i);
                 });
             } else {
                 let insertMovie = "INSERT INTO movies (tmdb_id, imdb_id, just_watch_id," +
@@ -255,11 +254,19 @@ function countryMovie(idMovie, type, data, i) {
 }
 
 function relationCountryMovie(idMovie, idCountry, type, data, country, i) {
-    let sql = "INSERT INTO movies_country (movie_id, country_id) VALUES ('" + idMovie + "', '" + idCountry +
-        "') ON DUPLICATE KEY UPDATE id=id";
-    db.query(sql, (err, result) => {
+    db.query("SELECT id FROM movies_country WHERE movie_id=" + idMovie + " AND country_id=" + idCountry, (err, result) => {
         if (err) throw err;
-        console.log("[" + printDate(type, data) + "] (" + i + ") Relação entre '" + data.title + "' e '" + country + "' criada no banco");
+        if (result && result.length > 0) {
+            console.log("[" + printDate(type, data) + "] (" + i + ") Filme '" + data.title + "' já está associado ao país '" + country + "'. ID: " + idMovie);
+        }
+        else {
+            let sql = "INSERT INTO movies_country (movie_id, country_id) VALUES ('" + idMovie + "', '" + idCountry +
+                "') ON DUPLICATE KEY UPDATE id=id";
+            db.query(sql, (err, result) => {
+                if (err) throw err;
+                console.log("[" + printDate(type, data) + "] (" + i + ") Relação entre '" + data.title + "' e '" + country + "' criada no banco");
+            });
+        }
     });
 }
 
@@ -291,11 +298,19 @@ function distributionMovie(idMovie, type, data, i) {
 }
 
 function relationDistributionMovie(idMovie, idDistribution, type, data, distribution, i) {
-    let sql = "INSERT INTO movies_distribution (movie_id, distribution_id) VALUES ('" + idMovie + "', '" + idDistribution +
-        "') ON DUPLICATE KEY UPDATE id=id";
-    db.query(sql, (err, result) => {
+    db.query("SELECT id FROM movies_distribution WHERE movie_id=" + idMovie + " AND distribution_id=" + idDistribution, (err, result) => {
         if (err) throw err;
-        console.log("[" + printDate(type, data) + "] (" + i + ") Relação entre '" + data.title + "' e '" + distribution + "' criada no banco");
+        if (result && result.length > 0) {
+            console.log("[" + printDate(type, data) + "] (" + i + ") Filme '" + data.title + "' já está associado à distribuidora '" + distribution + "'. ID: " + idMovie);
+        }
+        else {
+            let sql = "INSERT INTO movies_distribution (movie_id, distribution_id) VALUES ('" + idMovie + "', '" + idDistribution +
+                "') ON DUPLICATE KEY UPDATE id=id";
+            db.query(sql, (err, result) => {
+                if (err) throw err;
+                console.log("[" + printDate(type, data) + "] (" + i + ") Relação entre '" + data.title + "' e '" + distribution + "' criada no banco");
+            });
+        }
     });
 }
 
@@ -351,11 +366,19 @@ function creditsMovie(idMovie, type, data, i) {
 }
 
 function relationCreditMovie(idMovie, idCredit, type, data, credit, role, i) {
-    let sql = "INSERT INTO movies_credits (movie_id, credit_id, role) VALUES ('" + idMovie + "', '" + idCredit +
-        "', " + role + ") ON DUPLICATE KEY UPDATE id=id";
-    db.query(sql, (err, result) => {
+    db.query("SELECT id FROM movies_credits WHERE movie_id=" + idMovie + " AND credit_id=" + idCredit, (err, result) => {
         if (err) throw err;
-        console.log("[" + printDate(type, data) + "] (" + i + ") Relação entre '" + data.title + "' e '" + credit + "' criada no banco");
+        if (result && result.length > 0) {
+            console.log("[" + printDate(type, data) + "] (" + i + ") Filme '" + data.title + "' já está associado ao ator/diretor '" + credit + "'. ID: " + idMovie);
+        }
+        else {
+            let sql = "INSERT INTO movies_credits (movie_id, credit_id, role) VALUES ('" + idMovie + "', '" + idCredit +
+                "', " + role + ") ON DUPLICATE KEY UPDATE id=id";
+            db.query(sql, (err, result) => {
+                if (err) throw err;
+                console.log("[" + printDate(type, data) + "] (" + i + ") Relação entre '" + data.title + "' e '" + credit + "' criada no banco");
+            });
+        }
     });
 }
 

@@ -23,7 +23,11 @@ class GenericModal extends PureComponent {
     };
 
     applyGenre = (genreId) => {
-        let genres = this.props.list.genres;
+        let genres = this.props.list ? this.props.list.genres : null;
+        if (!genres) {
+            return <span/>
+        }
+
         let index = genres.map(function (e) {
             return e["just_watch_id"];
         }).indexOf(genreId);

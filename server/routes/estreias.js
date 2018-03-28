@@ -44,7 +44,7 @@ let estreias = {
             };
 
             let sql = `SELECT
-        id, tmdb_id AS "idTMDB", imdb_id AS "idIMDB", just_watch_id AS "idJustWatch", DATE_FORMAT(release_date, "%d/%m/%Y") AS "releaseDate",
+        id, popularity, tmdb_id AS "idTMDB", imdb_id AS "idIMDB", just_watch_id AS "idJustWatch", DATE_FORMAT(release_date, "%d/%m/%Y") AS "releaseDate",
         DATE_FORMAT(netflix_date, "%d/%m/%Y") AS "netflixDate", DATE_FORMAT(hbo_go_date, "%d/%m/%Y") AS "hbogoDate", title, subtitle, year,
         runtime, movie_age AS "movieAge", poster_image AS "posterImage", synopsis, trailer_url AS "trailerURL", netflix_url AS "netflixURL",
         hbo_go_url AS "hbogoURL", is_3d AS "is3D", is_imax AS "isIMAX"
@@ -61,6 +61,7 @@ let estreias = {
                 if (movies.count === 0) {
                     res.send(movies);
                 } else {
+                    let itemsProcessed = 0;
                     result.forEach((data, index) => {
                         let idMovie = data.id;
 
@@ -123,7 +124,9 @@ let estreias = {
 
                                             movies.content.push(data);
 
-                                            if (index + 1 === movies.count) {
+                                            itemsProcessed++;
+                                            if (itemsProcessed === movies.count) {
+                                                movies.content.sort((a, b) => b.popularity - a.popularity);
                                                 res.send(movies);
                                             }
                                         });
