@@ -1,0 +1,86 @@
+.contato form {
+    margin: 50px 0 120px;
+}
+
+.contato form label {
+    font-weight: bold;
+    width: 100%;
+}
+
+.contato form input, .contato form select, .contato form textarea {
+    min-width: 100%;
+    padding: 5px 10px;
+    margin: 10px 0;
+    color: #111111;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.contato .cinema input, .contato .cinema select, .contato .cinema textarea {
+    border: 2px solid #341f97;
+}
+
+.contato .netflix input, .contato .netflix select, .contato .netflix textarea {
+    border: 2px solid #ee5253;
+}
+
+.contato .hbo-go input, .contato .hbo-go select, .contato .hbo-go textarea {
+    border: 2px solid #2e86de;
+}
+
+.contato .button {
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.contato .cinema .button {
+    border: 2px solid #341f97;
+    background-color: #341f97;
+}
+
+.contato .netflix .button {
+    border: 2px solid #ee5253;
+    background-color: #ee5253;
+}
+
+.contato .hbo-go .button {
+    border: 2px solid #2e86de;
+    background-color: #2e86de;
+}
+
+.contato .button:hover, .modal .button:hover span {
+    background-color: transparent;
+}
+
+.contato .cinema .button:hover {
+    color: #341f97;
+}
+
+.contato .netflix .button:hover {
+    color: #ee5253;
+}
+
+.contato .hbo-go .button:hover {
+    color: #2e86de;
+}
+
+.contato .icon {
+    animation: scaleDown 0.5s ease-out 0s 1;
+}
+
+.contato .retorno-form {
+    color: #fff;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.contato .retorno-form.sucesso {
+    background-color: #27ae60;
+    padding: 40px;
+}
+
+.contato .retorno-form.falha {
+    background-color: #e74c3c;
+    padding: 40px;
+}

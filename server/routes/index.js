@@ -5,6 +5,7 @@ const router = express.Router();
 const estreias = require('./estreias');
 const list = require('./list');
 const dashboard = require('./dashboard');
+const form = require('./form');
 
 router.get('/api/dashboard', dashboard.getResumo);
 
@@ -14,6 +15,7 @@ router.get('/api/genres', list.getGenre);
 router.get('/api/country', list.getCountry);
 router.get('/api/distribution', list.getDistribution);
 
+router.post('/api/contato', form.postDadosContato);
 
 
 router.use(express.static(path.join(__dirname, '../../client/build')));
