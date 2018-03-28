@@ -38,11 +38,23 @@ footer .menu {
     text-align: right;
 }
 
+footer .menu-small a, footer .menu-small span {
+    font-size: 0.8rem;
+    text-align: right;
+}
+
 footer .menu a {
     display: inline-block;
     margin: 0;
     padding-left: 40px;
     color: #f2f2f2;
+}
+
+footer .menu-small a, footer .menu-small span {
+    display: inline-block;
+    padding-left: 1.5rem;
+    color: #f2f2f2;
+    margin-top: 30px;
 }
 
 footer .menu a:hover {

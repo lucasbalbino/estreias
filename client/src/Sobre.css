@@ -1,0 +1,22 @@
+.logos {
+    margin: 150px 0;
+}
+
+.logos .cinema:hover {
+    transform: translate(0, -50px);
+    filter: drop-shadow(0 100px 0 #341f97);
+}
+
+.logos .netflix:hover {
+    transform: translate(0, -50px);
+    filter: drop-shadow(0 100px 0 #ee5253);
+}
+
+.logos .hbo-go:hover {
+    transform: translate(0, -50px);
+    filter: drop-shadow(0 100px 0 #2e86de);
+}
+
+.logos a {
+    color: #2e86de;
+}

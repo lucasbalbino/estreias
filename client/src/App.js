@@ -4,6 +4,8 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Estreias from './Estreias';
 import Dashboards from './Dashboards';
 import Loading from './Loading';
+import Sobre from './Sobre';
+import Contato from './Contato';
 import NotFound from './NotFound';
 
 class App extends PureComponent {
@@ -72,7 +74,7 @@ class App extends PureComponent {
 
             return (
                 <div>
-                    <div className="container">
+                    <div className="container app-loading">
                         <Loading type={type[typeRandom]}/>
                     </div>
                 </div>
@@ -95,6 +97,8 @@ class App extends PureComponent {
                         <Route exact path="/netflix" render={() =>
                             <Estreias type="netflix" title="Estreias da Netflix" list={list}/>
                         }/>
+                        <Route exact path="/sobre" component={Sobre}/>
+                        <Route exact path="/contato" component={Contato}/>
                         <Route component={NotFound}/>
                     </Switch>
                 </Router>

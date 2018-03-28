@@ -1,0 +1,79 @@
+.notfound {
+    margin-top: -10px;
+}
+
+.notfound .quote {
+    font-size: 7rem;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: -3rem;
+    animation: translateRight 0.5s ease-out 0s 1;
+}
+
+@keyframes translateRight {
+    0% {
+        transform: translate(-10px, 0);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+.notfound .quote-img {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.notfound .quote-img img {
+    animation: scaleSmall 0.5s ease-out 0s 1;
+}
+
+@keyframes scaleSmall {
+    0% {
+        transform: scale(1.5, 1) translate(60px, 0);
+    }
+    100% {
+        transform: scale(1) translate(0);
+    }
+}
+
+.notfound .links {
+    padding: 6rem;
+}
+
+.notfound .links p {
+    margin-bottom: 1rem;
+}
+
+.notfound .links a {
+    font-size: 1.2rem;
+    display: block;
+    margin-top: 0.7rem;
+    color: #111;
+    padding: 0;
+    font-weight: normal;
+}
+
+.notfound .links .estreia {
+    font-size: 2rem;
+    display: block;
+    padding: 1rem 0;
+    font-weight: bold;
+}
+
+.notfound .links .estreia:hover {
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.notfound .links a.cinema {
+    color: #341f97;
+}
+
+.notfound .links a.netflix {
+    color: #ee5253;
+}
+
+.notfound .links a.hbo-go {
+    color: #2e86de;
+}
