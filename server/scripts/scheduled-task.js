@@ -2,28 +2,20 @@ const cron = require('node-cron');
 
 let task = require('./task-movies');
 
-let taskCinema = cron.schedule('00 01,07,13,19 * * *', function() {
+let scheduledTask = cron.schedule('10 01,07,13,19 * * *', function() {
+    console.log("INICIANDO TAREFA AGENDADA");
     task.getMovie("cinema");
-});
-
-let taskNetflix = cron.schedule('05 01,07,13,19 * * *', function() {
     task.getMovie("netflix");
-});
-
-let taskHBOGo = cron.schedule('10 01,07,13,19 * * *', function() {
     task.getMovie("hbo-go");
 });
 
 function startTasks() {
-    taskCinema.start();
-    taskNetflix.start();
-    taskHBOGo.start();
+    console.log("Tarefa agendada configurada");
+    scheduledTask.start();
 }
 
 function stopTasks() {
-    taskCinema.stop();
-    taskNetflix.stop();
-    taskHBOGo.stop();
+    scheduledTask.stop();
 }
 
 module.exports = {

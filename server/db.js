@@ -24,21 +24,30 @@ connection.getConnection((err) => {
 
 connection.on('error', (err) => {
     console.log("DB Disconnected!", err.code);
-    reconnect();
+    // reconnect(connection);
 });
 
-let interval;
-function reconnect() {
-    console.log('Retrying connection...');
-    connection.getConnection((err) => {
+let interval, heartbeat;
+// function reconnect(con) {
+//     console.log('Retrying connection...');
+//     con.getConnection((err) => {
+//         if (err) {//
+//             console.log("DB Not Connected!", err.code);
+//             interval = setInterval(reconnect(con), 3000);
+//         } else {
+//             console.log('DB Connected!');
+//             clearInterval(interval);
+//         }
+//     });
+// }
+
+heartbeat = setInterval(() => {
+    connection.query('SELECT 1', (err, result) => {
         if (err) {
             console.log("DB Not Connected!", err.code);
-            interval = setInterval(reconnect, 300);
-        } else {
-            console.log('DB Connected!');
-            clearInterval(interval);
+            // reconnect(connection);
         }
     });
-}
+}, 3000);
 
 module.exports = connection;

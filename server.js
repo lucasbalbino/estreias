@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 
 app.use('/', require('./server/routes'));
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
-
 let task = require('./server/scripts/scheduled-task');
 task.startScheduledTask();
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

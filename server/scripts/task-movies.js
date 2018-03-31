@@ -31,9 +31,10 @@ function isTV(type) {
 }
 
 function printDate(type, data) {
-    return (type === "nfx") ?
+    let date = (type === "nfx") ?
         data.netflixDate : (type === "hbg") ?
-            data.hbogoDate : data.releaseDate
+            data.hbogoDate : data.releaseDate;
+    return type + "] [" + date;
 }
 
 const db = require('../db');

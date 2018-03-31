@@ -128,7 +128,7 @@ function getJustWatchMovie(type, index, callback) {
 
         items = json.days[0].providers[0].items;
 
-        console.log("[" + date + "] FILMES ENCONTRADOS: " + items.length);
+        console.log("[" + type + "] [" + date + "] FILMES ENCONTRADOS: " + items.length);
         let itemsProcessed = 0;
         items.forEach((item, i) => {
             setTimeout(() => {
@@ -245,7 +245,7 @@ function getJustWatchMovie(type, index, callback) {
                                         "netflixURL": netflixURL,
                                         "hbogoURL": hbogoURL
                                     });
-                                    console.log("> Filme '" + title + "' adicionado");
+                                    console.log("[" + type + "] > Filme '" + title + "' adicionado");
 
                                     if (itemsProcessed === items.length) {
                                         callback(type, dados);
@@ -278,7 +278,7 @@ function getJustWatchMovie(type, index, callback) {
                                         "netflixURL": netflixURL,
                                         "hbogoURL": hbogoURL
                                     });
-                                    console.log("> Filme '" + title + "' adicionado (sem OMDB): " + error.message);
+                                    console.log("[" + type + "] > Filme '" + title + "' adicionado (sem OMDB): " + error.message);
 
                                     if (itemsProcessed === items.length) {
                                         callback(type, dados);
@@ -286,7 +286,7 @@ function getJustWatchMovie(type, index, callback) {
                                 });
                             }).catch(function (error) {
                                 itemsProcessed++;
-                                console.log("> Erro ao inserir Filme '" + title + "': " + error.message);
+                                console.log("[" + type + "] > Erro ao inserir Filme '" + title + "': " + error.message);
                             });
                         } else {
                             itemsProcessed++;
@@ -317,7 +317,7 @@ function getJustWatchMovie(type, index, callback) {
                                 "hbogoURL": hbogoURL
                             });
 
-                            console.log("> Filme '" + title + "' adicionado (sem TMDB)");
+                            console.log("[" + type + "] > Filme '" + title + "' adicionado (sem TMDB)");
 
                             if (itemsProcessed === items.length) {
                                 callback(type, dados);
@@ -352,7 +352,7 @@ function getJustWatchMovie(type, index, callback) {
                             "hbogoURL": hbogoURL
                         });
 
-                        console.log("> Filme '" + title + "' adicionado (sem TMDB): " + error.message);
+                        console.log("[" + type + "] > Filme '" + title + "' adicionado (sem TMDB): " + error.message);
 
                         if (itemsProcessed === items.length) {
                             callback(type, dados);
@@ -360,7 +360,7 @@ function getJustWatchMovie(type, index, callback) {
                     });
                 }).catch(function (error) {
                     itemsProcessed++;
-                    console.log("> Erro ao inserir Filme '" + title + "': " + error.message);
+                    console.log("[" + type + "] > Erro ao inserir Filme '" + title + "': " + error.message);
                 });
             }, i * 600);
         });

@@ -39,9 +39,13 @@ function transformDate(date) {
     return temp[2] + "-" + temp[1] + "-" + temp[0];
 }
 
+function isReleaseYear(year) {
+    return RELEASE_YEARS.indexOf(year) !== -1
+}
+
 function getCorrectIndex(arr) {
     for (let i = 0; i < arr.length; i++) {
-        if (RELEASE_YEARS.indexOf(arr[i].release_date.split("-")[0]) !== -1) {
+        if (isReleaseYear(arr[i].release_date.split("-")[0])) {
             return i;
         }
     }
@@ -51,10 +55,10 @@ function getCorrectIndex(arr) {
 function getFilmeBMovie(type, initialDate, finalDate, callback) {
     let dados = [];
 
-    if(!type && !initialDate && !finalDate) {
-        console.log("COLETANDO URL mais recente");
+    if (!type && !initialDate && !finalDate) {
+        console.log("[cinema] COLETANDO URL mais recente");
     } else {
-        console.log("COLETANDO URL '" + type + "' entre o período " + initialDate + " e " + finalDate);
+        console.log("[cinema] COLETANDO URL '" + type + "' entre o período " + initialDate + " e " + finalDate);
     }
     request(url.urlFilmeB(type, initialDate, finalDate), (error, response, html) => {
         if (!error && response.statusCode === 200) {
@@ -68,7 +72,7 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                 releaseDate = transformDate($(".data-extenso").text());
             }
 
-            console.log("FILMES ENCONTRADOS: " + qtd);
+            console.log("[cinema] FILMES ENCONTRADOS: " + qtd);
             let itemsProcessed = 0;
             $(".views-row").each((index, el) => {
                 setTimeout(() => {
@@ -103,15 +107,15 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                     title = titleA.text().trim();
 
                     subtitle = conteudo.find("i").text().trim();
-                    if(fixSubtitle) {
-                        if(fixSubtitle.old === subtitle) {
+                    if (fixSubtitle) {
+                        if (fixSubtitle.old === subtitle) {
                             subtitle = fixSubtitle.new;
                         }
                     }
 
                     let texto = conteudo.text();
-                    if(!texto) {
-                        console.log("> Erro ao inserir Filme '" + title + "' (" + subtitle + "). Não foi possível parsear as informações");
+                    if (!texto) {
+                        console.log("[cinema] > Erro ao inserir Filme '" + title + "' (" + subtitle + "). Não foi possível parsear as informações");
                         itemsProcessed++;
 
                         if (itemsProcessed === qtd) {
@@ -159,12 +163,12 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                             }
                         } else if (temp[i].trim().toLowerCase().indexOf("3d") >= 0) {
                             is3D = true;
-                            if(temp[i].split("/").length > 1 && temp[i].toLowerCase().split("/")[1].indexOf("imax") >= 0) {
+                            if (temp[i].split("/").length > 1 && temp[i].toLowerCase().split("/")[1].indexOf("imax") >= 0) {
                                 isIMAX = true;
                             }
                         } else if (temp[i].trim().toLowerCase().indexOf("imax") >= 0) {
                             isIMAX = true;
-                            if(temp[i].split("/").length > 1 && temp[i].toLowerCase().split("/")[1].indexOf("3d") >= 0) {
+                            if (temp[i].split("/").length > 1 && temp[i].toLowerCase().split("/")[1].indexOf("3d") >= 0) {
                                 is3D = true;
                             }
                         }
@@ -175,7 +179,7 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                         if (json.total_results !== 0) {
                             let k = getCorrectIndex(json.results);
                             if (k === -1) {
-                                console.log("> Erro ao inserir Filme '" + title + "' (" + subtitle + "). É provável que o nome esteja errado");
+                                console.log("[cinema] > Erro ao inserir Filme '" + title + "' (" + subtitle + "). É provável que o nome esteja errado");
                                 itemsProcessed++;
 
                                 if (itemsProcessed === qtd) {
@@ -209,13 +213,17 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                     let json = response.data;
                                     if (json.Response !== "False") {
                                         let result = json;
-                                        idIMDB = result["imdbID"];
-                                        year = result["Year"];
-                                        runtime = (result["Runtime"] !== "N/A") ? parseInt(result["Runtime"].split(" ")[0]) : "";
-                                        cast = result["Actors"].split(",").map(function (item) {
-                                            return item.replace(/'/g, "\\'").trim();
-                                        });
-                                        score = getScoreOMDB(result["Ratings"]);
+                                        if (isReleaseYear(result["Year"])) {
+                                            idIMDB = result["imdbID"];
+                                            year = result["Year"];
+                                            runtime = (result["Runtime"] !== "N/A") ? parseInt(result["Runtime"].split(" ")[0]) : "";
+                                            cast = result["Actors"].split(",").map(function (item) {
+                                                return item.replace(/'/g, "\\'").trim();
+                                            });
+                                            score = getScoreOMDB(result["Ratings"]);
+                                        } else {
+                                            console.log("[cinema] > Não adicionado OMDB para filme '" + title + "'");
+                                        }
                                     }
 
                                     itemsProcessed++;
@@ -245,7 +253,7 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                         "hbogoURL": ""
                                     });
 
-                                    console.log("> Filme '" + title + "' adicionado");
+                                    console.log("[cinema] > Filme '" + title + "' adicionado");
 
                                     if (itemsProcessed === qtd) {
                                         callback("cinema", dados);
@@ -279,7 +287,7 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                         "hbogoURL": ""
                                     });
 
-                                    console.log("> Filme '" + title + "' adicionado (sem OMDB): " + error.message);
+                                    console.log("[cinema] > Filme '" + title + "' adicionado (sem OMDB): " + error.message);
 
                                     if (itemsProcessed === qtd) {
                                         callback("cinema", dados);
@@ -287,7 +295,7 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                 });
                             }).catch(function (error) {
                                 itemsProcessed++;
-                                console.log("> Erro ao inserir Filme '" + title + "': " + error.message);
+                                console.log("[cinema] > Erro ao inserir Filme '" + title + "': " + error.message);
                             });
                         } else {
                             itemsProcessed++;
@@ -317,7 +325,7 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                                 "hbogoURL": ""
                             });
 
-                            console.log("> Filme '" + title + "' adicionado (sem TMDB)");
+                            console.log("[cinema] > Filme '" + title + "' adicionado (sem TMDB)");
 
                             if (itemsProcessed === qtd) {
                                 callback("cinema", dados);
@@ -351,7 +359,7 @@ function getFilmeBMovie(type, initialDate, finalDate, callback) {
                             "hbogoURL": ""
                         });
 
-                        console.log("> Filme '" + title + "' adicionado (sem TMDB): " + error.message);
+                        console.log("[cinema] > Filme '" + title + "' adicionado (sem TMDB): " + error.message);
 
                         if (itemsProcessed === qtd) {
                             callback("cinema", dados);
