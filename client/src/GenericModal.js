@@ -83,7 +83,7 @@ class GenericModal extends PureComponent {
             </Modal.Header>
             <Modal.Body>
                 <div className="row">
-                    <div className="col-md-4 text-center">
+                    <div className="col-lg-4 col-md-8 col-sm-12 poster-info">
                         {movie.posterImage &&
                         <img alt={movie.title} className="img-fluid img-poster" src={movie.posterImage}/>}
 
@@ -110,7 +110,7 @@ class GenericModal extends PureComponent {
                             Assistir na HBO Go
                         </a>}
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-lg-3 col-md-4 col-sm-4">
                         {movie.runtime > 0 && <div className="item">
                             <div className="header">Duração</div>
                             {movie.runtime} min
@@ -165,7 +165,7 @@ class GenericModal extends PureComponent {
                             {movie.year}
                         </div>}
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-lg-5 col-md-12 col-sm-8">
                         {movie.director && movie.director.length > 0 && <div className="item">
                             <div className="header">Direção</div>
                             {movie.director.map((dir) => <div key={dir}>{dir}</div>)}

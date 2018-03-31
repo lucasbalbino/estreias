@@ -95,6 +95,7 @@
     position: absolute;
     bottom: 100px;
     right: 0;
+    left: 0;
 }
 
 .poster-item .button {
@@ -145,32 +146,6 @@
     background-color: #666;
 }
 
-.poster-item:hover .poster {
-    transform: translate(0, 70px);
-}
-
-.poster-item:hover .img-poster {
-    max-width: 130%;
-    width: 130%;
-    margin-left: -15%;
-}
-
-.poster-item:hover .movie-age, .poster-item:hover .poster-footer {
-    opacity: 1;
-    width: 130%;
-    right: -15%;
-}
-
-.poster-item:hover h2, .poster-item:hover .subtitle {
-    visibility: visible;
-    margin-top: 0;
-}
-
-.poster-item:hover .button {
-    visibility: visible;
-    opacity: 1;
-}
-
 .no-results {
     padding: 100px;
     margin-bottom: 80px;
@@ -207,7 +182,155 @@
     visibility: visible;
 }
 
-.poster-item:hover .imageError h2, .poster-item:hover .imageError .subtitle {
-    visibility: hidden;
-    display: none;
+
+/*Hovers*/
+
+@media screen and (min-width: 767px) {
+    .poster-item:hover .poster {
+        transform: translate(0, 70px);
+    }
+
+    .poster-item:hover .img-poster {
+        max-width: 130%;
+        width: 130%;
+        margin-left: -15%;
+        margin-right: -15%;
+    }
+
+    .poster-item:hover .movie-age, .poster-item:hover .poster-footer {
+        opacity: 1;
+        width: 130%;
+        right: -15%;
+        left: -15%;
+    }
+
+    .poster-item:hover h2, .poster-item:hover .subtitle {
+        visibility: visible;
+        margin-top: 0;
+    }
+
+    .poster-item:hover .button {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .poster-item:hover .imageError h2, .poster-item:hover .imageError .subtitle {
+        visibility: hidden;
+        display: none;
+    }
+}
+
+/*Responsive*/
+
+@media screen and (max-width: 1199px) {
+    .poster {
+        min-height: initial;
+    }
+
+    .score-set .score {
+        font-size: 0.7rem;
+    }
+
+    .posters-list {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    header {
+        margin-top: -17px;
+        margin-bottom: 120px;
+    }
+
+    header h1 {
+        font-size: 4rem;
+    }
+
+    .datepicker {
+        margin-bottom: 120px;
+    }
+
+    .datepicker .controls-left, .controls-right {
+        float: none;
+    }
+
+    .datepicker .date {
+        display: block;
+        margin: 20px 0;
+        font-size: 1.5rem;
+    }
+
+    .poster-item {
+        padding: 20px 50px 150px;
+    }
+
+    .poster-item h2 {
+        font-size: 1.5rem;
+    }
+
+    .poster-item .subtitle {
+        font-size: 1rem;
+    }
+
+    .poster-item .button-group {
+        bottom: 25%;
+    }
+
+    .poster-item .button {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .poster-item .button span {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    .poster {
+        margin-top: -100px;
+    }
+
+    .poster-footer .score-set, .poster-footer .screen-format {
+        padding: 0 20px;
+        margin: 10px 0;
+    }
+
+    .score-set .score {
+        font-size: 1rem;
+    }
+
+    .poster-item.visible .poster {
+        -webkit-transform: translate(0, 120px);
+        -ms-transform: translate(0, 120px);
+        transform: translate(0, 120px);
+    }
+
+    .poster-item.visible .img-poster {
+        max-width: 130%;
+        width: 130%;
+        margin-left: -15%;
+        margin-right: -15%;
+    }
+
+    .poster-item.visible .movie-age, .poster-item.visible .poster-footer {
+        opacity: 1;
+        width: 130%;
+        right: -15%;
+        left: -15%;
+    }
+
+    .poster-item.visible h2, .poster-item.visible .subtitle {
+        visibility: visible;
+        margin-top: 0;
+    }
+
+    .poster-item.visible .button {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .poster-item.visible .imageError h2, .poster-item.visible .imageError .subtitle {
+        visibility: hidden;
+        display: none;
+    }
 }

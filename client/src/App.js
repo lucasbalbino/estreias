@@ -89,13 +89,13 @@ class App extends PureComponent {
                             <Dashboards title="Estreias do Cinema, Netflix e HBO Go"/>
                         }/>
                         <Route exact path="/cinema" render={() =>
-                            <Estreias type="cinema" title="Estreias do Cinema" list={list}/>
-                        }/>
-                        <Route exact path="/hbo-go" render={() =>
-                            <Estreias type="hbo-go" title="Estreias da HBO Go" list={list}/>
+                            <Estreias type="cinema" title="Estreias do Cinema" titlePage="Lançamentos do Cinema" list={list}/>
                         }/>
                         <Route exact path="/netflix" render={() =>
-                            <Estreias type="netflix" title="Estreias da Netflix" list={list}/>
+                            <Estreias type="netflix" title="Estreias da Netflix" titlePage="Lançamentos da Netflix" list={list}/>
+                        }/>
+                        <Route exact path="/hbo-go" render={() =>
+                            <Estreias type="hbo-go" title="Estreias da HBO Go" titlePage="Lançamentos da HBO Go" list={list}/>
                         }/>
                         <Route exact path="/sobre" component={Sobre}/>
                         <Route exact path="/contato" component={Contato}/>

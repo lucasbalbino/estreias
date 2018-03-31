@@ -78,8 +78,8 @@
 }
 
 .dash .poster img {
-    -webkit-box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
-    box-shadow: 0 12px 8px -8px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 12px 8px -8px rgba(0, 0, 0, .3);
+    box-shadow: 0 12px 8px -8px rgba(0, 0, 0, .3);
 }
 
 .dash h3 {
@@ -99,22 +99,124 @@
 
 .dash .cover .info {
     text-align: center;
-    margin: 25% 0;
+    margin: 25% 10%;
     font-size: 1.5rem;
-}
-
-.dash .posters-list:hover .poster {
-    opacity: 0.25;
-}
-
-.dash .posters-list:hover .cover {
-    z-index: 1;
 }
 
 .dash .poster-footer {
     display: none;
 }
 
-.dash:hover .poster-footer {
-    display: block;
+
+/*Hovers*/
+
+@media screen and (min-width: 767px) {
+    .dash .posters-list:hover .poster {
+        opacity: 0.25;
+    }
+
+    .dash .posters-list:hover .cover {
+        z-index: 1;
+    }
+
+    .dash:hover .poster-footer {
+        display: block;
+    }
+}
+
+/*Responsive*/
+
+@media screen and (max-width: 1199px) {
+    .dash h2 {
+        font-size: 3rem;
+    }
+
+    .dash .qtd {
+        font-size: 1.5rem;
+    }
+
+    .dash .date {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .dash .poster.last, .dash .poster.before-last {
+        display: none;
+    }
+
+    .dash .poster.last-tablet {
+        position: absolute;
+        right: -50%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .dash {
+        text-align: center;
+        padding: 5rem 0 15rem;
+    }
+
+    .dash, .dash h2, .dash h3, .dash p, .dash div, .dash span, .dash a, .dash time {
+        color: #fff;
+    }
+
+    .dash.cinema {
+        background-color: #341f97;
+    }
+
+    .dash.netflix {
+        background-color: #ee5253;
+    }
+
+    .dash.hbo-go {
+        background-color: #2e86de;
+    }
+
+    .dash h2 {
+        font-size: 4rem;
+    }
+
+    .dash .qtd {
+        font-size: 2rem;
+    }
+
+    .dash .date {
+        font-size: 1.5rem;
+        margin-bottom: 70px;
+    }
+
+    .dash h3 {
+        font-size: 2rem;
+        margin-top: 60px;
+    }
+
+    .dash .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .dash .poster.last-tablet {
+        position: inherit;
+    }
+
+    .dash .posters-list.visible .poster {
+        opacity: 0.25;
+    }
+
+    .dash .posters-list.visible .cover {
+        z-index: 1;
+    }
+
+    .dash .cover .info {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0 10%;
+    }
+
+    .dash .cover .info span {
+        font-size: 1.7rem;
+    }
+
 }

@@ -63,6 +63,7 @@ class Estreias extends PureComponent {
     render() {
         const type = this.props.type;
         const title = this.props.title;
+        const titlePage = this.props.titlePage || this.props.title;
 
         if (this.state.loading) {
             return (
@@ -81,7 +82,7 @@ class Estreias extends PureComponent {
         return (
             <div>
                 <Helmet>
-                    <title>{title}</title>
+                    <title>{titlePage}</title>
                     <link rel="icon" type="image/png" href={favicon}/>
                 </Helmet>
                 <div className="container estreias">
@@ -100,6 +101,7 @@ class Estreias extends PureComponent {
 Estreias.propTypes = {
     type: PropTypes.string,
     title: PropTypes.string,
+    titlePage: PropTypes.string,
     list: PropTypes.object
 };
 

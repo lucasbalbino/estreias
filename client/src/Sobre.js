@@ -34,12 +34,11 @@ class Sobre extends PureComponent {
                     <div className="row">
                         <div className="col-md-12">
                             <p>O site <strong>Estreias</strong> busca reunir a última informação sobre o que há de
-                                lançamento de
-                                filmes no Brasil. Visamos evidenciar tanto o que está em cartaz no
-                                <strong>Cinema</strong>, quanto
-                                o que entrou no catálogo dos serviços de streaming presentes no país
-                                (<strong><a href="https://www.netflix.com.br/" target="blank">Netflix</a></strong>
-                                e <strong> <a href="https://www.hbogo.com.br/" target="blank">HBO Go</a></strong>).
+                                lançamento de filmes no Brasil. Visamos evidenciar tanto o que está em cartaz
+                                no <strong>Cinema</strong>, quanto o que entrou no catálogo dos serviços de streaming
+                                presentes no país (<strong><a href="https://www.netflix.com.br/"
+                                                              target="blank">Netflix</a></strong> e <strong> <a
+                                    href="https://www.hbogo.com.br/" target="blank">HBO Go</a></strong>).
                                 Assim propiciamos aos visitantes uma visão geral do que ele pode encontrar em cada meio
                                 ou mídia.</p>
                             <p>Nós buscamos informações de sites abertos e de APIs públicas reunindo dados relevantes

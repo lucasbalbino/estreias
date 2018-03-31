@@ -18,13 +18,13 @@ class NotFound extends PureComponent {
                 </Helmet>
                 <div className="container estreias">
                     <div className="row notfound">
-                        <div className="col-md-6">
+                        <div className="col-lg-6 col-md-12">
                             <div className="quote">Houston, we have a problem.</div>
                             <div className="quote-img">
                                 <img alt="-v-" src="img/quote.png"/>
                             </div>
                         </div>
-                        <div className="col-md-6 links">
+                        <div className="col-lg-6 col-md-12 links">
                             <p>
                                 O conteúdo procurado não foi encontrado!<br/>
                                 Acesse uma das páginas abaixo.

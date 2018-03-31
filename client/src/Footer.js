@@ -12,15 +12,15 @@ class Footer extends PureComponent {
         return (
             <footer className={this.props.type}>
                 <div className="container">
-                    <div className="pull-left">
+                    <div className="title">
                         <h3><Link to="/">Estreias</Link></h3>
                     </div>
-                    <div className="menu pull-right">
+                    <div className="menu">
                         <Link className="cinema" to="/cinema">Cinema</Link>
                         <Link className="netflix" to="/netflix">Netflix</Link>
                         <Link className="hbo-go" to="/hbo-go">HBO Go</Link>
                     </div>
-                    <div className="menu-small pull-right">
+                    <div className="menu-small">
                         <Link className="" to="/sobre">Sobre</Link>
                         <Link className="" to="/contato">Contato</Link>
                         <span>© 2018 – {hoje} Estreias</span>

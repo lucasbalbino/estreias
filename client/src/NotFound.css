@@ -77,3 +77,10 @@
 .notfound .links a.hbo-go {
     color: #2e86de;
 }
+
+@media screen and (max-width: 767px) {
+    .notfound .quote {
+        font-size: 5rem;
+        margin-top: -2rem;
+    }
+}

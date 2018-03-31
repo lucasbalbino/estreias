@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import Moment from 'react-moment';
 import moment from 'moment';
+import VisibilitySensor from 'react-visibility-sensor';
 import PropTypes from 'prop-types';
 
 import Loading from './Loading';
@@ -18,8 +19,11 @@ class Dashboards extends PureComponent {
         this.imageError = this.imageError.bind(this);
 
         this.state = {
-            json: "",
-            loading: true
+            "json": "",
+            "loading": true,
+            "isVisiblecinema": "",
+            "isVisiblenetflix": "",
+            "isVisiblehbo-go": ""
         };
     }
 
@@ -45,6 +49,13 @@ class Dashboards extends PureComponent {
             </span>);
     };
 
+    onVisibleViewport = (isVisible, id) => {
+        let vis = "isVisible" + id;
+        this.setState({
+            [vis]: isVisible ? " visible" : ""
+        });
+    };
+
     dash = (type, json, title, info) => {
         if (json) {
             let dashClass = "dash " + type;
@@ -54,50 +65,65 @@ class Dashboards extends PureComponent {
 
             let posters = json.content;
 
-            return <div className={dashClass}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-4">
-                            <h2>{title}</h2>
-                            <p className="qtd">{json.count} filmes</p>
-                            {(type === "cinema") ?
-                                <p className="label">semana</p> :
-                                <p className="label">últimos 7 dias</p>}
-                            <p className="date">{this.getDate(json.date)}</p>
-                        </div>
-                        <div className="col-md-8 posters-list">
-                            <div className="row">
-                                {posters.map((poster, index) =>
-                                    <div className={ (
-                                        index === 4 ?
-                                            "col-md-4 poster last" :
-                                            (index === 3 ? "col-md-4 poster before-last" : "col-md-4 poster")
-                                    ) } key={poster.id}>
-                                        <h3>{poster.title}</h3>
-                                        <p className="subtitle">({poster.subtitle ? poster.subtitle : poster.title})</p>
-                                        <div>
-                                            {this.state["imageIsLoading" + poster.id] ?
-                                                <Loading type={posterClass}/> : null}
-                                            <img alt={poster.title} className="img-fluid img-poster"
-                                                 src={poster.posterImage}
-                                                 onLoad={() => this.imageLoaded(poster.id)}
-                                                 onError={(e) => {
-                                                     this.imageError(e, poster.id, type)
-                                                 }}/>
-                                        </div>
-                                    </div>
-                                )}
-                                <Link className={coverClass} to={link}>
-                                    <div className="info">
-                                        <span>{info}</span>
-                                        <span className="fa fa-chevron-circle-right" aria-hidden="true"/>
-                                    </div>
-                                </Link>
+            return (
+                <div className={dashClass}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-4">
+                                <h2>{title}</h2>
+                                <p className="qtd">{json.count} {json.count !== 1 ? "filmes" : "filme"}</p>
+                                {(type === "cinema") ?
+                                    <p className="label">semana</p> :
+                                    <p className="label">últimos 7 dias</p>}
+                                <p className="date">{this.getDate(json.date)}</p>
                             </div>
+
+                            <VisibilitySensor
+                                scrollCheck
+                                onChange={isVisible => this.onVisibleViewport(isVisible, type)}
+                                offset={{top: 750, bottom: 500}}
+                                partialVisibility>
+
+                                <div className={"col-md-8 posters-list" + this.state["isVisible" + type]}>
+                                    <div className="row">
+                                        {posters.map((poster, index) =>
+
+                                            <div className={ (
+                                                index === 4 ?
+                                                    "col-lg-4 col-md-6 poster last" :
+                                                    (index === 3 ? "col-lg-4 col-md-6 poster before-last" :
+                                                        (index === 2 ? "col-lg-4 col-md-6 poster last-tablet" : "col-lg-4 col-md-6 poster"))
+                                            ) } key={poster.id}>
+                                                <h3>{poster.title}</h3>
+                                                <p className="subtitle">
+                                                    ({poster.subtitle ? poster.subtitle : poster.title})</p>
+                                                <div>
+                                                    {this.state["imageIsLoading" + poster.id] ?
+                                                        <Loading type={posterClass}/> : null}
+                                                    <img alt={poster.title} className="img-fluid img-poster"
+                                                         src={poster.posterImage}
+                                                         onLoad={() => this.imageLoaded(poster.id)}
+                                                         onError={(e) => {
+                                                             this.imageError(e, poster.id, type)
+                                                         }}/>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <Link className={coverClass} to={link}>
+                                            <div className="info">
+                                                <span>{info}</span>
+                                                <span className="fa fa-chevron-circle-right" aria-hidden="true"/>
+                                            </div>
+                                        </Link>
+                                    </div>
+
+                                </div>
+
+                            </VisibilitySensor>
                         </div>
                     </div>
                 </div>
-            </div>
+            )
         }
     };
 
@@ -122,7 +148,7 @@ class Dashboards extends PureComponent {
 
         if (this.state.loading) {
             let type = ["cinema", "netflix", "hbo-go"];
-            let typeRandom = parseInt(Math.random()*10, 10)%3;
+            let typeRandom = parseInt(Math.random() * 10, 10) % 3;
 
             return (
                 <div>
@@ -137,7 +163,7 @@ class Dashboards extends PureComponent {
         return (
             <div>
                 <Helmet>
-                    <title>{this.props.title}</title>
+                    <title>Lançamentos do Cinema, Netflix e HBO Go</title>
                     <link rel="icon" type="image/png" href="img/favicon.png"/>
                 </Helmet>
                 <div>

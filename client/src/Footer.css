@@ -17,6 +17,10 @@ footer.netflix {
     border-top: 5px #ee5253 solid;
 }
 
+footer .title {
+    float: left;
+}
+
 footer h3 {
     text-transform: uppercase;
     font-weight: bold;
@@ -31,11 +35,17 @@ footer h3 a {
 
 footer h3 a:hover {
     color: #fff;
+    text-decoration: none;
 }
 
 footer .menu {
     font-size: 2rem;
     text-align: right;
+}
+
+footer .menu-small {
+    text-align: right;
+    margin-bottom: 20px;
 }
 
 footer .menu-small a, footer .menu-small span {
@@ -74,4 +84,74 @@ footer .menu a.hbo-go:hover {
 footer .menu a.netflix:hover {
     color: #ee5253;
     letter-spacing: 1px;
+}
+
+
+
+/*Responsive*/
+
+@media screen and (max-width: 991px) {
+    footer h3 {
+        font-size: 6rem;
+    }
+
+    footer .menu {
+        font-size: 1.5rem;
+    }
+
+    footer .menu a {
+        display: block;
+    }
+
+    footer.cinema {
+        border-top: 10px #341f97 solid;
+    }
+
+    footer.hbo-go {
+        border-top: 10px #2e86de solid;
+    }
+
+    footer.netflix {
+        border-top: 10px #ee5253 solid;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    footer .title {
+        text-align: center;
+        float: none;
+    }
+    footer h3 {
+        font-size: 4rem;
+        margin-bottom: 10px;
+    }
+
+    footer .menu, footer .menu-small {
+        text-align: center;
+    }
+
+    footer .menu a {
+        display: inline-block;
+        margin-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    footer .menu-small a {
+        margin-top: 60px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    footer.cinema {
+        border-top: 15px #341f97 solid;
+    }
+
+    footer.hbo-go {
+        border-top: 15px #2e86de solid;
+    }
+
+    footer.netflix {
+        border-top: 15px #ee5253 solid;
+    }
 }

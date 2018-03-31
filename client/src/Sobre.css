@@ -1,5 +1,6 @@
 .logos {
     margin: 150px 0;
+    text-align: center;
 }
 
 .logos .cinema:hover {
@@ -19,4 +20,12 @@
 
 .logos a {
     color: #2e86de;
+}
+
+
+@media screen and (max-width: 991px) {
+    .logos .cinema:hover, .logos .netflix:hover, .logos .hbo-go:hover {
+        transform: initial;
+        filter: initial;
+    }
 }
