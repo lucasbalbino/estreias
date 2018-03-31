@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,11 +19,19 @@ app.all('/*', function (req, res, next) {
     }
 });
 
+app.all('/api/*', function (req, res, next) {
+    res.set('Cache-Control', 'public, max-age=86400, s-maxage=86400'); // 1 day
+    res.setHeader("Expires", new Date(Date.now() + 86400000).toUTCString());
+    next();
+});
+
 app.use(bodyParser.urlencoded({
     extended:true
 }));
 
 app.use(bodyParser.json());
+
+app.use(compression());
 
 app.use('/', require('./server/routes'));
 

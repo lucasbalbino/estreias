@@ -3,6 +3,14 @@
     text-align: center;
 }
 
+.datepicker .controls-left {
+    float: left;
+}
+
+.datepicker .controls-right {
+    float: right;
+}
+
 .datepicker .button, .datepicker .button i {
     color: #111;
 }
@@ -32,4 +40,13 @@
 .datepicker .button.disabled:hover, .datepicker .button.disabled:hover i {
     letter-spacing: 0;
     color: #cccccc;
+}
+
+
+/*Responsive*/
+
+@media screen and (max-width: 767px) {
+    .datepicker .controls-left, .controls-right {
+        float: none;
+    }
 }

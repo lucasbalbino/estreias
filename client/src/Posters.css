@@ -250,10 +250,6 @@
         margin-bottom: 120px;
     }
 
-    .datepicker .controls-left, .controls-right {
-        float: none;
-    }
-
     .datepicker .date {
         display: block;
         margin: 20px 0;
