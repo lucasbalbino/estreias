@@ -38,4 +38,7 @@ app.use('/', require('./server/routes'));
 let task = require('./server/scripts/scheduled-task');
 task.startScheduledTask();
 
+// let task = require('./server/scripts/task-movies');
+// task.getMovie("hbo-go");
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -26,6 +26,16 @@ function saveOnFile(type, result) {
     });
 }
 
+
+function doNothing(type, result) {
+
+    if (!result) {
+        return;
+    }
+
+    console.log(type, result);
+}
+
 function isTV(type) {
     return (type === "netflix" || type === "hbo-go");
 }

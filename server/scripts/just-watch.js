@@ -187,7 +187,10 @@ function getJustWatchMovie(type, index, callback) {
                             title = result.title;
                             popularity = result.popularity;
                             posterImage = "http://image.tmdb.org/t/p/w500" + result.poster_path;
-                            genre = result.genre_ids;
+                            genre = result.genre_ids ? result.genre_ids :
+                                (result.genres && result.genres.map((el) => {
+                                    return el.id;
+                                }));
                             if (result.overview) {
                                 synopsis = result.overview;
                             }
