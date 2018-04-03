@@ -6,7 +6,7 @@ const dbconfig = {
     password: process.env.DB_PASS,
     port: process.env.DB_PORT,
     database: process.env.DB_NAME,
-    connectionLimit: 10,
+    connectionLimit: 20,
     waitForConnections: true,
     wait_timeout: 28800,
     connect_timeout: 10
