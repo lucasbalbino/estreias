@@ -37,7 +37,8 @@ function doNothing(type, result) {
 }
 
 function isTV(type) {
-    return (type === "netflix" || type === "hbo-go");
+    return (type === "netflix" || type === "hbo-go") ||
+        (type === "nfx" || type === "hbg");
 }
 
 function printDate(type, data) {
@@ -58,9 +59,15 @@ function insertOnDataBase(type, result) {
     result.forEach((data, i) => {
         let append = "";
         if (isTV(type)) {
-            append = "just_watch_id=" + data.idJustWatch;
+            if (data.idJustWatch) {
+                append = "just_watch_id=" + data.idJustWatch;
+            } else {
+                append = "( lower(title)='" + data.title.toLowerCase() + "' OR lower(subtitle)='" + data.subtitle.toLowerCase() +
+                    "' ) AND year='" + data.year + "'";
+            }
         } else {
-            append = "title='" + data.title + "' AND year='" + data.year + "'";
+            append = "( lower(title)='" + data.title.toLowerCase() + "' OR lower(subtitle)='" + data.subtitle.toLowerCase() +
+                "' ) AND year='" + data.year + "'";
         }
         db.query("SELECT id FROM movies WHERE " + append, (err, result) => {
             if (err) throw err;
