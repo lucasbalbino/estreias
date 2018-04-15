@@ -93,15 +93,18 @@ class Dashboards extends PureComponent {
                                                     "col-lg-4 col-md-6 poster last" :
                                                     (index === 3 ? "col-lg-4 col-md-6 poster before-last" :
                                                         (index === 2 ? "col-lg-4 col-md-6 poster last-tablet" : "col-lg-4 col-md-6 poster"))
-                                            ) } key={poster.id}>
-                                                <h3>{poster.title}</h3>
+                                            ) } key={poster.id} itemScope itemType="http://schema.org/Movie">
+                                                <h3 itemProp="name">{poster.title}</h3>
                                                 <p className="subtitle">
-                                                    ({poster.subtitle ? poster.subtitle : poster.title})</p>
+                                                    (<span itemProp="alternateName">
+                                                        {poster.subtitle ? poster.subtitle : poster.title}
+                                                    </span>)
+                                                </p>
                                                 <div>
                                                     {this.state["imageIsLoading" + poster.id] ?
                                                         <Loading type={posterClass}/> : null}
                                                     <img alt={poster.title} className="img-fluid img-poster"
-                                                         src={poster.posterImage}
+                                                         src={poster.posterImage} itemProp="image"
                                                          onLoad={() => this.imageLoaded(poster.id)}
                                                          onError={(e) => {
                                                              this.imageError(e, poster.id, type)

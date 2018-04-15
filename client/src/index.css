@@ -33,3 +33,7 @@ button {
 button:focus {
     outline: none;
 }
+
+.hidden {
+    display: none;
+}

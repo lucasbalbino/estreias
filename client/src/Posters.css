@@ -70,6 +70,10 @@
     font-size: 0.9rem;
 }
 
+.poster-footer .score-set .score img {
+    padding-right: 5px;
+}
+
 .poster-footer .screen-format img {
     float: right;
     padding: 0 5px;

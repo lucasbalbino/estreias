@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import GenericModal from './GenericModal';
 import Loading from './Loading';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import './Posters.css'
@@ -68,14 +69,33 @@ class Posters extends PureComponent {
     getScore = (type, pont) => {
         if (type === "rt") {
             if (pont > 50) {
-                return <span><img alt={type} src="./img/rt-1.png"/> {pont}%</span>;
+                return (
+                    <span>
+                        <img alt={type} src="./img/rt-1.png"/>{pont}%
+                    </span>
+                );
             } else {
-                return <span><img alt={type} src="./img/rt-2.png"/> {pont}%</span>;
+                return (
+                    <span>
+                        <img alt={type} src="./img/rt-2.png"/>{pont}%
+                    </span>
+                );
             }
         } else if (type === "imdb") {
-            return <span><img alt={type} src={"./img/" + type + ".png"}/> {pont}/10</span>;
+            return (
+                <span itemProp="aggregateRating" itemScope itemType="http://schema.org/AggregateRating">
+                    <span className="hidden" itemProp="author">IMDB</span>
+                    <span className="hidden" itemProp="ratingCount">100</span>
+                    <img alt={type} src={"./img/" + type + ".png"}/>
+                    <span itemProp="ratingValue">{pont}</span>/<span itemProp="bestRating">10</span>
+                </span>
+            );
         } else if (type === "mc") {
-            return <span><img alt={type} src={"./img/" + type + ".png"}/> {pont}/100</span>;
+            return (
+                <span>
+                    <img alt={type} src={"./img/" + type + ".png"}/>{pont}/100
+                </span>
+            );
         }
     };
 
@@ -84,6 +104,21 @@ class Posters extends PureComponent {
         this.setState({
             [vis]: isVisible ? " visible" : ""
         });
+    };
+
+    generateSchemaWatchAction = (date) => {
+        return <div className="hidden">
+            <span className="hidden" itemProp="expectsAcceptanceOf" itemScope itemType="http://schema.org/Offer">
+                <span className="hidden" itemProp="availabilityStarts">{date}</span>
+                <span className="hidden" itemProp="availabilityEnds">
+                    {moment(date, "DD/MM/YYYY").add(10, "year").format("DD/MM/YYYY")}
+                </span>
+                <span className="hidden" itemProp="category">subscription</span>
+                <span className="hidden" itemProp="eligibleRegion" itemScope itemType="http://schema.org/Country">
+                    <span className="hidden" itemProp="name">BR</span>
+                </span>
+            </span>
+        </div>
     };
 
     render() {
@@ -104,6 +139,7 @@ class Posters extends PureComponent {
         }
 
         let classType = "poster " + type;
+
         return (
             <section classID="posters" className="posters-list">
                 <div className="row">
@@ -116,26 +152,34 @@ class Posters extends PureComponent {
                             offset={{top: 500, bottom: 250}}
                             key={poster.id}>
 
-                            <div className={"col-lg-4 col-md-6 poster-item" + this.state["isVisible" + poster.id]}>
-                                <h2>{poster.title}</h2>
-                                <p className="subtitle">({poster.subtitle ? poster.subtitle : poster.title})</p>
+                            <div className={"col-lg-4 col-md-6 poster-item" + this.state["isVisible" + poster.id]}
+                                 itemScope itemType="http://schema.org/Movie">
+                                <h2 itemProp="name">{poster.title}</h2>
+                                <p className="subtitle">
+                                    (<span itemProp="alternateName">
+                                        {poster.subtitle ? poster.subtitle : poster.title}
+                                    </span>)
+                                </p>
                                 <div className={classType}>
                                     {this.state["imageIsLoading" + poster.id] ? <Loading type={classType}/> : null}
-                                    <img alt={poster.title} className="img-fluid img-poster" src={poster.posterImage}
+                                    <img itemProp="image" alt={poster.title} className="img-fluid img-poster"
+                                         src={poster.posterImage}
                                          onLoad={() => this.imageLoaded(poster.id)}
                                          onError={(e) => {
                                              this.imageError(e, poster, type)
                                          }}/>
                                     {this.state["titleWhenImageError" + poster.id]}
-                                    <span className="movie-age">
-                                    {this.getMovieAge(poster.movieAge)}
-                                </span>
+                                    <span className="movie-age" itemProp="contentRating">
+                                        {this.getMovieAge(poster.movieAge)}
+                                    </span>
                                     <div className="poster-footer">
                                         <div className="score-set">
                                             {poster.score && poster.score.map((score) =>
-                                                (score.rating > 0) ? <span className="score" key={score.type}>
-                                                    {this.getScore(score.type, score.rating)}
-                                                </span> : null
+                                                (score.rating > 0) ?
+                                                    <span className="score" key={score.type}>
+                                                        {this.getScore(score.type, score.rating)}
+                                                    </span> :
+                                                    null
                                             )}
                                         </div>
                                         <div className="screen-format">
@@ -155,18 +199,53 @@ class Posters extends PureComponent {
                                             Assistir Trailer
                                         </a>
                                         {type === "netflix" &&
-                                        <a className={!poster.netflixURL ? "button disabled" : "button"}
-                                           href={poster.netflixURL} target="_blank">
-                                            <span className="fa fa-film" aria-hidden="true"/>
-                                            Assistir na Netflix
-                                        </a>}
+                                        <span itemProp="potentialAction" itemScope
+                                              itemType="http://schema.org/WatchAction">
+                                            <span itemProp="target" itemScope itemType="http://schema.org/EntryPoint">
+                                                <a className={!poster.netflixURL ? "button disabled" : "button"}
+                                                   href={poster.netflixURL} target="_blank" itemProp="url">
+                                                    <span className="fa fa-film" aria-hidden="true"/>
+                                                    Assistir na Netflix
+                                                </a>
+                                                <span className="hidden" itemProp="actionPlatform">http://schema.org/DesktopWebPlatform</span>
+                                                <span className="hidden" itemProp="actionPlatform">http://schema.org/MobileWebPlatform</span>
+                                                <span className="hidden" itemProp="actionPlatform">http://schema.org/AndroidPlatform</span>
+                                                <span className="hidden" itemProp="actionPlatform">http://schema.org/IOSPlatform</span>
+                                                <span className="hidden" itemProp="inLanguage">pt-BR</span>
+                                            </span>
+                                            {this.generateSchemaWatchAction(poster.netflixDate)}
+                                        </span>}
                                         {type === "hbo-go" &&
-                                        <a className={!poster.hbogoURL ? "button disabled" : "button"}
-                                           href={poster.hbogoURL} target="_blank">
-                                            <span className="fa fa-film" aria-hidden="true"/>
-                                            Assistir na HBO Go
-                                        </a>}
+                                        <span itemProp="potentialAction" itemScope
+                                              itemType="http://schema.org/WatchAction">
+                                            <span itemProp="target" itemScope itemType="http://schema.org/EntryPoint">
+                                                <a className={!poster.hbogoURL ? "button disabled" : "button"}
+                                                   href={poster.hbogoURL} target="_blank" itemProp="url">
+                                                    <span className="fa fa-film" aria-hidden="true"/>
+                                                    Assistir na HBO Go
+                                                </a>
+                                                <span className="hidden" itemProp="actionPlatform">http://schema.org/DesktopWebPlatform</span>
+                                                <span className="hidden" itemProp="actionPlatform">http://schema.org/MobileWebPlatform</span>
+                                                <span className="hidden" itemProp="actionPlatform">http://schema.org/AndroidPlatform</span>
+                                                <span className="hidden" itemProp="actionPlatform">http://schema.org/IOSPlatform</span>
+                                                <span className="hidden" itemProp="inLanguage">pt-BR</span>
+                                            </span>
+                                            {this.generateSchemaWatchAction(poster.hbogoDate)}
+                                        </span>}
                                     </div>
+                                </div>
+                                <div className="hidden">
+                                    <span className="hidden" itemProp="duration">{poster.runtime}</span>
+                                    <span className="hidden" itemProp="releasedEvent" itemScope
+                                          itemType="http://schema.org/PublicationEvent">
+                                        <span className="hidden" itemProp="startDate">{poster.releaseDate}</span>
+                                    </span>
+                                    {poster.idIMDB && <span className="hidden"
+                                                            itemProp="sameAs">{"http://www.imdb.com/title/" + poster.idIMDB}</span>}
+                                    {poster.cast.map((actor) => <span key={actor} className="hidden"
+                                                                      itemProp="actor">{actor}</span>)}
+                                    {poster.director.map((director) => <span key={director} className="hidden"
+                                                                             itemProp="director">{director}</span>)}
                                 </div>
                                 <GenericModal
                                     estreiatype={type}
