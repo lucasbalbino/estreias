@@ -66,8 +66,10 @@ function insertOnDataBase(type, result) {
                     "' ) AND year='" + data.year + "'";
             }
         } else {
+            let dateTemp = parseInt(data.year);
             append = "( lower(title)='" + data.title.toLowerCase() + "' OR lower(subtitle)='" + data.subtitle.toLowerCase() +
-                "' ) AND year='" + data.year + "'";
+                "' ) AND year IN ('" + (dateTemp-1) + "','" + dateTemp + "','" + (dateTemp+1) + "')";
+            console.log(append);
         }
         db.query("SELECT id FROM movies WHERE " + append, (err, result) => {
             if (err) throw err;
